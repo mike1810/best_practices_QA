@@ -1,4 +1,3 @@
-<!--
 <Configuration status="INFO">
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
@@ -13,4 +12,3 @@
         </Root>
     </Loggers>
 </Configuration>
--->

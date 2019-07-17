@@ -10,11 +10,9 @@ public class RegistrationPage extends Page {
         super(driver);
     }
 
-    //@FindBy(xpath = "//*[@id='id_gender1']")
     @FindBy(xpath = ".//input[@id='id_gender1']")
     private WebElement male;
 
-    //@FindBy(xpath = "//*[@id='id_gender2']")
     @FindBy(xpath = ".//input[@id='id_gender2']")
     private WebElement female;
 
@@ -126,33 +124,25 @@ public class RegistrationPage extends Page {
     }
 
     void selectDate(String userDate) {
-        //waitForWebElementVisibility(date);
-        //waitForWebElementToBeClickable(date);
         Select sDate = new Select(date);
         sDate.selectByValue(String.valueOf(userDate));
     }
 
     void selectMonth(String userMonth) {
-       // waitForWebElementVisibility(month);
-        //waitForWebElementToBeClickable(month);
         Select sMonth = new Select(month);
         sMonth.selectByValue(String.valueOf(userMonth));
     }
 
     void selectYear(String userYear) {
-       // waitForWebElementVisibility(year);
-       // waitForWebElementToBeClickable(year);
         Select sYear = new Select(year);
         sYear.selectByValue(String.valueOf(userYear));
     }
 
     void clickNewsletter() {
-        //waitForWebElementToBeClickable(newsletter);
         newsletter.click();
     }
 
     void clickSpecialOffers() {
-        //waitForWebElementToBeClickable(specialOffers);
         specialOffers.click();
     }
 
@@ -187,8 +177,6 @@ public class RegistrationPage extends Page {
     }
 
     void selectState(String userState) {
-       // waitForWebElementVisibility(state);
-       // waitForWebElementToBeClickable(state);
         Select dropdown = new Select(state);
         dropdown.selectByValue(String.valueOf(userState));
     }
@@ -199,8 +187,6 @@ public class RegistrationPage extends Page {
     }
 
     void selectCountry(String userCountry) {
-    //    waitForWebElementVisibility(country);
-    //    waitForWebElementToBeClickable(country);
         Select dropdown = new Select(country);
         dropdown.selectByValue(String.valueOf(userCountry));
     }
@@ -229,6 +215,70 @@ public class RegistrationPage extends Page {
         waitForWebElementVisibility(register);
         waitForWebElementToBeClickable(register);
         register.click();
+    }
+
+    void createNewAccountWithOnlyRequiredFields(User user){
+        sendFirstName(user.getFirstName());
+        sendLastName(user.getLastName());
+        sendPassword(user.getPassword());
+        selectDate(user.getDate());
+        selectMonth(user.getMonth());
+        selectDate(user.getDate());
+        selectYear(user.getYear());
+        sendAddress(user.getAddress1());
+        sendCity(user.getCity());
+        selectState(user.getState());
+        sendPostcode(user.getPostcode());
+        selectCountry(user.getCountry());
+        sendMobilePhone(user.getMobilePhone());
+        sendAnAddressAlias(user.getAddressAlias());
+    }
+
+    void chooseGender(User user){
+        if (user.isGenderMale()) {
+            clickGenderMale();
+        } else {
+            clickGenderFemale();
+        }
+    }
+
+    void chooseNewsLetter(User user){
+        if (user.isNewsLetter()) {
+            clickNewsletter();
+        }
+    }
+
+    void chooseSpecialOffers(User user){
+        if(user.isSpecialOffers()){
+            clickSpecialOffers();
+        }
+    }
+
+    void createNewAccountWithAllFields(User user){
+        chooseGender(user);
+        sendFirstName(user.getFirstName());
+        sendLastName(user.getLastName());
+        sendPassword(user.getPassword());
+        selectDate(user.getDate());
+        selectMonth(user.getMonth());
+        selectYear(user.getYear());
+        chooseNewsLetter(user);
+        chooseSpecialOffers(user);
+        sendCompany(user.getCompany());
+        sendAddress(user.getAddress1());
+        sendAddressLine2(user.getAddress2());
+        sendCity(user.getCity());
+        selectState(user.getState());
+        sendPostcode(user.getPostcode());
+        selectCountry(user.getCountry());
+        sendAdditionalInformation(user.getAdditionalInformation());
+        sendHomePhone(user.getHomePhone());
+        sendMobilePhone(user.getMobilePhone());
+        sendAnAddressAlias(user.getAddressAlias());
+    }
+
+    public void registerAccount(){
+        clickRegister();
     }
 
     public String getInvalidData() {

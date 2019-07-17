@@ -28,6 +28,22 @@ public abstract class Page {
     @FindBy(xpath = "//a[@class='logout']")
     private WebElement signOutButton;
 
+    boolean signInButtonIsDisplayed(){
+        return signInButton.isDisplayed();
+    }
+
+    boolean accountWasNotRegistered(){
+        return signInButtonIsDisplayed();
+    }
+
+    boolean signOutButtonIsDisplayed(){
+        return signOutButton.isDisplayed();
+    }
+
+    boolean accountWasRegistered(){
+        return signOutButtonIsDisplayed();
+    }
+
     void clickSignOutButton(){
         waitForWebElementToBeClickable(signOutButton);
         signOutButton.click();
