@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.testng.annotations.DataProvider;
 
@@ -11,7 +12,10 @@ public class User {
     private boolean genderMale;
     private String firstName;
     private String lastName;
+
+    @JsonIgnore
     private String email;
+
     private String password;
     private String date;
     private String month;
@@ -30,11 +34,11 @@ public class User {
     private String mobilePhone;
     private String addressAlias;
 
-    public User() {
+    public User() {/*
         this.genderMale = true;
         this.firstName = "Mike";
-        this.lastName = "Kaliberdin";
-        this.email = giveNameToNewAccount() + "@gmail.com";
+        this.lastName = "Kaliberdin";*/
+        this.email = giveNameToNewAccount() + "@gmail.com";/*
         this.password = "12345";
         this.date = "1";
         this.month = "1";
@@ -51,7 +55,7 @@ public class User {
         this.additionalInformation = "I have no time to write about me";
         this.homePhone = "12345";
         this.mobilePhone = "12345";
-        this.addressAlias = "98093";
+        this.addressAlias = "98093";*/
     }
 
     private static String giveNameToNewAccount() {
@@ -82,7 +86,7 @@ public class User {
         this.homePhone = "";
         this.mobilePhone = "";
         this.addressAlias = "";
-    }
+    }/*
 
     @DataProvider(name = "DPForAccountCreating")
     public Object[] dataProviderNewUser() {
@@ -98,6 +102,11 @@ public class User {
         return new Object[]{
                 user
         };
+    }*/
+
+    @Override
+    public String toString(){
+        return firstName + " " + lastName;
     }
 
 }

@@ -1,0 +1,22 @@
+{
+  "genderMale":true,
+  "firstName":"Mike",
+  "lastName":"Kaliberdin",
+  "password":"12345",
+  "date":"1",
+  "month":"1",
+  "year":"1994",
+  "newsLetter":true,
+  "specialOffers":true,
+  "company":"sperasoft",
+  "address1":"Lenina 30",
+  "address2":"Centralnaya 1",
+  "city":"Volgograd",
+  "state":"1",
+  "postcode":"12345",
+  "country":"21",
+  "additionalInformation":"I have no time to write about me",
+  "homePhone":"12345",
+  "mobilePhone":"12345",
+  "addressAlias":"98093"
+}

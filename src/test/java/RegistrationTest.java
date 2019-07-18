@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class RegistrationTest extends BaseTest{
@@ -37,7 +38,17 @@ public class RegistrationTest extends BaseTest{
         signInPage.checkPageTitle();
     }
 
-    @Test(dataProvider = "DPForAccountCreating", dataProviderClass = User.class)
+
+    @DataProvider
+    private Object[][] dataProvider(){
+        return dataPool.getData();
+    }
+
+    @Test( dataProvider = "dataProvider" )
+    public void testGetAccountFromDataFile( User user ) {
+        System.out.println( user );
+    }
+    @Test(dataProvider = "dataProvider")
     public void registerNewAccount(User user) {
 
         signInPage.sendNewEmail(user.getEmail());

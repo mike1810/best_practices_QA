@@ -56,5 +56,21 @@ public class MyAccountPage extends Page{
         home.click();
     }
 
+    void clickAllButtons(){
+        clickOrderHistoryAndDetails();
+        clickMyAccountButton();
+        clickMyAccountButton();
+        clickMyAccountButton();
+        clickMyCreditSlips();
+        clickMyAccountButton();
+        clickMyAdresses();
+        clickMyAccountButton();
+        clickMyPersonalInformation();
+        clickMyAccountButton();
+        clickMyWishlists();
+        clickMyAccountButton();
+        clickHome();
+    }
+
     void checkPageTitle(){}
 }

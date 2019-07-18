@@ -12,9 +12,31 @@ public class AdressesPage extends Page{
     @FindBy(xpath = "//span[contains(text(),'Back to your account')]")
     private WebElement backToYourAccount;
 
-    void addNewAddress(){
+    private void clickAddANewAddress(){
         waitForWebElementToBeClickable(addANewAddress);
         addANewAddress.click();
+    }
+
+    void addNewAddress(){
+        clickAddANewAddress();
+    }
+
+    private void clickUpdateAddress(){
+        waitForWebElementToBeClickable(updateAddress);
+        updateAddress.click();
+    }
+
+    void updateAddress(){
+        clickUpdateAddress();
+    }
+
+    private void clickBackToYourAccount(){
+        waitForWebElementToBeClickable(backToYourAccount);
+        backToYourAccount.click();
+    }
+
+    void goToMyAccountPage(){
+        clickBackToYourAccount();
     }
 
     void checkPageTitle(){}
