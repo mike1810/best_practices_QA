@@ -25,7 +25,8 @@ public class RegistrationTest extends BaseTest{
     public void beforeClass() {
         super.beforeClass();
         LOGGER  = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
+        PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
+        //PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
     }
 
     @BeforeMethod
@@ -92,7 +93,6 @@ public class RegistrationTest extends BaseTest{
 
         registrationPage.registerAccount();
         Assert.assertTrue(registrationPage.accountWasNotRegistered());
-
     }
 }
 

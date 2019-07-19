@@ -92,22 +92,22 @@ public class RegistrationPage extends Page {
         Assert.assertEquals(driver.getTitle(), "Login - My Store", "not equals");
     }
 
-    void clickGenderMale() {
+    private void clickGenderMale() {
         waitForWebElementToBeClickable(male);
         male.click();
     }
 
-    void clickGenderFemale() {
+    private void clickGenderFemale() {
         waitForWebElementToBeClickable(female);
         female.click();
     }
 
-    void sendFirstName(String userFirstName) {
+    private void sendFirstName(String userFirstName) {
         waitForWebElementVisibility(firstName);
         firstName.sendKeys(userFirstName);
     }
 
-    void sendLastName(String userLastName) {
+    private void sendLastName(String userLastName) {
         waitForWebElementVisibility(lastName);
         lastName.sendKeys(userLastName);
     }
@@ -118,31 +118,31 @@ public class RegistrationPage extends Page {
         emailSecondPage.sendKeys(userEmail);
     }
 
-    void sendPassword(String userPassword) {
+    private void sendPassword(String userPassword) {
         waitForWebElementVisibility(password);
         password.sendKeys(userPassword);
     }
 
-    void selectDate(String userDate) {
+    private void selectDate(String userDate) {
         Select sDate = new Select(date);
         sDate.selectByValue(String.valueOf(userDate));
     }
 
-    void selectMonth(String userMonth) {
+    private void selectMonth(String userMonth) {
         Select sMonth = new Select(month);
         sMonth.selectByValue(String.valueOf(userMonth));
     }
 
-    void selectYear(String userYear) {
+    private void selectYear(String userYear) {
         Select sYear = new Select(year);
         sYear.selectByValue(String.valueOf(userYear));
     }
 
-    void clickNewsletter() {
+    private void clickNewsletter() {
         newsletter.click();
     }
 
-    void clickSpecialOffers() {
+    private void clickSpecialOffers() {
         specialOffers.click();
     }
 
@@ -156,57 +156,57 @@ public class RegistrationPage extends Page {
         lastNameInAdressForm.sendKeys(userLastName);
     }
 
-    void sendCompany(String userCompany) {
+    private void sendCompany(String userCompany) {
         waitForWebElementVisibility(company);
         company.sendKeys(userCompany);
     }
 
-    void sendAddress(String userAdress) {
+    private void sendAddress(String userAdress) {
         waitForWebElementVisibility(address);
         address.sendKeys(userAdress);
     }
 
-    void sendAddressLine2(String userAdressLine2) {
+    private void sendAddressLine2(String userAdressLine2) {
         waitForWebElementVisibility(addressLine2);
         addressLine2.sendKeys(userAdressLine2);
     }
 
-    void sendCity(String userCity) {
+    private void sendCity(String userCity) {
         waitForWebElementVisibility(city);
         city.sendKeys(userCity);
     }
 
-    void selectState(String userState) {
+    private void selectState(String userState) {
         Select dropdown = new Select(state);
         dropdown.selectByValue(String.valueOf(userState));
     }
 
-    void sendPostcode(String userPostcode) {
+    private void sendPostcode(String userPostcode) {
         waitForWebElementVisibility(postcode);
         postcode.sendKeys(userPostcode);
     }
 
-    void selectCountry(String userCountry) {
+    private void selectCountry(String userCountry) {
         Select dropdown = new Select(country);
         dropdown.selectByValue(String.valueOf(userCountry));
     }
 
-    void sendAdditionalInformation(String userAdditionalInformation) {
+    private void sendAdditionalInformation(String userAdditionalInformation) {
         waitForWebElementVisibility(additionalInformation);
         additionalInformation.sendKeys(userAdditionalInformation);
     }
 
-    void sendHomePhone(String userHomePhone) {
+    private void sendHomePhone(String userHomePhone) {
         waitForWebElementVisibility(homePhone);
         homePhone.sendKeys(userHomePhone);
     }
 
-    void sendMobilePhone(String userMobilePhone) {
+    private void sendMobilePhone(String userMobilePhone) {
         waitForWebElementVisibility(mobilePhone);
         mobilePhone.sendKeys(userMobilePhone);
     }
 
-    void sendAnAddressAlias(String alias) {
+    private void sendAnAddressAlias(String alias) {
         anAdressAlias.clear();
         anAdressAlias.sendKeys(alias);
     }
@@ -234,7 +234,7 @@ public class RegistrationPage extends Page {
         sendAnAddressAlias(user.getAddressAlias());
     }
 
-    void chooseGender(User user){
+    private void chooseGender(User user){
         if (user.isGenderMale()) {
             clickGenderMale();
         } else {
@@ -242,13 +242,13 @@ public class RegistrationPage extends Page {
         }
     }
 
-    void chooseNewsLetter(User user){
+    private void chooseNewsLetter(User user){
         if (user.isNewsLetter()) {
             clickNewsletter();
         }
     }
 
-    void chooseSpecialOffers(User user){
+    private void chooseSpecialOffers(User user){
         if(user.isSpecialOffers()){
             clickSpecialOffers();
         }

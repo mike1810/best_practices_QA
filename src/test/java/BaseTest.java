@@ -17,7 +17,6 @@ public abstract class BaseTest {
     WebDriver driver;
     Properties prop;
     static Logger LOGGER;
-
     DataPool dataPool;
 
     @BeforeSuite
@@ -39,7 +38,8 @@ public abstract class BaseTest {
         prop = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
+            input = new FileInputStream("C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\config.properties");
+            //input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
