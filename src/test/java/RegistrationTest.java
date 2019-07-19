@@ -11,6 +11,59 @@ public class RegistrationTest extends BaseTest{
 
     private RegistrationPage registrationPage;
     private SignInPage signInPage;
+    @Override
+    @BeforeClass
+    public void beforeClass() {
+        super.beforeClass();
+        LOGGER  = LogManager.getLogger(RegistrationTest.class);
+        //PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
+        PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
+
+        driver.get(prop.getProperty("registrationPageURL"));
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        signInPage = PageFactory.initElements(driver, SignInPage.class);
+        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
+        driver.get(prop.getProperty("registrationPageURL"));
+    }
+
+    @Test(dataProvider = "dataProvider")
+    public void registerNewAccount(User user) {
+
+        signInPage.sendNewEmail(user.getEmail());
+        signInPage.clickButtonToCreateAccount();
+
+        registrationPage.createNewAccountWithAllFields(user);
+        registrationPage.registerAccount();
+
+        Assert.assertTrue(registrationPage.accountWasRegistered());
+        registrationPage.clickSignOutButton();
+    }
+
+    @Test(dataProvider = "dataProvider")
+    public void registerNewAccountOnlyRequired(User user) {
+
+        signInPage.sendNewEmail(user.getEmail());
+        signInPage.clickButtonToCreateAccount();
+
+        registrationPage.createNewAccountWithOnlyRequiredFields(user);
+        registrationPage.registerAccount();
+
+        Assert.assertTrue(registrationPage.accountWasRegistered());
+        registrationPage.clickSignOutButton();
+    }
+
+    @Test(dataProvider = "dataProvider")
+    public void registerNewAccountNegative(User user) {
+
+        signInPage.sendNewEmail(user.getEmail());
+        signInPage.clickButtonToCreateAccount();
+
+        registrationPage.registerAccount();
+        Assert.assertTrue(registrationPage.accountWasNotRegistered());
+    }
 
     @Test
     public void testLogger(){
@@ -20,79 +73,9 @@ public class RegistrationTest extends BaseTest{
         LOGGER.info( "Info Message Logged !!!" );
     }
 
-    @Override
-    @BeforeClass
-    public void beforeClass() {
-        super.beforeClass();
-        LOGGER  = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
-        //PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
-    }
-
-    @BeforeMethod
-    public void beforeMethod() {
-
-        driver.get(prop.getProperty("registrationPageURL"));
-        signInPage = PageFactory.initElements(driver, SignInPage.class);
-
-        signInPage.waitPageIsLoaded();
-        signInPage.checkPageTitle();
-    }
-
-
     @DataProvider
     private Object[][] dataProvider(){
         return dataPool.getData();
-    }
-
-    @Test( dataProvider = "dataProvider" )
-    public void testGetAccountFromDataFile( User user ) {
-        System.out.println( user );
-    }
-    @Test(dataProvider = "dataProvider")
-    public void registerNewAccount(User user) {
-
-        signInPage.sendNewEmail(user.getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage = new RegistrationPage(driver);
-        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-
-        registrationPage.waitPageIsLoaded();
-        registrationPage.checkPageTitle();
-        registrationPage.createNewAccountWithAllFields(user);
-        registrationPage.clickRegister();
-        //registrationPage.clickSignOutButton();
-    }
-
-    @Test(dataProvider = "DPForAccountCreating", dataProviderClass = User.class)
-    public void registerNewAccountOnlyRequired(User user) {
-
-        signInPage.sendNewEmail(user.getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage = new RegistrationPage(driver);
-        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        registrationPage.waitPageIsLoaded();
-        registrationPage.checkPageTitle();
-        registrationPage.createNewAccountWithOnlyRequiredFields(user);
-        registrationPage.registerAccount();
-        registrationPage.clickSignOutButton();
-    }
-
-    @Test(dataProvider = "DPForAccountCreating", dataProviderClass = User.class)
-    public void registerNewAccountNegative(User user) {
-
-        signInPage.sendNewEmail(user.getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage = new RegistrationPage(driver);
-        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        registrationPage.waitPageIsLoaded();
-        registrationPage.checkPageTitle();
-
-        registrationPage.registerAccount();
-        Assert.assertTrue(registrationPage.accountWasNotRegistered());
     }
 }
 

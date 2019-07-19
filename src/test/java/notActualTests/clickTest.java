@@ -1,3 +1,5 @@
+/*
+package notActualTests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
@@ -5,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class clickTest extends BaseTest{
+public class clickTest extends BaseTest {
     private MyAccountPage myAccountPage;
 
     private RegistrationPage registrationPage;
@@ -56,4 +58,4 @@ public class clickTest extends BaseTest{
     public void testGetAccountFromDataFile( User user ) {
         System.out.println( user );
     }
-}
+}*/

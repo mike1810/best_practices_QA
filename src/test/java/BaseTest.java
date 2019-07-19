@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
@@ -38,8 +39,8 @@ public abstract class BaseTest {
         prop = new Properties();
         InputStream input = null;
         try {
-            input = new FileInputStream("C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\config.properties");
-            //input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
+            //input = new FileInputStream("C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\config.properties");
+            input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -54,8 +55,8 @@ public abstract class BaseTest {
         }
     }
 
-    @AfterClass
-    public void afterClass() {
-       // driver.quit();
+    @AfterSuite
+    public void afterSuite() {
+        driver.quit();
     }
 }

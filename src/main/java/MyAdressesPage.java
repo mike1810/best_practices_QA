@@ -1,7 +1,11 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AdressesPage extends Page{
+public class MyAdressesPage extends Page{
+    public MyAdressesPage(WebDriver driver){
+        super(driver);
+    }
 
     @FindBy(xpath = "//span[contains(text(),'Add a new address')]")
     private WebElement addANewAddress;
@@ -9,16 +13,31 @@ public class AdressesPage extends Page{
     @FindBy(xpath = "//span[contains(text(),'Update')]")
     private WebElement updateAddress;
 
+    @FindBy(xpath = "//span[contains(text(),'Delete')]")
+    private WebElement deleteAddress;
+
     @FindBy(xpath = "//span[contains(text(),'Back to your account')]")
     private WebElement backToYourAccount;
+
+    @FindBy(xpath = "//span[contains(text(),'Home')]")
+    private WebElement Home;
 
     private void clickAddANewAddress(){
         waitForWebElementToBeClickable(addANewAddress);
         addANewAddress.click();
     }
 
-    void addNewAddress(){
+    void addANewAddress(){
         clickAddANewAddress();
+    }
+
+    private void clickDeleteAddress(){
+        waitForWebElementToBeClickable(deleteAddress);
+        deleteAddress.click();
+    }
+
+    void deleteAnAddress(){
+        clickDeleteAddress();
     }
 
     private void clickUpdateAddress(){
@@ -26,7 +45,7 @@ public class AdressesPage extends Page{
         updateAddress.click();
     }
 
-    void updateAddress(){
+    void updateAnAddress(){
         clickUpdateAddress();
     }
 
@@ -39,5 +58,12 @@ public class AdressesPage extends Page{
         clickBackToYourAccount();
     }
 
-    void checkPageTitle(){}
+    private void clickHome(){
+        waitForWebElementToBeClickable(Home);
+        Home.click();
+    }
+
+    void openHomePage(){
+        clickHome();
+    }
 }

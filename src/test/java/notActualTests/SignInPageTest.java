@@ -1,3 +1,6 @@
+/*
+package notActualTests;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
@@ -17,10 +20,12 @@ public class SignInPageTest  extends BaseTest {
     }
 
     @Test(dataProvider = "DPForAccountCreating", dataProviderClass = User.class)
-    public void goToRegistrationPage(User user){
+    public void goToRegistrationPage(User user){*/
+/*
         signInPage.waitPageIsLoaded();
-        signInPage.checkPageTitle();
+        signInPage.checkPageTitle();*//*
+
         signInPage.sendNewEmail(user.getEmail());
         signInPage.clickButtonToCreateAccount();
     }
-}
+}*/

@@ -1,9 +1,10 @@
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
+@Getter
 public class RegistrationPage extends Page {
 
     public RegistrationPage(WebDriver driver){
@@ -17,10 +18,10 @@ public class RegistrationPage extends Page {
     private WebElement female;
 
     @FindBy(xpath = "//*[@id='customer_firstname']")
-    private WebElement firstName;
+    private WebElement сfirstName;
 
     @FindBy(xpath = "//*[@id='customer_lastname']")
-    private WebElement lastName;
+    private WebElement сlastName;
 
     @FindBy(xpath = "//*[@id='email']")
     private WebElement emailSecondPage;
@@ -43,17 +44,17 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = "//input[@id='optin']")
     private WebElement specialOffers;
 
-    @FindBy(xpath = "//*[@id='customer_firstname']")
-    private WebElement firstNameInAdressForm;
-
-    @FindBy(xpath = "//*[@id='customer_lastname']")
-    private WebElement lastNameInAdressForm;
-
     @FindBy(xpath = "//*[@id='company']")
     private WebElement company;
 
     @FindBy(xpath = "//*[@id='address1']")
     private WebElement address;
+
+    @FindBy(xpath = "//input[@id='firstname']")
+    private WebElement firstname;
+
+    @FindBy(xpath = "//input[@id='lastname']")
+    private WebElement lastname;
 
     @FindBy(xpath = "//*[@id='address2']")
     private WebElement addressLine2;
@@ -88,10 +89,6 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = "//*[@id='columns']/div[1]")
     private WebElement invalidData;
 
-    void checkPageTitle(){
-        Assert.assertEquals(driver.getTitle(), "Login - My Store", "not equals");
-    }
-
     private void clickGenderMale() {
         waitForWebElementToBeClickable(male);
         male.click();
@@ -103,13 +100,13 @@ public class RegistrationPage extends Page {
     }
 
     private void sendFirstName(String userFirstName) {
-        waitForWebElementVisibility(firstName);
-        firstName.sendKeys(userFirstName);
+        waitForWebElementVisibility(сfirstName);
+        сfirstName.sendKeys(userFirstName);
     }
 
     private void sendLastName(String userLastName) {
-        waitForWebElementVisibility(lastName);
-        lastName.sendKeys(userLastName);
+        waitForWebElementVisibility(сlastName);
+        сlastName.sendKeys(userLastName);
     }
 
     void sendEmailSecondPage(String userEmail) {
@@ -144,16 +141,6 @@ public class RegistrationPage extends Page {
 
     private void clickSpecialOffers() {
         specialOffers.click();
-    }
-
-    void firstNameInAddress(String userFirstName) {
-        firstNameInAdressForm.clear();
-        firstNameInAdressForm.sendKeys(userFirstName);
-    }
-
-    void lastNameInAddress(String userLastName) {
-        lastNameInAdressForm.clear();
-        lastNameInAdressForm.sendKeys(userLastName);
     }
 
     private void sendCompany(String userCompany) {

@@ -10,8 +10,6 @@ public abstract class Page {
 
     WebDriver driver;
 
-    public Page(){}
-
     public Page(WebDriver driver){
         this.driver = driver;
     }
@@ -28,7 +26,7 @@ public abstract class Page {
     @FindBy(xpath = "//a[@class='logout']")
     private WebElement signOutButton;
 
-    boolean signInButtonIsDisplayed(){
+    private boolean signInButtonIsDisplayed(){
         return signInButton.isDisplayed();
     }
 
@@ -36,7 +34,7 @@ public abstract class Page {
         return signInButtonIsDisplayed();
     }
 
-    boolean signOutButtonIsDisplayed(){
+    private boolean signOutButtonIsDisplayed(){
         return signOutButton.isDisplayed();
     }
 
@@ -52,6 +50,10 @@ public abstract class Page {
     void clickMyAccountButton(){
         waitForWebElementToBeClickable(myAccountButton);
         myAccountButton.click();
+    }
+
+    void openMyAccount(){
+        clickMyAccountButton();
     }
 
     void clickSignInButton(){
@@ -74,7 +76,7 @@ public abstract class Page {
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
-    abstract void checkPageTitle();
+    void checkPageTitle(){}
 
     void waitPageIsLoaded(){
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);

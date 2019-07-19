@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Simple test suite">
+    <parameter name="dataFile" value="src/test/data/data.json"/>
+
+
+    <test name="Some Test" verbose="2">
+        <classes>
+            <class name="RegistrationTest">
+                <methods>
+                    <include name="registerNewAccount" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

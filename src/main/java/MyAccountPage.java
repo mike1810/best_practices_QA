@@ -15,7 +15,7 @@ public class MyAccountPage extends Page{
     private WebElement myCreditSlips;
 
     @FindBy(xpath = "//span[contains(text(),'My addresses')]")
-    private WebElement myAdresses;
+    private WebElement myAddresses;
 
     @FindBy(xpath = "//span[contains(text(),'My personal information')]")
     private WebElement myPersonalInformation;
@@ -26,50 +26,72 @@ public class MyAccountPage extends Page{
     @FindBy(xpath = "//span[contains(text(),'Home')]")
     private WebElement home;
 
-    void clickOrderHistoryAndDetails(){
+    private void clickOrderHistoryAndDetails(){
         waitForWebElementToBeClickable(orderHistoryAndDetails);
         orderHistoryAndDetails.click();
     }
 
-    void clickMyCreditSlips(){
+    void openOrderHistoryAndDetails()
+    {clickOrderHistoryAndDetails();
+    }
+
+    private void clickMyCreditSlips(){
         waitForWebElementToBeClickable(myCreditSlips);
         myCreditSlips.click();
     }
 
-    void clickMyAdresses(){
-        waitForWebElementToBeClickable(myAdresses);
-        myAdresses.click();
+    void openMyCreditSlips(){
+        clickMyCreditSlips();
     }
 
-    void clickMyPersonalInformation(){
+    private void clickMyAddresses(){
+        waitForWebElementToBeClickable(myAddresses);
+        myAddresses.click();
+    }
+
+    void openMyAddresses(){
+        clickMyAddresses();
+    }
+
+    private void clickMyPersonalInformation(){
         waitForWebElementToBeClickable(myPersonalInformation);
         myPersonalInformation.click();
     }
 
-    void clickMyWishlists(){
+    void openMyPersonalInformation(){
+        clickMyPersonalInformation();
+    }
+
+    private void clickMyWishlists(){
         waitForWebElementToBeClickable(myWishlists);
         myWishlists.click();
     }
 
-    void clickHome(){
+    void openMyWishlists(){
+        clickMyWishlists();
+    }
+
+    private void clickHome(){
         waitForWebElementToBeClickable(home);
         home.click();
     }
 
-    void clickAllButtons(){
-        clickOrderHistoryAndDetails();
-        clickMyAccountButton();
-        clickMyAccountButton();
-        clickMyAccountButton();
-        clickMyCreditSlips();
-        clickMyAccountButton();
-        clickMyAdresses();
-        clickMyAccountButton();
-        clickMyPersonalInformation();
-        clickMyAccountButton();
-        clickMyWishlists();
-        clickMyAccountButton();
+    void openHome(){
         clickHome();
+    }
+
+    void clickAllButtons(){
+        openOrderHistoryAndDetails();
+        openMyAccount();
+        openMyCreditSlips();
+        openMyAccount();
+        openMyAddresses();
+        openMyAccount();
+        openMyPersonalInformation();
+        openMyAccount();
+        openMyWishlists();
+        openMyAccount();
+        openHome();
     }
 
     void checkPageTitle(){}

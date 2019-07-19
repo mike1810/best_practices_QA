@@ -12,10 +12,8 @@ public class User {
     private boolean genderMale;
     private String firstName;
     private String lastName;
-
     @JsonIgnore
     private String email;
-
     private String password;
     private String date;
     private String month;
@@ -108,5 +106,4 @@ public class User {
     public String toString(){
         return firstName + " " + lastName;
     }
-
 }

@@ -5,11 +5,10 @@
 
 
     <test name="Some Test" verbose="2">
-        <parameter name="login" value="true"/>
         <classes>
             <class name="RegistrationTest">
                 <methods>
-                    <include name="registerNewAccount" />
+                    <include name="registerNewAccountOnlyRequired" />
                 </methods>
             </class>
         </classes>
