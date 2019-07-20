@@ -1,0 +1,22 @@
+{
+  "genderMale":false,
+  "firstName":"Mikela",
+  "lastName":"Kaliberdina",
+  "password":"123456",
+  "date":"2",
+  "month":"2",
+  "year":"1995",
+  "newsLetter":false,
+  "specialOffers":false,
+  "company":"operasoft",
+  "address1":"Lenina 301",
+  "address2":"Centralnaya 11",
+  "city":"Moscow",
+  "state":"2",
+  "postcode":"11111",
+  "country":"21",
+  "additionalInformation":"I have time to write about me",
+  "homePhone":"11111",
+  "mobilePhone":"11111",
+  "alias":"Updated address"
+}

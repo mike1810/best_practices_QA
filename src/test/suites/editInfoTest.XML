@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Simple test suite">
+    <parameter name="dataFile" value="src/test/data/data.json"/>
+    <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
+
+
+    <test name="Some Test" verbose="2">
+        <classes>
+            <class name="EditTest">
+                <methods>
+                    <include name="testo" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

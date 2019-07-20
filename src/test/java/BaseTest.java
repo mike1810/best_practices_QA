@@ -2,7 +2,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -18,13 +17,17 @@ public abstract class BaseTest {
     WebDriver driver;
     Properties prop;
     static Logger LOGGER;
-    DataPool dataPool;
+    UserPool userPool;
+    UserPool userPoolNew;
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new DataPool();
+        userPool = new UserPool();
         HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPool.processDataFile( parameters.get( "dataFile" ) );
+        userPool.processDataFile( parameters.get( "dataFile" ) );
+        userPoolNew = new UserPool();
+        HashMap<String,String> parameters2 = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
+        userPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ) );
     }
 
     @BeforeClass
@@ -35,12 +38,12 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
     }
 
-    void initProperties(){
+    private void initProperties(){
         prop = new Properties();
         InputStream input = null;
         try {
-            //input = new FileInputStream("C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\config.properties");
-            input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
+            input = new FileInputStream("C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\config.properties");
+            //input = new FileInputStream("C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\config.properties");
             prop.load(input);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -57,6 +60,6 @@ public abstract class BaseTest {
 
     @AfterSuite
     public void afterSuite() {
-        driver.quit();
+        //driver.quit();
     }
 }

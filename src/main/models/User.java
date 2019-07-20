@@ -30,13 +30,16 @@ public class User {
     private String additionalInformation;
     private String homePhone;
     private String mobilePhone;
-    private String addressAlias;
+    private String alias;
 
-    public User() {/*
+    public User() {
+        /*
         this.genderMale = true;
         this.firstName = "Mike";
         this.lastName = "Kaliberdin";*/
-        this.email = giveNameToNewAccount() + "@gmail.com";/*
+        this.email = giveNameToNewAccount() + "@gmail.com";
+        //this.email = "tester@tester.tester";
+        /*
         this.password = "12345";
         this.date = "1";
         this.month = "1";
@@ -53,7 +56,8 @@ public class User {
         this.additionalInformation = "I have no time to write about me";
         this.homePhone = "12345";
         this.mobilePhone = "12345";
-        this.addressAlias = "98093";*/
+        this.alias = "98093";
+        */
     }
 
     private static String giveNameToNewAccount() {
@@ -61,7 +65,7 @@ public class User {
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
     }
-
+/*
     private void setNegative() {
         this.genderMale = true;
         this.firstName = "";
@@ -83,8 +87,8 @@ public class User {
         this.additionalInformation = "";
         this.homePhone = "";
         this.mobilePhone = "";
-        this.addressAlias = "";
-    }/*
+        this.alias = "";
+    }
 
     @DataProvider(name = "DPForAccountCreating")
     public Object[] dataProviderNewUser() {

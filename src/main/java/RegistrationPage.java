@@ -14,74 +14,162 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = ".//input[@id='id_gender1']")
     private WebElement male;
 
+    protected String getMaleAttribute(){
+        return male.getAttribute("checked");
+    }
+
     @FindBy(xpath = ".//input[@id='id_gender2']")
     private WebElement female;
 
+    protected String getFemaleAttribute(){
+        return female.getAttribute("checked");
+    }
+
     @FindBy(xpath = "//*[@id='customer_firstname']")
-    private WebElement сfirstName;
+    private WebElement сustomerFirstName;
 
     @FindBy(xpath = "//*[@id='customer_lastname']")
-    private WebElement сlastName;
+    private WebElement сustomerLastName;
 
-    @FindBy(xpath = "//*[@id='email']")
-    private WebElement emailSecondPage;
+    @FindBy(xpath = "//input[@id='email']")
+    private WebElement email;
 
-    @FindBy(xpath = "//*[@id='passwd']")
+    protected String getEmailAttribute(){
+        return email.getAttribute("value");
+    }
+
+    @FindBy(xpath = "//input[@id='passwd']")
     private WebElement password;
 
+    protected String getPasswordAttribute(){
+        return password.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='days']")
-    private WebElement date;
+    private WebElement days;
+
+    protected String getDaysAttribute(){
+        return days.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='months']")
-    private WebElement month;
+    private WebElement months;
+
+    protected String getMonthsAttribute(){
+        return months.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='years']")
-    private WebElement year;
+    private WebElement years;
+
+    protected String getYearsAttribute(){
+        return years.getAttribute("value");
+    }
 
     @FindBy(xpath = "//input[@id='newsletter']")
     private WebElement newsletter;
 
+    protected String getNewsletterAttribute(){
+        return newsletter.getAttribute("checked");
+    }
+
     @FindBy(xpath = "//input[@id='optin']")
     private WebElement specialOffers;
+
+    protected String getSpecialOffersAttribute(){
+        return specialOffers.getAttribute("checked");
+    }
 
     @FindBy(xpath = "//*[@id='company']")
     private WebElement company;
 
+    protected String getCompanyAttribute(){
+        return company.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='address1']")
-    private WebElement address;
+    private WebElement address1;
+
+    protected String getAddress1Attribute(){
+        return address1.getAttribute("value");
+    }
 
     @FindBy(xpath = "//input[@id='firstname']")
     private WebElement firstname;
 
+    protected String getFirstnameAttribute(){
+        return firstname.getAttribute("value");
+    }
+
     @FindBy(xpath = "//input[@id='lastname']")
     private WebElement lastname;
 
+    protected String getLastnameAttribute(){
+        return lastname.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='address2']")
-    private WebElement addressLine2;
+    private WebElement address2;
+
+    protected String getAddress2Attribute(){
+        return address2.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='city']")
     private WebElement city;
 
+    protected String getCityAttribute(){
+        return city.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='id_state']")
     private WebElement state;
+
+    protected String getStateAttribute(){
+        return state.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='postcode']")
     private WebElement postcode;
 
+    protected String getPostcodeAttribute(){
+        return postcode.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='id_country']")
     private WebElement country;
+
+    protected String getCountryAttribute(){
+        return country.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='other']")
     private WebElement additionalInformation;
 
+    protected String getAdditionalInformationAttribute(){
+        return additionalInformation.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='phone']")
     private WebElement homePhone;
+
+    protected String getHomePhoneAttribute(){
+        return homePhone.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='phone_mobile']")
     private WebElement mobilePhone;
 
+    protected String getMobilePhoneAttribute(){
+        return mobilePhone.getAttribute("value");
+    }
+
     @FindBy(xpath = "//*[@id='alias']")
-    private WebElement anAdressAlias;
+    private WebElement alias;
+
+    protected String getAliasAttribute(){
+        return alias.getAttribute("value");
+    }
 
     @FindBy(xpath = "//*[@id='submitAccount']/span")
     private WebElement register;
@@ -99,39 +187,48 @@ public class RegistrationPage extends Page {
         female.click();
     }
 
-    private void sendFirstName(String userFirstName) {
-        waitForWebElementVisibility(сfirstName);
-        сfirstName.sendKeys(userFirstName);
+    private void sendCustomerFirstName(String userFirstName) {
+        waitForWebElementVisibility(сustomerFirstName);
+        сustomerFirstName.clear();
+        сustomerFirstName.sendKeys(userFirstName);
     }
 
-    private void sendLastName(String userLastName) {
-        waitForWebElementVisibility(сlastName);
-        сlastName.sendKeys(userLastName);
+    protected void sendLastname(String userLastName) {
+        waitForWebElementVisibility(lastname);
+        lastname.clear();
+        lastname.sendKeys(userLastName);
     }
 
-    void sendEmailSecondPage(String userEmail) {
-        waitForWebElementVisibility(emailSecondPage);
-        emailSecondPage.clear();
-        emailSecondPage.sendKeys(userEmail);
+    protected void sendFirstname(String userFirstName) {
+        waitForWebElementVisibility(firstname);
+        firstname.clear();
+        firstname.sendKeys(userFirstName);
     }
 
-    private void sendPassword(String userPassword) {
+    private void sendCustomerLastName(String userLastName) {
+        waitForWebElementVisibility(сustomerLastName);
+        сustomerLastName.clear();
+        сustomerLastName.sendKeys(userLastName);
+    }
+
+    protected void sendPassword(String userPassword) {
         waitForWebElementVisibility(password);
+        password.clear();
         password.sendKeys(userPassword);
     }
 
-    private void selectDate(String userDate) {
-        Select sDate = new Select(date);
+    protected void selectDays(String userDate) {
+        Select sDate = new Select(days);
         sDate.selectByValue(String.valueOf(userDate));
     }
 
-    private void selectMonth(String userMonth) {
-        Select sMonth = new Select(month);
+    protected void selectMonths(String userMonth) {
+        Select sMonth = new Select(months);
         sMonth.selectByValue(String.valueOf(userMonth));
     }
 
-    private void selectYear(String userYear) {
-        Select sYear = new Select(year);
+    protected void selectYears(String userYear) {
+        Select sYear = new Select(years);
         sYear.selectByValue(String.valueOf(userYear));
     }
 
@@ -143,33 +240,38 @@ public class RegistrationPage extends Page {
         specialOffers.click();
     }
 
-    private void sendCompany(String userCompany) {
+    protected void sendCompany(String userCompany) {
         waitForWebElementVisibility(company);
+        company.clear();
         company.sendKeys(userCompany);
     }
 
-    private void sendAddress(String userAdress) {
-        waitForWebElementVisibility(address);
-        address.sendKeys(userAdress);
+    protected void sendAddress1(String userAddress1) {
+        waitForWebElementVisibility(address1);
+        address1.clear();
+        address1.sendKeys(userAddress1);
     }
 
-    private void sendAddressLine2(String userAdressLine2) {
-        waitForWebElementVisibility(addressLine2);
-        addressLine2.sendKeys(userAdressLine2);
+    protected void sendAddress2(String userAddress2) {
+        waitForWebElementVisibility(address2);
+        address2.clear();
+        address2.sendKeys(userAddress2);
     }
 
-    private void sendCity(String userCity) {
+    protected void sendCity(String userCity) {
         waitForWebElementVisibility(city);
+        city.clear();
         city.sendKeys(userCity);
     }
 
-    private void selectState(String userState) {
+    protected void selectState(String userState) {
         Select dropdown = new Select(state);
         dropdown.selectByValue(String.valueOf(userState));
     }
 
-    private void sendPostcode(String userPostcode) {
+    protected void sendPostcode(String userPostcode) {
         waitForWebElementVisibility(postcode);
+        postcode.clear();
         postcode.sendKeys(userPostcode);
     }
 
@@ -178,47 +280,33 @@ public class RegistrationPage extends Page {
         dropdown.selectByValue(String.valueOf(userCountry));
     }
 
-    private void sendAdditionalInformation(String userAdditionalInformation) {
+    protected void sendAdditionalInformation(String userAdditionalInformation) {
         waitForWebElementVisibility(additionalInformation);
+        additionalInformation.clear();
         additionalInformation.sendKeys(userAdditionalInformation);
     }
 
-    private void sendHomePhone(String userHomePhone) {
+    protected void sendHomePhone(String userHomePhone) {
         waitForWebElementVisibility(homePhone);
+        homePhone.clear();
         homePhone.sendKeys(userHomePhone);
     }
 
-    private void sendMobilePhone(String userMobilePhone) {
+    protected void sendMobilePhone(String userMobilePhone) {
         waitForWebElementVisibility(mobilePhone);
+        mobilePhone.clear();
         mobilePhone.sendKeys(userMobilePhone);
     }
 
-    private void sendAnAddressAlias(String alias) {
-        anAdressAlias.clear();
-        anAdressAlias.sendKeys(alias);
+    protected void sendAlias(String userAlias) {
+        alias.clear();
+        alias.sendKeys(userAlias);
     }
 
     public void clickRegister() {
         waitForWebElementVisibility(register);
         waitForWebElementToBeClickable(register);
         register.click();
-    }
-
-    void createNewAccountWithOnlyRequiredFields(User user){
-        sendFirstName(user.getFirstName());
-        sendLastName(user.getLastName());
-        sendPassword(user.getPassword());
-        selectDate(user.getDate());
-        selectMonth(user.getMonth());
-        selectDate(user.getDate());
-        selectYear(user.getYear());
-        sendAddress(user.getAddress1());
-        sendCity(user.getCity());
-        selectState(user.getState());
-        sendPostcode(user.getPostcode());
-        selectCountry(user.getCountry());
-        sendMobilePhone(user.getMobilePhone());
-        sendAnAddressAlias(user.getAddressAlias());
     }
 
     private void chooseGender(User user){
@@ -241,19 +329,35 @@ public class RegistrationPage extends Page {
         }
     }
 
+    void createNewAccountWithOnlyRequiredFields(User user){
+        sendCustomerFirstName(user.getFirstName());
+        sendCustomerLastName(user.getLastName());
+        sendPassword(user.getPassword());
+        selectDays(user.getDate());
+        selectMonths(user.getMonth());
+        selectYears(user.getYear());
+        sendAddress1(user.getAddress1());
+        sendCity(user.getCity());
+        selectState(user.getState());
+        sendPostcode(user.getPostcode());
+        selectCountry(user.getCountry());
+        sendMobilePhone(user.getMobilePhone());
+        sendAlias(user.getAlias());
+    }
+
     void createNewAccountWithAllFields(User user){
         chooseGender(user);
-        sendFirstName(user.getFirstName());
-        sendLastName(user.getLastName());
+        sendCustomerFirstName(user.getFirstName());
+        sendCustomerLastName(user.getLastName());
         sendPassword(user.getPassword());
-        selectDate(user.getDate());
-        selectMonth(user.getMonth());
-        selectYear(user.getYear());
+        selectDays(user.getDate());
+        selectMonths(user.getMonth());
+        selectYears(user.getYear());
         chooseNewsLetter(user);
         chooseSpecialOffers(user);
         sendCompany(user.getCompany());
-        sendAddress(user.getAddress1());
-        sendAddressLine2(user.getAddress2());
+        sendAddress1(user.getAddress1());
+        sendAddress2(user.getAddress2());
         sendCity(user.getCity());
         selectState(user.getState());
         sendPostcode(user.getPostcode());
@@ -261,14 +365,10 @@ public class RegistrationPage extends Page {
         sendAdditionalInformation(user.getAdditionalInformation());
         sendHomePhone(user.getHomePhone());
         sendMobilePhone(user.getMobilePhone());
-        sendAnAddressAlias(user.getAddressAlias());
+        sendAlias(user.getAlias());
     }
 
     public void registerAccount(){
         clickRegister();
-    }
-
-    public String getInvalidData() {
-        return invalidData.getText();
     }
 }

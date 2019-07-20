@@ -2,8 +2,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MyAdressesPage extends Page{
-    public MyAdressesPage(WebDriver driver){
+public class MyAddressesPage extends Page{
+    public MyAddressesPage(WebDriver driver){
         super(driver);
     }
 
@@ -45,7 +45,7 @@ public class MyAdressesPage extends Page{
         updateAddress.click();
     }
 
-    void updateAnAddress(){
+    void openAddressUpdatePage(){
         clickUpdateAddress();
     }
 
@@ -63,7 +63,7 @@ public class MyAdressesPage extends Page{
         Home.click();
     }
 
-    void openHomePage(){
+    void openHome(){
         clickHome();
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class DataPool {
+public class UserPool {
 
     Collection<User> users;
 

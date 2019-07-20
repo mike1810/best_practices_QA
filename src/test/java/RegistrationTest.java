@@ -16,8 +16,8 @@ public class RegistrationTest extends BaseTest{
     public void beforeClass() {
         super.beforeClass();
         LOGGER  = LogManager.getLogger(RegistrationTest.class);
-        //PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
-        PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
+        PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
+        //PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
 
         driver.get(prop.getProperty("registrationPageURL"));
     }
@@ -75,7 +75,7 @@ public class RegistrationTest extends BaseTest{
 
     @DataProvider
     private Object[][] dataProvider(){
-        return dataPool.getData();
+        return userPool.getData();
     }
 }
 
