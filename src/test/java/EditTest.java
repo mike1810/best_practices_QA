@@ -1,8 +1,5 @@
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 public class EditTest extends BaseTest{
@@ -12,6 +9,7 @@ public class EditTest extends BaseTest{
     private MyAddressesPage myAddressesPage;
     private MyAddressesUpdatePage myAddressesUpdatePage;
     private MyPersonalInformationPage myPersonalInformationPage;
+    private String newPassword, oldPassword;
 
     @Override
     @BeforeClass
@@ -24,6 +22,17 @@ public class EditTest extends BaseTest{
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
         signInPage.signInWith("tester@tester.tester", "12345");
+
+    }
+
+    @Test(dataProvider = "dataProvider")
+    public void getOldPasswordParameter(User user){
+        this.oldPassword = user.getPassword();
+    }
+
+    @Test(dataProvider = "dataProviderWithNewUser")
+    public void getNewPasswordParameter(User user){
+        this.newPassword = user.getPassword();
     }
 
     @BeforeMethod
@@ -60,12 +69,51 @@ public class EditTest extends BaseTest{
         myAddressesUpdatePage.updateAddress(oldUser);
         myAddressesUpdatePage.saveUpdates();
     }
+////////////////////////////////////////////////////////////
+    @Test(dataProvider = "dataProvider")//WithNewUser")
+    public void verifyOldPersonalInformation(User oldUser){
+        myAccountPage.openMyPersonalInformation();
+        verifyPersonalInformation(oldUser);
+    }
 
-    @Test(dataProvider = "dataProvider")
+    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
+    public void editOldPersonalInformation(User newUser){
+        myAccountPage.openMyPersonalInformation();
+        myPersonalInformationPage.updatePersonalInformation(newUser,oldPassword,newPassword);
+        myPersonalInformationPage.saveUpdates();
+    }
+
+    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
+    public void verifyNewPersonalInformation(User newUser){
+        myAccountPage.openMyPersonalInformation();
+        verifyPersonalInformation(newUser);
+    }
+
+    @Test(dataProvider = "dataProvider")//WithNewUser")
+    public void editNewPersonalInformation(User oldUser){
+        myAccountPage.openMyPersonalInformation();
+        myPersonalInformationPage.updatePersonalInformation(oldUser,newPassword,oldPassword);
+        myPersonalInformationPage.saveUpdates();
+    }
+
+    @Test(dataProvider = "dataProvider")//WithNewUser")
     public void testo(User oldUser){
         myAccountPage.openMyPersonalInformation();
+        verifyPersonalInformation(oldUser);
+        myPersonalInformationPage.updatePersonalInformation(oldUser,
+                oldUser.getPassword(),
+                oldUser.getPassword().replace("12345","54321"));
+        myPersonalInformationPage.saveUpdates();
+    }
+////////////////////////////////////////////////////////////
+
+
+
+    @Test(dataProvider = "dataProvider")
+    @Parameters({ "oldPassword", "newPassword" })
+    public void testVerifyInfo(String oldPassword, String newPassword, User oldUser ){
+        myAccountPage.openMyPersonalInformation();
         System.out.println(myPersonalInformationPage.getMaleAttribute());
-        System.out.println(myPersonalInformationPage.getFemaleAttribute());
         System.out.println(myPersonalInformationPage.getFirstnameAttribute());
         System.out.println(myPersonalInformationPage.getLastnameAttribute());
         System.out.println(myPersonalInformationPage.getEmailAttribute());
@@ -77,6 +125,44 @@ public class EditTest extends BaseTest{
         System.out.println(myPersonalInformationPage.getSpecialOffersAttribute());
         System.out.println(myPersonalInformationPage.getPasswordAttribute());
         System.out.println(myPersonalInformationPage.getConfirmationPasswordAttribute());
+//        /*
+//
+//        */
+//        verifyPersonalInfo(oldUser);
+//        myPersonalInformationPage.updatePersonalInformation(oldUser, oldPassword, newPassword);
+//        myPersonalInformationPage.saveUpdates();
+//        myAccountPage.openMyPersonalInformation();
+//        verifyPersonalInfo();
+//        myPersonalInformationPage.updatePersonalInformation(oldUser, newPassword, oldPassword);
+    }
+
+    private void verifyPersonalInformation(User user){
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(
+                myPersonalInformationPage.getMaleAttribute(),
+                user.isGenderMale());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getFirstnameAttribute(),
+                user.getFirstName());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getLastnameAttribute(),
+                user.getLastName());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getDaysAttribute(),
+                user.getDate());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getMonthsAttribute(),
+                user.getMonth());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getYearsAttribute(),
+                user.getYear());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getNewsletterAttribute(),
+                user.isNewsLetter());
+        softAssert.assertEquals(
+                myPersonalInformationPage.getSpecialOffersAttribute(),
+                user.isSpecialOffers());
+        softAssert.assertAll();
     }
 
     private void verifyAddressUpdated(User user){

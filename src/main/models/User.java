@@ -33,31 +33,7 @@ public class User {
     private String alias;
 
     public User() {
-        /*
-        this.genderMale = true;
-        this.firstName = "Mike";
-        this.lastName = "Kaliberdin";*/
         this.email = giveNameToNewAccount() + "@gmail.com";
-        //this.email = "tester@tester.tester";
-        /*
-        this.password = "12345";
-        this.date = "1";
-        this.month = "1";
-        this.year = "1994";
-        this.newsLetter = true;
-        this.specialOffers = true;
-        this.company = "sperasoft";
-        this.address1 = "Lenina 30";
-        this.address2 = "Centralnaya 1";
-        this.city = "Volgograd";
-        this.state = "1";
-        this.postcode = "12345";
-        this.country = "21";
-        this.additionalInformation = "I have no time to write about me";
-        this.homePhone = "12345";
-        this.mobilePhone = "12345";
-        this.alias = "98093";
-        */
     }
 
     private static String giveNameToNewAccount() {

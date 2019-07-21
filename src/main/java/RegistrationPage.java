@@ -7,21 +7,21 @@ import org.openqa.selenium.support.ui.Select;
 @Getter
 public class RegistrationPage extends Page {
 
-    public RegistrationPage(WebDriver driver){
+    public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
     @FindBy(xpath = ".//input[@id='id_gender1']")
     private WebElement male;
 
-    protected String getMaleAttribute(){
-        return male.getAttribute("checked");
+    protected boolean getMaleAttribute() {
+        return male.isSelected();
     }
 
     @FindBy(xpath = ".//input[@id='id_gender2']")
     private WebElement female;
 
-    protected String getFemaleAttribute(){
+    protected String getFemaleAttribute() {
         return female.getAttribute("checked");
     }
 
@@ -34,140 +34,140 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = "//input[@id='email']")
     private WebElement email;
 
-    protected String getEmailAttribute(){
+    protected String getEmailAttribute() {
         return email.getAttribute("value");
     }
 
     @FindBy(xpath = "//input[@id='passwd']")
     private WebElement password;
 
-    protected String getPasswordAttribute(){
+    protected String getPasswordAttribute() {
         return password.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='days']")
     private WebElement days;
 
-    protected String getDaysAttribute(){
+    protected String getDaysAttribute() {
         return days.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='months']")
     private WebElement months;
 
-    protected String getMonthsAttribute(){
+    protected String getMonthsAttribute() {
         return months.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='years']")
     private WebElement years;
 
-    protected String getYearsAttribute(){
+    protected String getYearsAttribute() {
         return years.getAttribute("value");
     }
 
     @FindBy(xpath = "//input[@id='newsletter']")
     private WebElement newsletter;
 
-    protected String getNewsletterAttribute(){
-        return newsletter.getAttribute("checked");
+    protected boolean getNewsletterAttribute() {
+        return newsletter.isSelected();//getAttribute("checked") == "true";
     }
 
     @FindBy(xpath = "//input[@id='optin']")
     private WebElement specialOffers;
 
-    protected String getSpecialOffersAttribute(){
-        return specialOffers.getAttribute("checked");
+    protected boolean getSpecialOffersAttribute() {
+        return specialOffers.isSelected();//.getAttribute("checked") == "true";
     }
 
     @FindBy(xpath = "//*[@id='company']")
     private WebElement company;
 
-    protected String getCompanyAttribute(){
+    protected String getCompanyAttribute() {
         return company.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='address1']")
     private WebElement address1;
 
-    protected String getAddress1Attribute(){
+    protected String getAddress1Attribute() {
         return address1.getAttribute("value");
     }
 
     @FindBy(xpath = "//input[@id='firstname']")
     private WebElement firstname;
 
-    protected String getFirstnameAttribute(){
+    protected String getFirstnameAttribute() {
         return firstname.getAttribute("value");
     }
 
     @FindBy(xpath = "//input[@id='lastname']")
     private WebElement lastname;
 
-    protected String getLastnameAttribute(){
+    protected String getLastnameAttribute() {
         return lastname.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='address2']")
     private WebElement address2;
 
-    protected String getAddress2Attribute(){
+    protected String getAddress2Attribute() {
         return address2.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='city']")
     private WebElement city;
 
-    protected String getCityAttribute(){
+    protected String getCityAttribute() {
         return city.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='id_state']")
     private WebElement state;
 
-    protected String getStateAttribute(){
+    protected String getStateAttribute() {
         return state.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='postcode']")
     private WebElement postcode;
 
-    protected String getPostcodeAttribute(){
+    protected String getPostcodeAttribute() {
         return postcode.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='id_country']")
     private WebElement country;
 
-    protected String getCountryAttribute(){
+    protected String getCountryAttribute() {
         return country.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='other']")
     private WebElement additionalInformation;
 
-    protected String getAdditionalInformationAttribute(){
+    protected String getAdditionalInformationAttribute() {
         return additionalInformation.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='phone']")
     private WebElement homePhone;
 
-    protected String getHomePhoneAttribute(){
+    protected String getHomePhoneAttribute() {
         return homePhone.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='phone_mobile']")
     private WebElement mobilePhone;
 
-    protected String getMobilePhoneAttribute(){
+    protected String getMobilePhoneAttribute() {
         return mobilePhone.getAttribute("value");
     }
 
     @FindBy(xpath = "//*[@id='alias']")
     private WebElement alias;
 
-    protected String getAliasAttribute(){
+    protected String getAliasAttribute() {
         return alias.getAttribute("value");
     }
 
@@ -178,12 +178,12 @@ public class RegistrationPage extends Page {
     private WebElement invalidData;
 
     private void clickGenderMale() {
-        waitForWebElementToBeClickable(male);
+        //waitForWebElementToBeClickable(male);
         male.click();
     }
 
     private void clickGenderFemale() {
-        waitForWebElementToBeClickable(female);
+        //waitForWebElementToBeClickable(female);
         female.click();
     }
 
@@ -309,7 +309,7 @@ public class RegistrationPage extends Page {
         register.click();
     }
 
-    private void chooseGender(User user){
+    protected void chooseGender(User user) {
         if (user.isGenderMale()) {
             clickGenderMale();
         } else {
@@ -317,19 +317,19 @@ public class RegistrationPage extends Page {
         }
     }
 
-    private void chooseNewsLetter(User user){
-        if (user.isNewsLetter()) {
+    protected void chooseNewsLetter(User user) {
+        while(user.isNewsLetter() != getNewsletterAttribute()){
             clickNewsletter();
         }
     }
 
-    private void chooseSpecialOffers(User user){
-        if(user.isSpecialOffers()){
+    protected void chooseSpecialOffers(User user) {
+        while(user.isSpecialOffers() != getSpecialOffersAttribute()){
             clickSpecialOffers();
         }
     }
 
-    void createNewAccountWithOnlyRequiredFields(User user){
+    void createNewAccountWithOnlyRequiredFields(User user) {
         sendCustomerFirstName(user.getFirstName());
         sendCustomerLastName(user.getLastName());
         sendPassword(user.getPassword());
@@ -345,7 +345,7 @@ public class RegistrationPage extends Page {
         sendAlias(user.getAlias());
     }
 
-    void createNewAccountWithAllFields(User user){
+    void createNewAccountWithAllFields(User user) {
         chooseGender(user);
         sendCustomerFirstName(user.getFirstName());
         sendCustomerLastName(user.getLastName());
@@ -368,7 +368,7 @@ public class RegistrationPage extends Page {
         sendAlias(user.getAlias());
     }
 
-    public void registerAccount(){
+    public void registerAccount() {
         clickRegister();
     }
 }

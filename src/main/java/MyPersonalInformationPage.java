@@ -70,4 +70,18 @@ public class MyPersonalInformationPage extends RegistrationPage{
         confirmationPassword.sendKeys(userPassword);
     }
 
+    void updatePersonalInformation(User user, String oldPassword, String newPassword){
+        chooseGender(user);//Male
+        sendFirstname(user.getFirstName());//Firstname
+        sendLastname(user.getLastName());//Lastname
+        //Email
+        selectDays(user.getDate());//Days
+        selectMonths(user.getMonth());//Months
+        selectYears(user.getYear());//Years
+        sendOldPassword(oldPassword);//OldPassword
+        chooseNewsLetter(user);//Newsletter
+        chooseSpecialOffers(user);//SpecialOffers
+        sendPassword(newPassword);//Password
+        sendConfirmationPassword(newPassword);//ConfirmationPassword
+    }
 }
