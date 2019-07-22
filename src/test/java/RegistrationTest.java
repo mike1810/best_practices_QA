@@ -19,9 +19,7 @@ public class RegistrationTest extends BaseTest {
     public void beforeClass() throws IOException {
         super.beforeClass();
         LOGGER  = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure(ReadResourceFile.read("configProperties.txt"));
-        //PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
-
+        PropertyConfigurator.configure(ReadResourceFile.read("log4jProperties.txt"));
         driver.get(prop.getProperty("registrationPageURL"));
     }
 

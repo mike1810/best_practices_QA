@@ -178,12 +178,12 @@ public class RegistrationPage extends Page {
     private WebElement invalidData;
 
     private void clickGenderMale() {
-        //waitForWebElementToBeClickable(male);
+        waitForWebElementToBeClickable(male);
         male.click();
     }
 
     private void clickGenderFemale() {
-        //waitForWebElementToBeClickable(female);
+        waitForWebElementToBeClickable(female);
         female.click();
     }
 
@@ -309,7 +309,7 @@ public class RegistrationPage extends Page {
         register.click();
     }
 
-    protected void chooseGender(User user) {
+    private void chooseGender(User user) {
         if (user.isGenderMale()) {
             clickGenderMale();
         } else {

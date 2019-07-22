@@ -31,6 +31,22 @@ public class MyPersonalInformationPage extends RegistrationPage{
     @FindBy(xpath = "//span[contains(text(),'Save')]")
     private WebElement saveButton;
 
+    private void clickGenderMale() {
+        getMale().click();
+    }
+
+    private void clickGenderFemale() {
+        getFemale().click();
+    }
+
+    private void chooseGender(User user) {
+        if (user.isGenderMale()) {
+            clickGenderMale();
+        } else {
+            clickGenderFemale();
+        }
+    }
+
     private void clickHome(){
         waitForWebElementToBeClickable(home);
         home.click();

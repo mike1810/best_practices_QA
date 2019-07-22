@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Simple test suite">
-    <parameter name="dataFile" value="src/test/data/data.json"/>
-    <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
 
 
     <test name="Some Test" verbose="2">
-        <parameter name="oldPassword" value="12345"></parameter>
-        <parameter name="newPassword" value="54321"></parameter>
+        <parameter name="oldPassword" value="12345"/>
+        <parameter name="newPassword" value="54321"/>
+        <parameter name="dataFile" value="src/test/data/data.json"/>
+        <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
             <class name="EditAndVerifyPersonalInfoTest">
                 <methods>

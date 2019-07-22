@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Simple test suite">
-    <parameter name="dataFile" value="src/test/data/data.json"/>
-    <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
 
 
     <test name="Some Test" verbose="2">
+        <parameter name="dataFile" value="src/test/data/data.json"/>
+        <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
             <class name="EditAndVerifyAddressesTest">
                 <methods>

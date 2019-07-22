@@ -25,9 +25,9 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
         userPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ) );
     }
 
-    @Override
     @BeforeClass
-    public void beforeClass() throws IOException {
+    @Parameters({"oldPassword"})
+    public void beforeClass(String asd) throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
