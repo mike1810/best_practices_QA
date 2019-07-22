@@ -18,14 +18,14 @@ public abstract class BaseTest {
     WebDriver driver;
     Properties prop;
     static Logger LOGGER;
-    UserPool userPool;
-    UserPool userPoolNew;
+    dataPool dataPool;
+    dataPool dataPoolNew;
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        userPool = new UserPool();
+        dataPool = new dataPool();
         HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        userPool.processDataFile( parameters.get( "dataFile" ) );
+        dataPool.processDataFile( parameters.get( "dataFile" ), User.class );
     }
 
     @BeforeClass

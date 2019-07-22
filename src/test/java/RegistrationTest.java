@@ -76,7 +76,7 @@ public class RegistrationTest extends BaseTest {
 
     @DataProvider
     private Object[][] dataProvider(){
-        return userPool.getData();
+        return dataPool.getData();
     }
 }
 

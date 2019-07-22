@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class UserPool {
+public class dataPool<T>{
 
-    Collection<User> users;
+    Collection<T> data;
 
-    public void processDataFile( String filePath ){
+    public void processDataFile( String filePath, Class<T> dataClass ){
 
-        users = new ArrayList<>();
+        data = new ArrayList<>();
 
         ObjectMapper objectMapper = new ObjectMapper();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         objectMapper.setDateFormat( dateFormat );
         try {
-            User user = objectMapper.readValue( new File( filePath ), User.class );
-            users.add( user );
+            T user = objectMapper.readValue( new File( filePath ), dataClass );
+            data.add( user );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,16 +29,16 @@ public class UserPool {
 
     public Object[][] getData() {
 
-        Object[][] data = new Object[ users.size() ][ 1 ];
+        Object[][] dataToGet = new Object[ data.size() ][ 1 ];
 
-        Iterator<User> it = users.iterator();
+        Iterator<T> it = data.iterator();
 
         int i = 0;
         while( it.hasNext() ) {
-            data[ i ][ 0 ] = it.next();
+            dataToGet[ i ][ 0 ] = it.next();
             i++;
         }
 
-        return data;
+        return dataToGet;
     }
 }

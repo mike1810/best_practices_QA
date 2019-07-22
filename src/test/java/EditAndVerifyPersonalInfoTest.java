@@ -17,12 +17,12 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        userPool = new UserPool();
+        dataPool = new dataPool();
         HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        userPool.processDataFile( parameters.get( "dataFile" ) );
-        userPoolNew = new UserPool();
+        dataPool.processDataFile( parameters.get( "dataFile" ), User.class );
+        dataPoolNew = new dataPool();
         HashMap<String,String> parameters2 = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        userPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ) );
+        dataPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ), User.class );
     }
 
     @BeforeClass
@@ -113,11 +113,11 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
 
     @DataProvider
     private Object[][] dataProvider(){
-        return userPool.getData();
+        return dataPool.getData();
     }
 
     @DataProvider
     private Object[][] dataProviderWithNewUser(){
-        return userPoolNew.getData();
+        return dataPoolNew.getData();
     }
 }
