@@ -1,19 +1,32 @@
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class EditTest extends BaseTest{
+import java.io.IOException;
+import java.util.HashMap;
+
+public class EditAndVerifyAddressesTest extends BaseTest {
 
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;
     private MyAddressesPage myAddressesPage;
     private MyAddressesUpdatePage myAddressesUpdatePage;
     private MyPersonalInformationPage myPersonalInformationPage;
-    private String newPassword, oldPassword;
+
+    @BeforeSuite
+    protected void beforeSuite( ITestContext testContext ) {
+        userPool = new UserPool();
+        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
+        userPool.processDataFile( parameters.get( "dataFile" ) );
+        userPoolNew = new UserPool();
+        HashMap<String,String> parameters2 = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
+        userPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ) );
+    }
 
     @Override
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
@@ -22,17 +35,6 @@ public class EditTest extends BaseTest{
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
         signInPage.signInWith("tester@tester.tester", "12345");
-
-    }
-
-    @Test(dataProvider = "dataProvider")
-    public void getOldPasswordParameter(User user){
-        this.oldPassword = user.getPassword();
-    }
-
-    @Test(dataProvider = "dataProviderWithNewUser")
-    public void getNewPasswordParameter(User user){
-        this.newPassword = user.getPassword();
     }
 
     @BeforeMethod
@@ -69,47 +71,8 @@ public class EditTest extends BaseTest{
         myAddressesUpdatePage.updateAddress(oldUser);
         myAddressesUpdatePage.saveUpdates();
     }
-////////////////////////////////////////////////////////////
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void verifyOldPersonalInformation(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(oldUser);
-    }
 
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void editOldPersonalInformation(User newUser){
-        myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(newUser,oldPassword,newPassword);
-        myPersonalInformationPage.saveUpdates();
-    }
-
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void verifyNewPersonalInformation(User newUser){
-        myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(newUser);
-    }
-
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void editNewPersonalInformation(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(oldUser,newPassword,oldPassword);
-        myPersonalInformationPage.saveUpdates();
-    }
-
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void testo(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(oldUser);
-        myPersonalInformationPage.updatePersonalInformation(oldUser,
-                oldUser.getPassword(),
-                oldUser.getPassword().replace("12345","54321"));
-        myPersonalInformationPage.saveUpdates();
-    }
-////////////////////////////////////////////////////////////
-
-
-
-    @Test(dataProvider = "dataProvider")
+    /*@Test(dataProvider = "dataProvider")
     @Parameters({ "oldPassword", "newPassword" })
     public void testVerifyInfo(String oldPassword, String newPassword, User oldUser ){
         myAccountPage.openMyPersonalInformation();
@@ -125,100 +88,49 @@ public class EditTest extends BaseTest{
         System.out.println(myPersonalInformationPage.getSpecialOffersAttribute());
         System.out.println(myPersonalInformationPage.getPasswordAttribute());
         System.out.println(myPersonalInformationPage.getConfirmationPasswordAttribute());
-//        /*
-//
-//        */
-//        verifyPersonalInfo(oldUser);
-//        myPersonalInformationPage.updatePersonalInformation(oldUser, oldPassword, newPassword);
-//        myPersonalInformationPage.saveUpdates();
-//        myAccountPage.openMyPersonalInformation();
-//        verifyPersonalInfo();
-//        myPersonalInformationPage.updatePersonalInformation(oldUser, newPassword, oldPassword);
-    }
-
-    private void verifyPersonalInformation(User user){
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(
-                myPersonalInformationPage.getMaleAttribute(),
-                user.isGenderMale());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getFirstnameAttribute(),
-                user.getFirstName());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getLastnameAttribute(),
-                user.getLastName());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getDaysAttribute(),
-                user.getDate());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getMonthsAttribute(),
-                user.getMonth());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getYearsAttribute(),
-                user.getYear());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getNewsletterAttribute(),
-                user.isNewsLetter());
-        softAssert.assertEquals(
-                myPersonalInformationPage.getSpecialOffersAttribute(),
-                user.isSpecialOffers());
-        softAssert.assertAll();
-    }
+    }*/
 
     private void verifyAddressUpdated(User user){
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getFirstnameAttribute(),
-                user.getFirstName()
-        );
+                user.getFirstName());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getLastnameAttribute(),
-                user.getLastName()
-        );
+                user.getLastName());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getAddress1Attribute(),
-                user.getAddress1()
-        );
+                user.getAddress1());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getAddress2Attribute(),
-                user.getAddress2()
-        );
+                user.getAddress2());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getCompanyAttribute(),
-                user.getCompany()
-        );
+                user.getCompany());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getCityAttribute(),
-                user.getCity()
-        );
+                user.getCity());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getStateAttribute(),
-                user.getState()
-        );
+                user.getState());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getPostcodeAttribute(),
-                user.getPostcode()
-        );
+                user.getPostcode());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getCountryAttribute(),
-                user.getCountry()
-        );
+                user.getCountry());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getHomePhoneAttribute(),
-                user.getHomePhone()
-        );
+                user.getHomePhone());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getMobilePhoneAttribute(),
-                user.getMobilePhone()
-        );
+                user.getMobilePhone());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getAdditionalInformationAttribute(),
-                user.getAdditionalInformation()
-        );
+                user.getAdditionalInformation());
         softAssert.assertNotEquals(
                 myAddressesUpdatePage.getAliasAttribute(),
-                user.getAlias()
-        );
+                user.getAlias());
         softAssert.assertAll();
     }
 
@@ -226,56 +138,43 @@ public class EditTest extends BaseTest{
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(
                 myAddressesUpdatePage.getFirstnameAttribute(),
-                user.getFirstName()
-        );
+                user.getFirstName());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getLastnameAttribute(),
-                user.getLastName()
-        );
+                user.getLastName());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getAddress1Attribute(),
-                user.getAddress1()
-        );
+                user.getAddress1());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getAddress2Attribute(),
-                user.getAddress2()
-        );
+                user.getAddress2());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getCompanyAttribute(),
-                user.getCompany()
-        );
+                user.getCompany());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getCityAttribute(),
-                user.getCity()
-        );
+                user.getCity());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getStateAttribute(),
-                user.getState()
-        );
+                user.getState());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getPostcodeAttribute(),
-                user.getPostcode()
-        );
+                user.getPostcode());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getCountryAttribute(),
-                user.getCountry()
-        );
+                user.getCountry());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getHomePhoneAttribute(),
-                user.getHomePhone()
-        );
+                user.getHomePhone());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getMobilePhoneAttribute(),
-                user.getMobilePhone()
-        );
+                user.getMobilePhone());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getAdditionalInformationAttribute(),
-                user.getAdditionalInformation()
-        );
+                user.getAdditionalInformation());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getAliasAttribute(),
-                user.getAlias()
-        );
+                user.getAlias());
         softAssert.assertAll();
     }
 

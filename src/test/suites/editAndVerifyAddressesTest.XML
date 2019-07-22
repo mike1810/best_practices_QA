@@ -7,7 +7,7 @@
 
     <test name="Some Test" verbose="2">
         <classes>
-            <class name="EditTest">
+            <class name="EditAndVerifyAddressesTest">
                 <methods>
                     <include name="testVerifyOldAddress" />
                     <include name="testEditOldAddress" />

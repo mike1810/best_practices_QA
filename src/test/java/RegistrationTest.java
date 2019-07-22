@@ -6,17 +6,20 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import readResource.ReadResourceFile;
 
-public class RegistrationTest extends BaseTest{
+import java.io.IOException;
+
+public class RegistrationTest extends BaseTest {
 
     private RegistrationPage registrationPage;
     private SignInPage signInPage;
     @Override
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass() throws IOException {
         super.beforeClass();
         LOGGER  = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure( "C:\\Users\\kalib\\Documents\\GitHub\\main\\src\\test\\resources\\log4j.properties");
+        PropertyConfigurator.configure(ReadResourceFile.read("configProperties.txt"));
         //PropertyConfigurator.configure( "C:\\Users\\mikhail.kaliberdin\\Documents\\GitHub\\automationQA\\src\\test\\resources\\log4j.properties");
 
         driver.get(prop.getProperty("registrationPageURL"));
