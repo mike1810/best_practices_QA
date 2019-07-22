@@ -30,14 +30,18 @@ public abstract class BaseTest {
 
     @BeforeClass
     public void beforeClass() throws IOException {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") +
+                ReadResourceFile.read("driverPath.txt"));
         driver = new ChromeDriver();
         initProperties();
         driver.manage().window().maximize();
     }
 
-    private void initProperties(){
+    private void initProperties() throws IOException{
         prop = new Properties();
+        InputStream input = new FileInputStream(ReadResourceFile.read("configProperties.txt"));
+        prop.load(input);
+        /*prop = new Properties();
         InputStream input = null;
         try {
             input = new FileInputStream(ReadResourceFile.read("configProperties.txt"));
@@ -52,7 +56,7 @@ public abstract class BaseTest {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
     @AfterSuite
