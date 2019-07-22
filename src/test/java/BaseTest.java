@@ -36,7 +36,7 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
     }
 
-    private void initProperties() throws IOException{
+    private void initProperties(){
         prop = new Properties();
         InputStream input = null;
         try {
