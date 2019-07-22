@@ -26,8 +26,8 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
     }
 
     @BeforeClass
-    @Parameters({"oldPassword"})
-    public void beforeClass(String asd) throws IOException {
+    @Parameters({"oldPassword", "email"})
+    public void beforeClass(String oldPassword, String email) throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
@@ -35,7 +35,8 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        signInPage.signInWith("tester@tester.tester", "12345");
+        //signInPage.signInWith("tester@tester.tester", "12345");
+        signInPage.signInWith(email, oldPassword);
 
     }
 

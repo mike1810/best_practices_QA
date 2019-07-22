@@ -12,7 +12,7 @@ public class ReadResourceFile {
         File file = new File(classLoader.getResource(filePathInResources).getFile());
 
         //File is found
-        System.out.println("File Found : " + file.exists());
+        //System.out.println("File Found : " + file.exists());
 
         //Read File Content
         String content = new String(Files.readAllBytes(file.toPath()));

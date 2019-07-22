@@ -3,7 +3,13 @@
 <suite name="Simple test suite">
 
 
+    <listeners>
+        <listener class-name="listeners.CustomListener"/>
+        <listener class-name="listeners.CustomListenerForSuite"/>
+    </listeners>
+
     <test name="Some Test" verbose="2">
+        <parameter name="email" value="tester@tester.tester"/>
         <parameter name="oldPassword" value="12345"/>
         <parameter name="newPassword" value="54321"/>
         <parameter name="dataFile" value="src/test/data/data.json"/>
