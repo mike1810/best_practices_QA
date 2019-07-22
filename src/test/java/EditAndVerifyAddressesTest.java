@@ -24,22 +24,23 @@ public class EditAndVerifyAddressesTest extends BaseTest {
         userPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ) );
     }
 
-    @Override
     @BeforeClass
-    public void beforeClass() throws IOException {
+    @Parameters({"oldPassword", "email"})
+    public void beforeClass(String oldPassword, String email) throws IOException {
         super.beforeClass();
-        driver.get(prop.getProperty("signInPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        signInPage.signInWith("tester@tester.tester", "12345");
+        //signInPage.signInWith("tester@tester.tester", "12345");
+        signInPage.signInWith(email, oldPassword);
     }
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get(prop.getProperty("signInPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
     }
 
     @Test(dataProvider = "dataProvider")

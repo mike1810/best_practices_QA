@@ -20,14 +20,14 @@ public class RegistrationTest extends BaseTest {
         super.beforeClass();
         LOGGER  = LogManager.getLogger(RegistrationTest.class);
         PropertyConfigurator.configure(ReadResourceFile.read("log4jProperties.txt"));
-        driver.get(prop.getProperty("registrationPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("registrationPageURL"));
     }
 
     @BeforeMethod
     public void beforeMethod() {
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        driver.get(prop.getProperty("registrationPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("registrationPageURL"));
     }
 
     @Test(dataProvider = "dataProvider")

@@ -29,7 +29,7 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
     @Parameters({"oldPassword", "email"})
     public void beforeClass(String oldPassword, String email) throws IOException {
         super.beforeClass();
-        driver.get(prop.getProperty("signInPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
@@ -52,7 +52,8 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get(prop.getProperty("signInPageURL"));
+        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
+
     }
 
     @Test(dataProvider = "dataProvider")//WithNewUser")
@@ -78,16 +79,6 @@ public class EditAndVerifyPersonalInfoTest extends BaseTest {
     public void editNewPersonalInformation(User oldUser){
         myAccountPage.openMyPersonalInformation();
         myPersonalInformationPage.updatePersonalInformation(oldUser,newPassword,oldPassword);
-        myPersonalInformationPage.saveUpdates();
-    }
-
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void testo(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(oldUser);
-        myPersonalInformationPage.updatePersonalInformation(oldUser,
-                oldUser.getPassword(),
-                oldUser.getPassword().replace("12345","54321"));
         myPersonalInformationPage.saveUpdates();
     }
 
