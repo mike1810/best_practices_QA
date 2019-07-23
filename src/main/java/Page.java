@@ -93,8 +93,6 @@ public abstract class Page {
         webElement.sendKeys(textToSend);
     }
 
-    void checkPageTitle(){}
-
     void waitPageIsLoaded(){
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }

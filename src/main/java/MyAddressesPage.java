@@ -1,7 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-//import pageElements.Addresses;
+//import hmmmm.Addresses;
 
 public class MyAddressesPage extends Page {
     public MyAddressesPage(WebDriver driver) {

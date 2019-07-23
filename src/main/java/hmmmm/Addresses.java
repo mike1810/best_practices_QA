@@ -1,26 +1,28 @@
-/*
-package pageElements;
 
+package hmmmm;
+
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Getter
 public class Addresses {
-*/
-/*
-    sendFirstname(user.getFirstName());
-    sendLastname(user.getLastName());*//*
+
+
+    /*sendFirstname(user.getFirstName());
+    sendLastname(user.getLastName());
 
 
 
-    sendCompany(user.getCompany());
+    sendCompany(user.getCompany());*/
     @FindBy(xpath = "//*[@id='company']")
     private WebElement company;
 
-    protected String getCompanyAttribute() {
+    public String getCompanyAttribute() {
         return company.getAttribute("value");
     }
 
-
+/*
     sendAddress1(user.getAddress1());
     @FindBy(xpath = "//*[@id='address1']")
     private WebElement address1;
@@ -45,6 +47,6 @@ public class Addresses {
     sendHomePhone(user.getHomePhone());
     sendMobilePhone(user.getMobilePhone());
     sendAdditionalInformation(user.getAdditionalInformation());
-    sendAlias(user.getAlias());
+    sendAlias(user.getAlias());*/
 }
-*/
+
