@@ -178,198 +178,63 @@ public class RegistrationPage extends Page {
     @FindBy(xpath = "//*[@id='columns']/div[1]")
     private WebElement invalidData;
 
-    private void clickGenderMale() {
-        waitForWebElementToBeClickable(male);
-        male.click();
-    }
-
-    private void clickGenderFemale() {
-        waitForWebElementToBeClickable(female);
-        female.click();
-    }
-
-    private void sendCustomerFirstName(String userFirstName) {
-        waitForWebElementVisibility(сustomerFirstName);
-        сustomerFirstName.clear();
-        сustomerFirstName.sendKeys(userFirstName);
-    }
-
-    protected void sendLastname(String userLastName) {
-        waitForWebElementVisibility(lastname);
-        lastname.clear();
-        lastname.sendKeys(userLastName);
-    }
-
-    protected void sendFirstname(String userFirstName) {
-        waitForWebElementVisibility(firstname);
-        firstname.clear();
-        firstname.sendKeys(userFirstName);
-    }
-
-    private void sendCustomerLastName(String userLastName) {
-        waitForWebElementVisibility(сustomerLastName);
-        сustomerLastName.clear();
-        сustomerLastName.sendKeys(userLastName);
-    }
-
-    protected void sendPassword(String userPassword) {
-        waitForWebElementVisibility(password);
-        password.clear();
-        password.sendKeys(userPassword);
-    }
-
-    protected void selectDays(String userDate) {
-        Select sDate = new Select(days);
-        sDate.selectByValue(String.valueOf(userDate));
-    }
-
-    protected void selectMonths(String userMonth) {
-        Select sMonth = new Select(months);
-        sMonth.selectByValue(String.valueOf(userMonth));
-    }
-
-    protected void selectYears(String userYear) {
-        Select sYear = new Select(years);
-        sYear.selectByValue(String.valueOf(userYear));
-    }
-
-    private void clickNewsletter() {
-        newsletter.click();
-    }
-
-    private void clickSpecialOffers() {
-        specialOffers.click();
-    }
-
-    protected void sendCompany(String userCompany) {
-        waitForWebElementVisibility(company);
-        company.clear();
-        company.sendKeys(userCompany);
-    }
-
-    protected void sendAddress1(String userAddress1) {
-        waitForWebElementVisibility(address1);
-        address1.clear();
-        address1.sendKeys(userAddress1);
-    }
-
-    protected void sendAddress2(String userAddress2) {
-        waitForWebElementVisibility(address2);
-        address2.clear();
-        address2.sendKeys(userAddress2);
-    }
-
-    protected void sendCity(String userCity) {
-        waitForWebElementVisibility(city);
-        city.clear();
-        city.sendKeys(userCity);
-    }
-
-    protected void selectState(String userState) {
-        Select dropdown = new Select(state);
-        dropdown.selectByValue(String.valueOf(userState));
-    }
-
-    protected void sendPostcode(String userPostcode) {
-        waitForWebElementVisibility(postcode);
-        postcode.clear();
-        postcode.sendKeys(userPostcode);
-    }
-
-    private void selectCountry(String userCountry) {
-        Select dropdown = new Select(country);
-        dropdown.selectByValue(String.valueOf(userCountry));
-    }
-
-    protected void sendAdditionalInformation(String userAdditionalInformation) {
-        waitForWebElementVisibility(additionalInformation);
-        additionalInformation.clear();
-        additionalInformation.sendKeys(userAdditionalInformation);
-    }
-
-    protected void sendHomePhone(String userHomePhone) {
-        waitForWebElementVisibility(homePhone);
-        homePhone.clear();
-        homePhone.sendKeys(userHomePhone);
-    }
-
-    protected void sendMobilePhone(String userMobilePhone) {
-        waitForWebElementVisibility(mobilePhone);
-        mobilePhone.clear();
-        mobilePhone.sendKeys(userMobilePhone);
-    }
-
-    protected void sendAlias(String userAlias) {
-        alias.clear();
-        alias.sendKeys(userAlias);
-    }
-
-    public void clickRegister() {
-        waitForWebElementVisibility(register);
-        waitForWebElementToBeClickable(register);
-        register.click();
-    }
-
     private void chooseGender(User user) {
-        if (user.isGenderMale()) {
-            clickGenderMale();
-        } else {
-            clickGenderFemale();
-        }
+        clickAfterWaiting(user.isGenderMale() ? male : female);
     }
 
     protected void chooseNewsLetter(User user) {
         while(user.isNewsLetter() != getNewsletterAttribute()){
-            clickNewsletter();
+            click(newsletter);
         }
     }
 
     protected void chooseSpecialOffers(User user) {
         while(user.isSpecialOffers() != getSpecialOffersAttribute()){
-            clickSpecialOffers();
+            click(specialOffers);
         }
     }
 
     void createNewAccountWithOnlyRequiredFields(User user) {
-        sendCustomerFirstName(user.getFirstName());
-        sendCustomerLastName(user.getLastName());
-        sendPassword(user.getPassword());
-        selectDays(user.getDate());
-        selectMonths(user.getMonth());
-        selectYears(user.getYear());
-        sendAddress1(user.getAddress1());
-        sendCity(user.getCity());
-        selectState(user.getState());
-        sendPostcode(user.getPostcode());
-        selectCountry(user.getCountry());
-        sendMobilePhone(user.getMobilePhone());
-        sendAlias(user.getAlias());
-    }
+        send(getСustomerFirstName(), user.getFirstName());
+        send(getСustomerLastName(), user.getLastName());
+        send(getPassword(), user.getPassword());
+        select(getDays(), user.getDate());
+        select(getMonths(), user.getMonth());
+        select(getYears(), user.getYear());
+        send(getAddress1(), user.getAddress1());
+        send(getCity(), user.getCity());
+        select(getState(),user.getState());
+        send(getPostcode(), user.getPostcode());
+        select(getCountry(),user.getCountry());
+        send(getMobilePhone(), user.getMobilePhone());
+        send(getAlias(), user.getAlias());
+}
 
     void createNewAccountWithAllFields(User user) {
         chooseGender(user);
-        sendCustomerFirstName(user.getFirstName());
-        sendCustomerLastName(user.getLastName());
-        sendPassword(user.getPassword());
-        selectDays(user.getDate());
-        selectMonths(user.getMonth());
-        selectYears(user.getYear());
+        send(getСustomerFirstName(), user.getFirstName());
+        send(getСustomerLastName(), user.getLastName());
+        send(getPassword(), user.getPassword());
+        select(getDays(), user.getDate());
+        select(getMonths(), user.getMonth());
+        select(getYears(), user.getYear());
         chooseNewsLetter(user);
         chooseSpecialOffers(user);
-        sendCompany(user.getCompany());
-        sendAddress1(user.getAddress1());
-        sendAddress2(user.getAddress2());
-        sendCity(user.getCity());
-        selectState(user.getState());
-        sendPostcode(user.getPostcode());
-        selectCountry(user.getCountry());
-        sendAdditionalInformation(user.getAdditionalInformation());
-        sendHomePhone(user.getHomePhone());
-        sendMobilePhone(user.getMobilePhone());
-        sendAlias(user.getAlias());
+        send(getCompany(), user.getCompany());
+        send(getAddress1(), user.getAddress1());
+        send(getAddress2(), user.getAddress2());
+        send(getCity(), user.getCity());
+        select(getState(),user.getState());
+        send(getPostcode(), user.getPostcode());
+        select(getCountry(),user.getCountry());
+        send(getAdditionalInformation(), user.getAdditionalInformation());
+        send(getHomePhone(), user.getHomePhone());
+        send(getMobilePhone(), user.getMobilePhone());
+        send(getAlias(), user.getAlias());
     }
 
     public void registerAccount() {
-        clickRegister();
+        waitForWebElementVisibility(register);
+        clickAfterWaiting(register);
     }
 }

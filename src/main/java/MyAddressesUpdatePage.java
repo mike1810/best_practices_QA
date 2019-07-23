@@ -3,9 +3,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MyAddressesUpdatePage extends RegistrationPage{
+public class MyAddressesUpdatePage extends RegistrationPage {
 
-    public MyAddressesUpdatePage(WebDriver driver){
+    public MyAddressesUpdatePage(WebDriver driver) {
         super(driver);
     }
 
@@ -15,33 +15,26 @@ public class MyAddressesUpdatePage extends RegistrationPage{
     @FindBy(xpath = "//span[contains(text(),'Back to your addresses')]")
     private WebElement backToYourAddressesButton;
 
-    private void clickSaveButton(){
-        waitForWebElementToBeClickable(saveButton);
-        saveButton.click();
+    void saveUpdates() {
+        clickAfterWaiting(saveButton);
     }
 
-    void saveUpdates(){
-        clickSaveButton();
+    private void backToYourAddresses() {
+        clickAfterWaiting(backToYourAddressesButton);
     }
 
-    private void backToYourAddresses(){
-        waitForWebElementToBeClickable(backToYourAddressesButton);
-        backToYourAddressesButton.click();
+    void updateAddress(User user) {
+        send(getFirstname(), user.getFirstName());//sendFirstname(user.getFirstName());
+        send(getLastname(), user.getLastName());//sendLastname(user.getLastName());
+        send(getCompany(), user.getCompany());//sendCompany(user.getCompany());
+        send(getAddress1(), user.getAddress1());//sendAddress1(user.getAddress1());
+        send(getAddress2(), user.getAddress2());//sendAddress2(user.getAddress2());
+        send(getCity(), user.getCity());//sendCity(user.getCity());
+        select(getState(), user.getState());
+        send(getPostcode(), user.getPostcode());//sendPostcode(user.getPostcode());
+        send(getHomePhone(), user.getHomePhone());//sendHomePhone(user.getHomePhone());
+        send(getMobilePhone(), user.getMobilePhone());//sendMobilePhone(user.getMobilePhone());
+        send(getAdditionalInformation(), user.getAdditionalInformation());//sendAdditionalInformation(user.getAdditionalInformation());
+        send(getAlias(), user.getAlias());//sendAlias(user.getAlias());
     }
-
-    void updateAddress(User user){
-        sendFirstname(user.getFirstName());
-        sendLastname(user.getLastName());
-        sendCompany(user.getCompany());
-        sendAddress1(user.getAddress1());
-        sendAddress2(user.getAddress2());
-        sendCity(user.getCity());
-        selectState(user.getState());
-        sendPostcode(user.getPostcode());
-        sendHomePhone(user.getHomePhone());
-        sendMobilePhone(user.getMobilePhone());
-        sendAdditionalInformation(user.getAdditionalInformation());
-        sendAlias(user.getAlias());
-    }
-
 }

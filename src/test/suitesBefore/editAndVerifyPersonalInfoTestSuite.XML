@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="editAndVerifyPersonalInfo suite">
+
+    <listeners>
+        <listener class-name="listeners.CustomListener"/>
+        <listener class-name="listeners.CustomListenerForSuite"/>
+    </listeners>
+
+    <test name="Some Test" verbose="2">
+        <parameter name="email" value="tester@tester.tester"/>
+        <parameter name="oldPassword" value="12345"/>
+        <parameter name="newPassword" value="54321"/>
+        <parameter name="dataFile" value="src/test/data/data.json"/>
+        <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
+        <classes>
+            <class name="EditAndVerifyPersonalInfoTest">
+                <methods>
+                    <include name="getOldPasswordParameter" />
+                    <include name="getNewPasswordParameter" />
+                    <include name="verifyOldPersonalInformation" />
+                    <include name="editOldPersonalInformation" />
+                    <include name="verifyNewPersonalInformation" />
+                    <include name="editNewPersonalInformation" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

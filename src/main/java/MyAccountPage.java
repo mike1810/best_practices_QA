@@ -2,9 +2,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MyAccountPage extends Page{
+public class MyAccountPage extends Page {
 
-    public MyAccountPage(WebDriver driver){
+    public MyAccountPage(WebDriver driver) {
         super(driver);
     }
 
@@ -26,73 +26,27 @@ public class MyAccountPage extends Page{
     @FindBy(xpath = "//span[contains(text(),'Home')]")
     private WebElement home;
 
-    private void clickOrderHistoryAndDetails(){
-        waitForWebElementToBeClickable(orderHistoryAndDetails);
-        orderHistoryAndDetails.click();
+    void openOrderHistoryAndDetails() {
+        clickAfterWaiting(orderHistoryAndDetails);
     }
 
-    void openOrderHistoryAndDetails()
-    {clickOrderHistoryAndDetails();
+    void openMyCreditSlips() {
+        clickAfterWaiting(myCreditSlips);
     }
 
-    private void clickMyCreditSlips(){
-        waitForWebElementToBeClickable(myCreditSlips);
-        myCreditSlips.click();
+    void openMyAddresses() {
+        clickAfterWaiting(myAddresses);
     }
 
-    void openMyCreditSlips(){
-        clickMyCreditSlips();
+    void openMyPersonalInformation() {
+        clickAfterWaiting(myPersonalInformation);
     }
 
-    private void clickMyAddresses(){
-        waitForWebElementToBeClickable(myAddresses);
-        myAddresses.click();
+    void openMyWishlists() {
+        clickAfterWaiting(myWishlists);
     }
 
-    void openMyAddresses(){
-        clickMyAddresses();
+    void goHomePage() {
+        clickAfterWaiting(home);
     }
-
-    private void clickMyPersonalInformation(){
-        waitForWebElementToBeClickable(myPersonalInformation);
-        myPersonalInformation.click();
-    }
-
-    void openMyPersonalInformation(){
-        clickMyPersonalInformation();
-    }
-
-    private void clickMyWishlists(){
-        waitForWebElementToBeClickable(myWishlists);
-        myWishlists.click();
-    }
-
-    void openMyWishlists(){
-        clickMyWishlists();
-    }
-
-    private void clickHome(){
-        waitForWebElementToBeClickable(home);
-        home.click();
-    }
-
-    void openHome(){
-        clickHome();
-    }
-
-    void clickAllButtons(){
-        openOrderHistoryAndDetails();
-        openMyAccount();
-        openMyCreditSlips();
-        openMyAccount();
-        openMyAddresses();
-        openMyAccount();
-        openMyPersonalInformation();
-        openMyAccount();
-        openMyWishlists();
-        openMyAccount();
-        openHome();
-    }
-
-    void checkPageTitle(){}
 }

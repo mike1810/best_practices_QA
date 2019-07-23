@@ -24,37 +24,21 @@ public class SignInPage extends Page {
     private WebElement submit;
 
     void sendNewEmail(String email){
-        waitForWebElementVisibility(newEmail);
-        newEmail.sendKeys(email);
+        send(newEmail, email);
     }
 
     void clickButtonToCreateAccount(){
-        waitForWebElementToBeClickable(buttonToCreateAccount);
-        buttonToCreateAccount.click();
-    }
-
-    void sendEmail(String regEmail){
-        waitForWebElementVisibility(registeredEmail);
-        registeredEmail.sendKeys(regEmail);
-    }
-
-    void sendPassword(String regPassword){
-        waitForWebElementVisibility(registeredEmailsPasswd);
-        registeredEmailsPasswd.sendKeys(regPassword);
-    }
-    void clickSubmit(){
-        waitForWebElementToBeClickable(submit);
-        submit.click();
+        clickAfterWaiting(buttonToCreateAccount);
     }
 
     void signIn(){
-        clickSubmit();
+        clickAfterWaiting(submit);
     }
 
     void signInWith(String login, String password){
-        sendEmail("tester@tester.tester");
-        sendPassword("12345");
-        clickSubmit();
+        send(registeredEmail, login);
+        send(registeredEmailsPasswd, password);
+        clickAfterWaiting(submit);
     }
 
     @Override

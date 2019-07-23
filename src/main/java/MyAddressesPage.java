@@ -1,10 +1,10 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageElements.Addresses;
+//import pageElements.Addresses;
 
-public class MyAddressesPage extends Page{
-    public MyAddressesPage(WebDriver driver){
+public class MyAddressesPage extends Page {
+    public MyAddressesPage(WebDriver driver) {
         super(driver);
     }
 
@@ -23,49 +23,23 @@ public class MyAddressesPage extends Page{
     @FindBy(xpath = "//span[contains(text(),'Home')]")
     private WebElement Home;
 
-
-    private void clickAddANewAddress(){
-        waitForWebElementToBeClickable(addANewAddress);
-        addANewAddress.click();
+    void addANewAddress() {
+        clickAfterWaiting(addANewAddress);
     }
 
-    void addANewAddress(){
-        clickAddANewAddress();
+    void deleteAnAddress() {
+        clickAfterWaiting(deleteAddress);
     }
 
-    private void clickDeleteAddress(){
-        waitForWebElementToBeClickable(deleteAddress);
-        deleteAddress.click();
+    void openAddressUpdatePage() {
+        clickAfterWaiting(updateAddress);
     }
 
-    void deleteAnAddress(){
-        clickDeleteAddress();
+    void goToMyAccountPage() {
+        clickAfterWaiting(backToYourAccount);
     }
 
-    private void clickUpdateAddress(){
-        waitForWebElementToBeClickable(updateAddress);
-        updateAddress.click();
-    }
-
-    void openAddressUpdatePage(){
-        clickUpdateAddress();
-    }
-
-    private void clickBackToYourAccount(){
-        waitForWebElementToBeClickable(backToYourAccount);
-        backToYourAccount.click();
-    }
-
-    void goToMyAccountPage(){
-        clickBackToYourAccount();
-    }
-
-    private void clickHome(){
-        waitForWebElementToBeClickable(Home);
-        Home.click();
-    }
-
-    void openHome(){
-        clickHome();
+    void openHomePage() {
+        clickAfterWaiting(Home);
     }
 }

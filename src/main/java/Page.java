@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -43,27 +44,20 @@ public abstract class Page {
     }
 
     void clickSignOutButton(){
-        waitForWebElementToBeClickable(signOutButton);
-        signOutButton.click();
+        clickAfterWaiting(signOutButton);
     }
 
-    void clickMyAccountButton(){
-        waitForWebElementToBeClickable(myAccountButton);
-        myAccountButton.click();
+    protected void click(WebElement webElement){
+        webElement.click();
+    }
+
+    protected void clickAfterWaiting(WebElement webElement){
+        waitForWebElementToBeClickable(webElement);
+        click(webElement);
     }
 
     void openMyAccount(){
-        clickMyAccountButton();
-    }
-
-    void clickSignInButton(){
-        waitForWebElementToBeClickable(signInButton);
-        signInButton.click();
-    }
-
-    void clickContactUsButton(){
-        waitForWebElementToBeClickable(contactUsButton);
-        contactUsButton.click();
+        clickAfterWaiting(myAccountButton);
     }
 
     void waitForWebElementVisibility(WebElement webElement){
@@ -74,6 +68,29 @@ public abstract class Page {
     void waitForWebElementToBeClickable(WebElement webElement){
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
+    }
+
+    protected void select(WebElement webElement, String valueToSelect) {
+        Select dropdown = new Select(webElement);
+        dropdown.selectByValue(String.valueOf(valueToSelect));
+    }
+
+    protected void clear(WebElement webElement) {
+        webElement.clear();
+    }
+
+    public String getDropBoxValueAttribute(WebElement dropBox) {
+        return dropBox.getAttribute("value");
+    }
+
+    protected String getTextBoxValueAttribute(WebElement textBox) {
+        return textBox.getAttribute("value");
+    }
+
+    protected void send(WebElement webElement, String textToSend) {
+        waitForWebElementVisibility(webElement);
+        webElement.clear();
+        webElement.sendKeys(textToSend);
     }
 
     void checkPageTitle(){}

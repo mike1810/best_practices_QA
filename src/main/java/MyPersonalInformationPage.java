@@ -1,8 +1,10 @@
+import lombok.Getter;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Getter
 public class MyPersonalInformationPage extends RegistrationPage{
 
     public MyPersonalInformationPage(WebDriver driver){
@@ -32,73 +34,39 @@ public class MyPersonalInformationPage extends RegistrationPage{
     @FindBy(xpath = "//span[contains(text(),'Save')]")
     private WebElement saveButton;
 
-    private void clickGenderMale() {
-        getMale().click();
-    }
-
-    private void clickGenderFemale() {
-        getFemale().click();
-    }
-
     private void chooseGender(User user) {
-        if (user.isGenderMale()) {
-            clickGenderMale();
-        } else {
-            clickGenderFemale();
-        }
+        click(user.isGenderMale() ? getMale() : getFemale());
     }
 
-    private void clickHome(){
-        waitForWebElementToBeClickable(home);
-        home.click();
-    }
-
-    void openHome(){
-        clickHome();
+    void goHomePage(){
+        clickAfterWaiting(home);
     }
 
     private void clickBackToYourAccount(){
-        waitForWebElementToBeClickable(backToYourAccount);
-        backToYourAccount.click();
+        clickAfterWaiting(backToYourAccount);
     }
 
     void goToMyAccountPage(){
         clickBackToYourAccount();
     }
 
-    private void clickSaveButton(){
-        waitForWebElementToBeClickable(saveButton);
-        saveButton.click();
-    }
-
     void saveUpdates(){
-        clickSaveButton();
-    }
-
-    void sendOldPassword(String userOldPassword){
-        waitForWebElementVisibility(oldPassword);
-        oldPassword.clear();
-        oldPassword.sendKeys(userOldPassword);
-    }
-
-    void sendConfirmationPassword(String userPassword){
-        waitForWebElementVisibility(confirmationPassword);
-        confirmationPassword.clear();
-        confirmationPassword.sendKeys(userPassword);
+        clickAfterWaiting(saveButton);
     }
 
     void updatePersonalInformation(User user, String oldPassword, String newPassword){
-        chooseGender(user);//Male
-        sendFirstname(user.getFirstName());//Firstname
-        sendLastname(user.getLastName());//Lastname
+        chooseGender(user);
+        send(getFirstname(), user.getFirstName());
+        send(getLastname(), user.getLastName());
         //Email
-        selectDays(user.getDate());//Days
-        selectMonths(user.getMonth());//Months
-        selectYears(user.getYear());//Years
-        sendOldPassword(oldPassword);//OldPassword
-        chooseNewsLetter(user);//Newsletter
-        chooseSpecialOffers(user);//SpecialOffers
-        sendPassword(newPassword);//Password
-        sendConfirmationPassword(newPassword);//ConfirmationPassword
+        select(getDays(), user.getDate());
+        select(getMonths(), user.getMonth());
+        select(getYears(), user.getYear());
+        send(getOldPassword(), oldPassword);
+        chooseNewsLetter(user);
+        chooseSpecialOffers(user);
+        send(getPassword(), newPassword);
+        send(getConfirmationPassword(), newPassword);
     }
+
 }
