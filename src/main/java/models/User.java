@@ -1,3 +1,5 @@
+package models;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.testng.annotations.DataProvider;
@@ -69,13 +71,13 @@ public class User {
     @DataProvider(name = "DPForAccountCreating")
     public Object[] dataProviderNewUser() {
         return new Object[]{
-                new User()
+                new models.User()
         };
     }
 
     @DataProvider(name = "DPForAccountCreatingNegative")
     public Object[] dataProviderNewUserNegative() {
-        User user = new User();
+        models.User user = new models.User();
         user.setNegative();
         return new Object[]{
                 user

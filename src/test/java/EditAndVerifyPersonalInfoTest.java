@@ -1,3 +1,4 @@
+import models.User;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
 import org.testng.annotations.*;

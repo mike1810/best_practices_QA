@@ -7,7 +7,7 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class EditAndVerifyAddressesTest extends BaseTest {
+public class VerifyAddressesTest extends BaseTest {
 
     private SignInPage signInPage;
     private MyAccountPage myAccountPage;

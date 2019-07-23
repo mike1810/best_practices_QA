@@ -10,18 +10,18 @@ import java.util.Iterator;
 
 public class dataPool<T>{
 
-    Collection<T> data;
+    Collection<T> dataCollection;
 
     public void processDataFile( String filePath, Class<T> dataClass ){
 
-        data = new ArrayList<>();
+        dataCollection = new ArrayList<>();
 
         ObjectMapper objectMapper = new ObjectMapper();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         objectMapper.setDateFormat( dateFormat );
         try {
-            T user = objectMapper.readValue( new File( filePath ), dataClass );
-            data.add( user );
+            T data = objectMapper.readValue( new File( filePath ), dataClass );
+            dataCollection.add( data );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,9 +29,9 @@ public class dataPool<T>{
 
     public Object[][] getData() {
 
-        Object[][] dataToGet = new Object[ data.size() ][ 1 ];
+        Object[][] dataToGet = new Object[ dataCollection.size() ][ 1 ];
 
-        Iterator<T> it = data.iterator();
+        Iterator<T> it = dataCollection.iterator();
 
         int i = 0;
         while( it.hasNext() ) {

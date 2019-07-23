@@ -1,3 +1,4 @@
+import models.User;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.support.PageFactory;

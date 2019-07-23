@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageElements.Addresses;
 
 public class MyAddressesPage extends Page{
     public MyAddressesPage(WebDriver driver){
@@ -21,6 +22,7 @@ public class MyAddressesPage extends Page{
 
     @FindBy(xpath = "//span[contains(text(),'Home')]")
     private WebElement Home;
+
 
     private void clickAddANewAddress(){
         waitForWebElementToBeClickable(addANewAddress);
