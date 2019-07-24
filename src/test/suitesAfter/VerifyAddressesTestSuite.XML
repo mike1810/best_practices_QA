@@ -14,7 +14,7 @@
         <parameter name="dataFile" value="src/test/data/data.json"/>
         <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
-            <class name="EditAndVerifyAddressesTest">
+            <class name="VerifyAddressesTest">
                 <methods>
                     <include name="testVerifyOldAddress" />
                     <include name="testEditOldAddress" />

@@ -17,12 +17,8 @@ public class VerifyAddressesTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new dataPool();
-        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPool.processDataFile( parameters.get( "dataFile" ), User.class );
-        dataPoolNew = new dataPool();
-        HashMap<String,String> parameters2 = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ), User.class );
+        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
     }
 
     @BeforeClass

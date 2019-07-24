@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class EditPersonalInfoTest extends BaseTest {
 
     private SignInPage signInPage;
+    private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
     private MyAddressesPage myAddressesPage;
     private MyAddressesUpdatePage myAddressesUpdatePage;
@@ -18,27 +19,20 @@ public class EditPersonalInfoTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new dataPool();
-        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPool.processDataFile( parameters.get( "dataFile" ), User.class );
-        dataPoolNew = new dataPool();
-        HashMap<String,String> parameters2 = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPoolNew.processDataFile( parameters2.get( "dataToReplaceFile" ), User.class );
+        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
     }
 
     @BeforeClass
-    @Parameters({"oldPassword", "email"})
-    public void beforeClass(String oldPassword, String email) throws IOException {
+    public void beforeClass() throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
+        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        //signInPage.signInWith("tester@tester.tester", "12345");
-        signInPage.signInWith(email, oldPassword);
-
     }
 
     @Test(dataProvider = "dataProvider")
@@ -51,10 +45,12 @@ public class EditPersonalInfoTest extends BaseTest {
         this.newPassword = user.getPassword();
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
-
+    @Test(dataProvider = "dataProvider")
+    public void CreateAccount(User user) {
+        signInPage.sendNewEmail(user.getEmail());
+        signInPage.clickButtonToCreateAccount();
+        registrationPage.createNewAccountWithAllFields(user);
+        registrationPage.registerAccount();
     }
 
     @Test(dataProvider = "dataProvider")//WithNewUser")

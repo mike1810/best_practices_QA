@@ -19,15 +19,8 @@ public abstract class BaseTest {
     WebDriver driver;
     Properties prop;
     static Logger LOGGER;
-    dataPool dataPool;
-    dataPool dataPoolNew;
-
-    @BeforeSuite
-    protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new dataPool();
-        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        dataPool.processDataFile( parameters.get( "dataFile" ), User.class );
-    }
+    DataPool dataPool;
+    DataPool dataPoolNew;
 
     @BeforeClass
     public void beforeClass() throws IOException {

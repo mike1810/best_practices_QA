@@ -3,10 +3,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
 import readResource.ReadResourceFile;
 
 import java.io.IOException;
@@ -15,6 +13,12 @@ public class RegistrationTest extends BaseTest {
 
     private RegistrationPage registrationPage;
     private SignInPage signInPage;
+
+    @BeforeSuite
+    protected void beforeSuite( ITestContext testContext ) {
+        dataPool = new DataPool("dataFile", testContext, User.class);
+    }
+
     @Override
     @BeforeClass
     public void beforeClass() throws IOException {

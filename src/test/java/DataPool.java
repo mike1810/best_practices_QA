@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.testng.ITestContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,9 +7,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
-public class dataPool<T>{
+public class DataPool<T>{
+
+    DataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
+        fillNewDataPool(testParameterName, testContext, dataClass);
+    }
 
     Collection<T> dataCollection;
 
@@ -40,5 +46,10 @@ public class dataPool<T>{
         }
 
         return dataToGet;
+    }
+
+    public void fillNewDataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
+        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
+        this.processDataFile( parameters.get(testParameterName), dataClass );
     }
 }
