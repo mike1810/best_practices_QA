@@ -15,16 +15,9 @@ public class EditAddressesTest extends BaseTest {
     private MyAccountPage myAccountPage;
     private MyAddressesPage myAddressesPage;
     private MyAddressesUpdatePage myAddressesUpdatePage;
-    private MyPersonalInformationPage myPersonalInformationPage;
-
-    @BeforeSuite
-    protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
-    }
 
     @BeforeClass
-    public void beforeClass() throws IOException {
+    public void beforeClass( ITestContext testContext ) throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
@@ -32,7 +25,8 @@ public class EditAddressesTest extends BaseTest {
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
-        myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
+        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
     }
 
     @Test(dataProvider = "dataProvider")
@@ -47,9 +41,49 @@ public class EditAddressesTest extends BaseTest {
         myAddressesPage.openAddressUpdatePage();
         myAddressesUpdatePage.updateAddress(user2);
         myAddressesUpdatePage.saveUpdates();
-        //myAddressesUpdatePage.openMyAccount();
         myAddressesPage.openAddressUpdatePage();
+        verifyAddressUpdated(user1);
         verifyAddress(user2);
+    }
+    private void verifyAddressUpdated(User user){
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getFirstnameAttribute(),
+                user.getFirstName());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getLastnameAttribute(),
+                user.getLastName());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getAddress1Attribute(),
+                user.getAddress1());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getAddress2Attribute(),
+                user.getAddress2());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getCompanyAttribute(),
+                user.getCompany());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getCityAttribute(),
+                user.getCity());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getStateAttribute(),
+                user.getState());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getPostcodeAttribute(),
+                user.getPostcode());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getHomePhoneAttribute(),
+                user.getHomePhone());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getMobilePhoneAttribute(),
+                user.getMobilePhone());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getAdditionalInformationAttribute(),
+                user.getAdditionalInformation());
+        softAssert.assertNotEquals(
+                myAddressesUpdatePage.getAliasAttribute(),
+                user.getAlias());
+        softAssert.assertAll();
     }
 
     private void verifyAddress(User user){
@@ -78,9 +112,6 @@ public class EditAddressesTest extends BaseTest {
         softAssert.assertEquals(
                 myAddressesUpdatePage.getPostcodeAttribute(),
                 user.getPostcode());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getCountryAttribute(),
-                user.getCountry());
         softAssert.assertEquals(
                 myAddressesUpdatePage.getHomePhoneAttribute(),
                 user.getHomePhone());

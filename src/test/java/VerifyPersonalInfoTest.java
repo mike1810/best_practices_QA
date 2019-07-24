@@ -10,73 +10,35 @@ import java.util.HashMap;
 public class VerifyPersonalInfoTest extends BaseTest {
 
     private SignInPage signInPage;
+    private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
-    private MyAddressesPage myAddressesPage;
-    private MyAddressesUpdatePage myAddressesUpdatePage;
     private MyPersonalInformationPage myPersonalInformationPage;
-    private String newPassword, oldPassword;
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
         dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
     }
 
     @BeforeClass
-    @Parameters({"oldPassword", "email"})
-    public void beforeClass(String oldPassword, String email) throws IOException {
+    public void beforeClass() throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
+        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
-        myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
+        myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        //signInPage.signInWith("tester@tester.tester", "12345");
-        signInPage.signInWith(email, oldPassword);
-
     }
 
     @Test(dataProvider = "dataProvider")
-    public void getOldPasswordParameter(User user){
-        this.oldPassword = user.getPassword();
-    }
+    public void VerifyPersonalInfo(User user) {
+        signInPage.sendNewEmail(user.getEmail());
+        signInPage.clickButtonToCreateAccount();
+        registrationPage.createNewAccountWithAllFields(user);
+        registrationPage.registerAccount();
 
-    @Test(dataProvider = "dataProviderWithNewUser")
-    public void getNewPasswordParameter(User user){
-        this.newPassword = user.getPassword();
-    }
-
-    @BeforeMethod
-    public void beforeMethod() {
-        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
-
-    }
-
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void verifyOldPersonalInformation(User oldUser){
         myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(oldUser);
-    }
-
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void editOldPersonalInformation(User newUser){
-        myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(newUser,oldPassword,newPassword);
-        myPersonalInformationPage.saveUpdates();
-    }
-
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void verifyNewPersonalInformation(User newUser){
-        myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(newUser);
-    }
-
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void editNewPersonalInformation(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(oldUser,newPassword,oldPassword);
-        myPersonalInformationPage.saveUpdates();
+        verifyPersonalInformation(user);
     }
 
     private void verifyPersonalInformation(User user){
@@ -91,9 +53,7 @@ public class VerifyPersonalInfoTest extends BaseTest {
                 myPersonalInformationPage.getLastnameAttribute(),
                 user.getLastName());
         softAssert.assertEquals(
-                //myPersonalInformationPage.getDaysAttribute(),
-                myPersonalInformationPage.getDropBoxValueAttribute(myPersonalInformationPage.getDays()),
-                //myPersonalInformationPage.getDays().getAttribute("value"),
+                myPersonalInformationPage.getDaysAttribute(),
                 user.getDate());
         softAssert.assertEquals(
                 myPersonalInformationPage.getMonthsAttribute(),
@@ -113,10 +73,5 @@ public class VerifyPersonalInfoTest extends BaseTest {
     @DataProvider
     private Object[][] dataProvider(){
         return dataPool.getData();
-    }
-
-    @DataProvider
-    private Object[][] dataProviderWithNewUser(){
-        return dataPoolNew.getData();
     }
 }

@@ -17,25 +17,8 @@ public class EditPersonalInfoTest extends BaseTest {
     private MyPersonalInformationPage myPersonalInformationPage;
     private String newPassword, oldPassword;
 
-    @BeforeSuite
-    protected void beforeSuite( ITestContext testContext ) {
-        /*dataPool = new DataPool();
-        dataPool.fillNewDataPool("dataFile", testContext, User.class);*/
-        dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
-        //dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
-
-/*
-        dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
-        Object[][] obj = dataPoolNew.getData();
-        newPassword = ((User)obj[0][0]).getPassword();
-        Object[][] obj2 = dataPool.getData();
-        oldPassword = ((User)obj2[0][0]).getPassword();*/
-    }
-
     @BeforeClass
-    public void beforeClass() throws IOException {
+    public void beforeClass( ITestContext testContext ) throws IOException {
         super.beforeClass();
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
@@ -44,23 +27,15 @@ public class EditPersonalInfoTest extends BaseTest {
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
+        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
     }
-/*
-    @Test(dataProvider = "dataProvider")
-    public void getOldPasswordParameter(User user){
-        this.oldPassword = user.getPassword();
-    }
-
-    @Test(dataProvider = "dataProviderWithNewUser")
-    public void getNewPasswordParameter(User user){
-        this.newPassword = user.getPassword();
-    }*/
 
     @Test
     public void passwordTest() {
         Object[][] obj = dataPool.getData();
         newPassword = ((User)obj[0][0]).getPassword();
-        oldPassword = ((User)obj[1][0]).getPassword();
+        oldPassword = ((User)obj[0][1]).getPassword();
         System.out.println(newPassword);
         System.out.println(oldPassword);
     }
@@ -116,18 +91,9 @@ public class EditPersonalInfoTest extends BaseTest {
                 user.isSpecialOffers());
         softAssert.assertAll();
     }
-    @AfterMethod
-    public void afterMethod(){
-        myPersonalInformationPage.openMyAccount();
-    }
 
     @DataProvider
     private Object[][] dataProvider(){
         return dataPool.getData();
     }
-/*
-    @DataProvider
-    private Object[][] dataProviderWithNewUser(){
-        return dataPoolNew.getData();
-    }*/
 }

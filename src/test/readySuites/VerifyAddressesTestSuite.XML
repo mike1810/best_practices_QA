@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="editAndVerifyPersonalInfo suite">
+<suite name="editAndVerifyAddresses suite">
 
     <listeners>
         <listener class-name="listeners.CustomListener"/>
@@ -8,14 +8,11 @@
     </listeners>
 
     <test name="Some Test" verbose="2">
-        <parameter name="email" value="tester@tester.tester"/>
         <parameter name="dataFile" value="src/test/data/data.json"/>
-        <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
-            <class name="EditPersonalInfoTest">
+            <class name="VerifyAddressesTest">
                 <methods>
-                    <!--<include name="passwordTest" />-->
-                    <include name="editPersonalInfo" />
+                    <include name="verifyAddressTest" />
                 </methods>
             </class>
         </classes>
