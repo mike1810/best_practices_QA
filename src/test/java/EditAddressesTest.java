@@ -20,7 +20,7 @@ public class EditAddressesTest extends BaseTest {
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
         dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
+        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
     }
 
     @BeforeClass
@@ -36,31 +36,21 @@ public class EditAddressesTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void CreateAccount(User user) {
-        signInPage.sendNewEmail(user.getEmail());
+    public void editAccountAddress(User user1, User user2) {
+        signInPage.sendNewEmail(user1.getEmail());
         signInPage.clickButtonToCreateAccount();
-        registrationPage.createNewAccountWithAllFields(user);
+        registrationPage.createNewAccountWithAllFields(user1);
         registrationPage.registerAccount();
         Assert.assertTrue(registrationPage.accountWasRegistered());
-    }
 
-    @Test(dataProvider = "dataProviderWithNewUser")
-    public void EditAccountAddress(User user) {
         myAccountPage.openMyAddresses();
         myAddressesPage.openAddressUpdatePage();
-        myAddressesUpdatePage.updateAddress(user);
+        myAddressesUpdatePage.updateAddress(user2);
         myAddressesUpdatePage.saveUpdates();
         //myAddressesUpdatePage.openMyAccount();
         myAddressesPage.openAddressUpdatePage();
-        verifyAddress(user);
-    }/*
-
-    @Test(dataProvider = "dataProviderWithNewUser")
-    public void VerifyNewAddress(User user){
-        myAccountPage.openMyAddresses();
-        myAddressesPage.openAddressUpdatePage();
-        verifyAddress(user);
-    }*/
+        verifyAddress(user2);
+    }
 
     private void verifyAddress(User user){
         SoftAssert softAssert = new SoftAssert();
@@ -109,10 +99,5 @@ public class EditAddressesTest extends BaseTest {
     @DataProvider
     private Object[][] dataProvider(){
         return dataPool.getData();
-    }
-
-    @DataProvider
-    private Object[][] dataProviderWithNewUser(){
-        return dataPoolNew.getData();
     }
 }

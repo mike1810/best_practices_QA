@@ -9,19 +9,13 @@
 
     <test name="Some Test" verbose="2">
         <parameter name="email" value="tester@tester.tester"/>
-        <parameter name="oldPassword" value="12345"/>
-        <parameter name="newPassword" value="54321"/>
         <parameter name="dataFile" value="src/test/data/data.json"/>
         <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
             <class name="EditPersonalInfoTest">
                 <methods>
-                    <include name="getOldPasswordParameter" />
-                    <include name="getNewPasswordParameter" />
-                    <include name="verifyOldPersonalInformation" />
-                    <include name="editOldPersonalInformation" />
-                    <include name="verifyNewPersonalInformation" />
-                    <include name="editNewPersonalInformation" />
+                    <!--<include name="passwordTest" />-->
+                    <include name="editPersonalInfo" />
                 </methods>
             </class>
         </classes>

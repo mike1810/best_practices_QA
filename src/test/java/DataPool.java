@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 import org.testng.ITestContext;
 
 import java.io.File;
@@ -10,7 +11,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+@NoArgsConstructor
 public class DataPool<T>{
+    {   //new
+        dataCollection = new ArrayList<>();
+    }
 
     DataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
         fillNewDataPool(testParameterName, testContext, dataClass);
@@ -20,7 +25,7 @@ public class DataPool<T>{
 
     public void processDataFile( String filePath, Class<T> dataClass ){
 
-        dataCollection = new ArrayList<>();
+        //dataCollection = new ArrayList<>();    new
 
         ObjectMapper objectMapper = new ObjectMapper();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -35,13 +40,13 @@ public class DataPool<T>{
 
     public Object[][] getData() {
 
-        Object[][] dataToGet = new Object[ dataCollection.size() ][ 1 ];
+        Object[][] dataToGet = new Object[ 1 ][ dataCollection.size() ];
 
         Iterator<T> it = dataCollection.iterator();
 
         int i = 0;
         while( it.hasNext() ) {
-            dataToGet[ i ][ 0 ] = it.next();
+            dataToGet[ 0 ][ i  ] = it.next();
             i++;
         }
 

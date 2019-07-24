@@ -19,8 +19,19 @@ public class EditPersonalInfoTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
+        /*dataPool = new DataPool();
+        dataPool.fillNewDataPool("dataFile", testContext, User.class);*/
+        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
+        //dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
+
+/*
         dataPool = new DataPool("dataFile", testContext, User.class);
         dataPoolNew = new DataPool("dataToReplaceFile", testContext, User.class);
+        Object[][] obj = dataPoolNew.getData();
+        newPassword = ((User)obj[0][0]).getPassword();
+        Object[][] obj2 = dataPool.getData();
+        oldPassword = ((User)obj2[0][0]).getPassword();*/
     }
 
     @BeforeClass
@@ -34,7 +45,7 @@ public class EditPersonalInfoTest extends BaseTest {
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
     }
-
+/*
     @Test(dataProvider = "dataProvider")
     public void getOldPasswordParameter(User user){
         this.oldPassword = user.getPassword();
@@ -43,40 +54,36 @@ public class EditPersonalInfoTest extends BaseTest {
     @Test(dataProvider = "dataProviderWithNewUser")
     public void getNewPasswordParameter(User user){
         this.newPassword = user.getPassword();
+    }*/
+
+    @Test
+    public void passwordTest() {
+        Object[][] obj = dataPool.getData();
+        newPassword = ((User)obj[0][0]).getPassword();
+        oldPassword = ((User)obj[1][0]).getPassword();
+        System.out.println(newPassword);
+        System.out.println(oldPassword);
     }
 
     @Test(dataProvider = "dataProvider")
-    public void CreateAccount(User user) {
-        signInPage.sendNewEmail(user.getEmail());
+    public void editPersonalInfo(User user1, User user2) {
+        signInPage.sendNewEmail(user1.getEmail());
         signInPage.clickButtonToCreateAccount();
-        registrationPage.createNewAccountWithAllFields(user);
+        registrationPage.createNewAccountWithAllFields(user1);
         registrationPage.registerAccount();
-    }
 
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void verifyOldPersonalInformation(User oldUser){
         myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(oldUser);
-    }
+        verifyPersonalInformation(user1);
 
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void editOldPersonalInformation(User newUser){
+        myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(newUser,oldPassword,newPassword);
+        myPersonalInformationPage.updatePersonalInformation(user2,user1.getPassword(),user2.getPassword());
         myPersonalInformationPage.saveUpdates();
-    }
 
-    @Test(dataProvider = "dataProviderWithNewUser")//WithNewUser")
-    public void verifyNewPersonalInformation(User newUser){
+        myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(newUser);
-    }
+        verifyPersonalInformation(user2);
 
-    @Test(dataProvider = "dataProvider")//WithNewUser")
-    public void editNewPersonalInformation(User oldUser){
-        myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(oldUser,newPassword,oldPassword);
-        myPersonalInformationPage.saveUpdates();
     }
 
     private void verifyPersonalInformation(User user){
@@ -91,8 +98,8 @@ public class EditPersonalInfoTest extends BaseTest {
                 myPersonalInformationPage.getLastnameAttribute(),
                 user.getLastName());
         softAssert.assertEquals(
-                //myPersonalInformationPage.getDaysAttribute(),
-                myPersonalInformationPage.getDropBoxValueAttribute(myPersonalInformationPage.getDays()),
+                myPersonalInformationPage.getDaysAttribute(),
+                //myPersonalInformationPage.getDropBoxValueAttribute(myPersonalInformationPage.getDays()),
                 //myPersonalInformationPage.getDays().getAttribute("value"),
                 user.getDate());
         softAssert.assertEquals(
@@ -109,14 +116,18 @@ public class EditPersonalInfoTest extends BaseTest {
                 user.isSpecialOffers());
         softAssert.assertAll();
     }
+    @AfterMethod
+    public void afterMethod(){
+        myPersonalInformationPage.openMyAccount();
+    }
 
     @DataProvider
     private Object[][] dataProvider(){
         return dataPool.getData();
     }
-
+/*
     @DataProvider
     private Object[][] dataProviderWithNewUser(){
         return dataPoolNew.getData();
-    }
+    }*/
 }
