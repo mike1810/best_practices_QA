@@ -45,7 +45,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.registerAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
-        registrationPage.clickSignOutButton();
+        registrationPage.signOut();
     }
 
     @Test(dataProvider = "dataProvider")
@@ -58,7 +58,7 @@ public class RegistrationTest extends BaseTest {
         registrationPage.registerAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
-        registrationPage.clickSignOutButton();
+        registrationPage.signOut();
     }
 
     @Test(dataProvider = "dataProvider")

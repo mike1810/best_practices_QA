@@ -36,6 +36,7 @@ public abstract class Page {
     }
 
     private boolean signOutButtonIsDisplayed(){
+        waitForWebElementVisibility(signOutButton);
         return signOutButton.isDisplayed();
     }
 
@@ -43,8 +44,8 @@ public abstract class Page {
         return signOutButtonIsDisplayed();
     }
 
-    void clickSignOutButton(){
-        clickAfterWaiting(signOutButton);
+    void signOut(){
+        click(signOutButton);
     }
 
     protected void click(WebElement webElement){

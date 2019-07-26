@@ -8,11 +8,13 @@
     </listeners>
 
     <test name="Some Test" verbose="2">
-        <parameter name="accFile" value="src/test/data/registeredAccount.json"/>
+        <parameter name="registered" value="src/test/data/registeredAccount.json"/>
+        <parameter name="notRegistered" value="src/test/data/notRegisteredAccount.json"/>
         <classes>
             <class name="SignInPageTest">
                 <methods>
-                    <include name="goToRegistrationPage" />
+                    <include name="enterAccount" />
+                    <include name="enterAccountNegative" />
                 </methods>
             </class>
         </classes>

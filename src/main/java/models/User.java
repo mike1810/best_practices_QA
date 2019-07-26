@@ -1,17 +1,25 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.testng.annotations.DataProvider;
+import lombok.NoArgsConstructor;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Getter
+@AllArgsConstructor
 public class User {
 
+    /*private Address address;
+    private PersonalIlfo personalIlfo;*/
+
+
     private boolean genderMale;
+    private String customerFirstName;
+    private String customerLastName;
     private String firstName;
     private String lastName;
     @JsonIgnore
@@ -34,15 +42,7 @@ public class User {
     private String mobilePhone;
     private String alias;
 
-    public User() {
-        this.email = giveNameToNewAccount() + "@gmail.com";
-    }
 
-    private static String giveNameToNewAccount() {
-        DateFormat dateFormat = new SimpleDateFormat("yMdHms");
-        Calendar cal = Calendar.getInstance();
-        return dateFormat.format(cal.getTime());
-    }
 /*
     private void setNegative() {
         this.genderMale = true;
@@ -86,6 +86,7 @@ public class User {
 
     @Override
     public String toString(){
+        //return personalIlfo.getFirstName() + " " + personalIlfo.getLastName();
         return firstName + " " + lastName;
     }
 }

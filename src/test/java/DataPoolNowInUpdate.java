@@ -12,49 +12,36 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @NoArgsConstructor
-public class DataPoolNowInUpdate<T>{
-    {   //new
-        dataCollection = new ArrayList<>();
+public class DataPoolNowInUpdate<T> {
+    {
+        dataHashMap = new HashMap<>();
     }
 
-    DataPoolNowInUpdate(String testParameterName , ITestContext testContext, Class<T> dataClass){
-        fillNewDataPool(testParameterName, testContext, dataClass);
+    DataPoolNowInUpdate(String testParameterName, ITestContext testContext, Class<T> dataClass, Object key) {
+        fillNewDataPool(testParameterName, testContext, dataClass, key);
     }
 
-    Collection<Object> dataCollection;
+    HashMap<Object, Object> dataHashMap;
 
-    public void processDataFile( String filePath, Class<T> dataClass ){
-
-        //dataCollection = new ArrayList<>();    new
+    public void processDataFile(String filePath, Class<T> dataClass, Object key) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        objectMapper.setDateFormat( dateFormat );
         try {
-            T data = objectMapper.readValue( new File( filePath ), dataClass );
-            dataCollection.add( data );
+            T data = objectMapper.readValue(new File(filePath), dataClass);
+            dataHashMap.put(key, data);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Object[][] getData() {
-
-        Object[][] dataToGet = new Object[ 1 ][ dataCollection.size() ];
-
-        Iterator<Object> it = dataCollection.iterator();
-
-        int i = 0;
-        while( it.hasNext() ) {
-            dataToGet[ 0 ][ i  ] = it.next();
-            i++;
-        }
-
+    public Object[][] getData(Object neededKey) {
+        Object[][] dataToGet = new Object[1][1];
+        dataToGet[0][0] = dataHashMap.get(neededKey);
         return dataToGet;
     }
 
-    public void fillNewDataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
-        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        this.processDataFile( parameters.get(testParameterName), dataClass );
+    public void fillNewDataPool(String testParameterName, ITestContext testContext, Class<T> dataClass, Object key) {
+        HashMap<String, String> parameters = new HashMap<>(testContext.getCurrentXmlTest().getAllParameters());
+        this.processDataFile(parameters.get(testParameterName), dataClass, key);
     }
 }

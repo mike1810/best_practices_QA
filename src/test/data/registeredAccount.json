@@ -1,8 +1,4 @@
 {
-  "Email" : {
-    "email":"tester@tester.tester"
-  },
-  "Password" : {
-    "password" : "12345"
-  }
+  "email":"tester@tester.tester",
+  "password" : "12345"
 }
