@@ -45,7 +45,7 @@ public class SignInPageTest  extends BaseTest {
         signInPage.signInWith(
                 acc.getEmail().getEmail(),
                 acc.getPassword().getPassword());
-        Assert.assertFalse(signInPage.accountWasRegistered());
+        Assert.assertTrue(signInPage.getSubmit().isEnabled());
     }
 
     @DataProvider
