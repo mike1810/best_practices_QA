@@ -1,6 +1,5 @@
 import models.Account;
 import models.AccountIs;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -18,7 +17,7 @@ public class SignInPageTest  extends BaseTest {
     @BeforeClass
     public void beforeClass(ITestContext testContext) throws IOException {
         dp = new DataPoolNowInUpdate("registered", testContext, Account.class, AccountIs.REGISTERED);
-        dp.fillNewDataPool("notRegistered", testContext, Account.class, AccountIs.NOT_REGISTERED);
+        dp.addNewDataPool("notRegistered", testContext, Account.class, AccountIs.NOT_REGISTERED);
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
@@ -33,10 +32,8 @@ public class SignInPageTest  extends BaseTest {
         signInPage.signInWith(
                 acc.getEmail().getEmail(),
                 acc.getPassword().getPassword());
-        signInPage.signIn();
-        //System.out.println("dfghjkl");
+        Assert.assertTrue(myAccountPage.getMyWishlists().isEnabled());
         myAccountPage.signOut();
-        //Assert.assertTrue(myAccountPage.getMyWishlists().isEnabled());
     }
 
     @Test(dataProvider = "dataProviderNegative")
@@ -45,11 +42,10 @@ public class SignInPageTest  extends BaseTest {
                 "Login" +acc.getEmail().getEmail() +
                 "\nPassword" + acc.getPassword().getPassword());
 
-        /*signInPage.signInWith(
+        signInPage.signInWith(
                 acc.getEmail().getEmail(),
                 acc.getPassword().getPassword());
-        signInPage.signIn();
-        Assert.assertFalse(signInPage.accountWasRegistered());*/
+        Assert.assertFalse(signInPage.accountWasRegistered());
     }
 
     @DataProvider
