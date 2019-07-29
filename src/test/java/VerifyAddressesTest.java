@@ -46,47 +46,10 @@ public class VerifyAddressesTest extends BaseTest {
     }
 
     private void verifyAddress(User user){
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getFirstnameAttribute(),
-                user.getAddress().getFirstName());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getLastnameAttribute(),
-                user.getAddress().getLastName());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getAddress1Attribute(),
-                user.getAddress().getAddress1());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getAddress2Attribute(),
-                user.getAddress().getAddress2());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getCompanyAttribute(),
-                user.getAddress().getCompany());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getCityAttribute(),
-                user.getAddress().getCity());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getStateAttribute(),
-                user.getAddress().getState());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getPostcodeAttribute(),
-                user.getAddress().getPostcode());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getCountryAttribute(),
-                user.getAddress().getCountry());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getHomePhoneAttribute(),
-                user.getAddress().getHomePhone());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getMobilePhoneAttribute(),
-                user.getAddress().getMobilePhone());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getAdditionalInformationAttribute(),
-                user.getAddress().getAdditionalInformation());
-        softAssert.assertEquals(
-                myAddressesUpdatePage.getAliasAttribute(),
-                user.getAddress().getAlias());
-        softAssert.assertAll();
+        Assert.assertEquals(
+                myAddressesUpdatePage.
+                        getUserAddress().compareTo(user.getAddress()),
+                0);
     }
 
     @DataProvider

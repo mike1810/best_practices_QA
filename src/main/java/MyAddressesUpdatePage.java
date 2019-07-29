@@ -1,3 +1,4 @@
+import models.Address;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,5 +37,23 @@ public class MyAddressesUpdatePage extends RegistrationPage {
         send(getMobilePhone(), user.getAddress().getMobilePhone());
         send(getAdditionalInformation(), user.getAddress().getAdditionalInformation());
         send(getAlias(), user.getAddress().getAlias());
+    }
+
+    public Address getUserAddress(){
+        Address pageUserAddress = new Address();
+        pageUserAddress.setFirstName(getValueAttribute(getFirstname()));
+        pageUserAddress.setLastName(getValueAttribute(getLastname()));
+        pageUserAddress.setCompany(getValueAttribute(getCompany()));
+        pageUserAddress.setAddress1(getValueAttribute(getAddress1()));
+        pageUserAddress.setAddress2(getValueAttribute(getAddress2()));
+        pageUserAddress.setCity(getValueAttribute(getCity()));
+        pageUserAddress.setCountry(getValueAttribute(getCountry()));
+        pageUserAddress.setState(getValueAttribute(getState()));
+        pageUserAddress.setPostcode(getValueAttribute(getPostcode()));
+        pageUserAddress.setHomePhone(getValueAttribute(getHomePhone()));
+        pageUserAddress.setMobilePhone(getValueAttribute(getMobilePhone()));
+        pageUserAddress.setAdditionalInformation(getValueAttribute(getAdditionalInformation()));
+        pageUserAddress.setAlias(getValueAttribute(getAlias()));
+        return pageUserAddress;
     }
 }

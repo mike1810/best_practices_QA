@@ -82,12 +82,12 @@ public abstract class Page {
         webElement.clear();
     }
 
-    public String getDropBoxValueAttribute(WebElement dropBox) {
+    public String getValueAttribute(WebElement dropBox) {
         return dropBox.getAttribute("value");
     }
 
-    protected String getTextBoxValueAttribute(WebElement textBox) {
-        return textBox.getAttribute("value");
+    protected boolean getIsSelected(WebElement webElement) {
+        return webElement.isSelected();
     }
 
     protected void send(WebElement webElement, String textToSend) {

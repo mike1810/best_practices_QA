@@ -1,3 +1,6 @@
+package TEMP;
+
+import TEMP.DataPoolNowInUpdate;
 import models.Account;
 import models.DataIs;
 import org.openqa.selenium.support.PageFactory;
@@ -6,6 +9,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.io.IOException;
+/*
 
 public class SignInPageTest extends BaseTest {
 
@@ -79,4 +83,4 @@ public class SignInPageTest extends BaseTest {
         Account acc2 = (Account) dp.getData(DataIs.USER_AFTER_EDITING)[0][0];
         return new Object[][]{{acc1,acc2}};
     }
-}
+}*/

@@ -1,4 +1,6 @@
 import lombok.Getter;
+import models.Address;
+import models.PersonalInfo;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,16 +16,16 @@ public class MyPersonalInformationPage extends RegistrationPage{
     @FindBy(xpath = "//input[@id='old_passwd']")
     private WebElement oldPassword;
 
-    protected String getOldPasswordAttribute(){
+    /*protected String getOldPasswordAttribute(){
         return oldPassword.getAttribute("value");
-    }
+    }*/
 
     @FindBy(xpath = "//input[@id='confirmation']")
     private WebElement confirmationPassword;
 
-    protected String getConfirmationPasswordAttribute(){
+    /*protected String getConfirmationPasswordAttribute(){
         return confirmationPassword.getAttribute("value");
-    }
+    }*/
 
     @FindBy(xpath = "//span[contains(text(),'Home')]")
     private WebElement home;
@@ -58,15 +60,31 @@ public class MyPersonalInformationPage extends RegistrationPage{
         chooseGender(userAfter);
         send(getFirstname(), userAfter.getPersonalInfo().getCustomerFirstName());
         send(getLastname(), userAfter.getPersonalInfo().getCustomerLastName());
-        //Email
+        send(getEmail(), userAfter.getPersonalInfo().getEmail());
         select(getDays(), userAfter.getPersonalInfo().getDay());
         select(getMonths(), userAfter.getPersonalInfo().getMonth());
         select(getYears(), userAfter.getPersonalInfo().getYear());
-        send(getOldPassword(), userBefore.getPersonalInfo().getPassword());
         chooseNewsLetter(userAfter);
         chooseSpecialOffers(userAfter);
+        send(getOldPassword(), userBefore.getPersonalInfo().getPassword());
         send(getPassword(), userAfter.getPersonalInfo().getPassword());
         send(getConfirmationPassword(), userAfter.getPersonalInfo().getPassword());
+    }
+
+    public PersonalInfo getUserPersonalInfo(){
+        PersonalInfo pageUserPersonalInfo = new PersonalInfo();
+
+        pageUserPersonalInfo.setCustomerFirstName(getValueAttribute(getFirstname()));
+        pageUserPersonalInfo.setCustomerLastName(getValueAttribute(getLastname()));
+        pageUserPersonalInfo.setEmail(getValueAttribute(getEmail()));
+        pageUserPersonalInfo.setDay(getValueAttribute(getDays()));
+        pageUserPersonalInfo.setMonth(getValueAttribute(getMonths()));
+        pageUserPersonalInfo.setYear(getValueAttribute(getYears()));
+        pageUserPersonalInfo.setGenderMale(getMale().isSelected());
+        pageUserPersonalInfo.setNewsLetter(getNewsletter().isSelected());
+        pageUserPersonalInfo.setSpecialOffers(getSpecialOffers().isSelected());
+
+        return pageUserPersonalInfo;
     }
 
 }
