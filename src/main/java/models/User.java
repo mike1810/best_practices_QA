@@ -1,27 +1,22 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
-    /*private Address address;
-    private PersonalIlfo personalIlfo;*/
+
+    private Address address;
+    private PersonalInfo personalInfo;
 
 
-    private boolean genderMale;
+    /*private boolean genderMale;
     private String customerFirstName;
     private String customerLastName;
-    private String firstName;
-    private String lastName;
     @JsonIgnore
     private String email;
     private String password;
@@ -30,6 +25,9 @@ public class User {
     private String year;
     private boolean newsLetter;
     private boolean specialOffers;
+
+    private String firstName;
+    private String lastName;
     private String company;
     private String address1;
     private String address2;
@@ -40,7 +38,7 @@ public class User {
     private String additionalInformation;
     private String homePhone;
     private String mobilePhone;
-    private String alias;
+    private String alias;*/
 
 
 /*
@@ -86,7 +84,6 @@ public class User {
 
     @Override
     public String toString(){
-        //return personalIlfo.getFirstName() + " " + personalIlfo.getLastName();
-        return firstName + " " + lastName;
+        return personalInfo.getCustomerFirstName() + " " + personalInfo.getCustomerLastName();
     }
 }

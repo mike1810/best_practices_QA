@@ -4,57 +4,64 @@ import org.testng.ITestContext;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 @NoArgsConstructor
-public class DataPool<T>{
-    {   //new
-        dataCollection = new ArrayList<>();
+public class DataPool<T> {
+
+    HashMap<Object, Collection<T>> dataHashMap;
+
+    {
+        dataHashMap = new HashMap<>();
     }
 
-    DataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
-        fillNewDataPool(testParameterName, testContext, dataClass);
+    DataPool(String testParameterName, ITestContext testContext, Class<T> dataClass, Object key) {
+        addNewDataPool(testParameterName, testContext, dataClass, key);
     }
 
-    Collection<T> dataCollection;
 
-    public void processDataFile( String filePath, Class<T> dataClass ){
+    public void processDataFile(String filePath, Class<T> dataClass, Object key) {
 
-        //dataCollection = new ArrayList<>();    new
-
+        Collection<T> keyCollection;
         ObjectMapper objectMapper = new ObjectMapper();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        objectMapper.setDateFormat( dateFormat );
+        T data;
+        keyCollection = (dataHashMap.containsKey(key))?
+                (dataHashMap.get(key)):
+                (new ArrayList<>());
+
         try {
-            T data = objectMapper.readValue( new File( filePath ), dataClass );
-            dataCollection.add( data );
+            data = objectMapper.readValue(new File(filePath), dataClass);
+            keyCollection.add(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        dataHashMap.put(key, keyCollection);
+
     }
 
-    public Object[][] getData() {
+    public Object[][] getData(Object neededKey) {
 
-        Object[][] dataToGet = new Object[ 1 ][ dataCollection.size() ];
+        Object[][] dataToGet = new Object[0][0];
+        if (dataHashMap.containsKey(neededKey)) {
+            Collection<T> neededKeyCollection = dataHashMap.get(neededKey);
 
-        Iterator<T> it = dataCollection.iterator();
+            dataToGet = new Object[neededKeyCollection.size()][1];
 
-        int i = 0;
-        while( it.hasNext() ) {
-            dataToGet[ 0 ][ i  ] = it.next();
-            i++;
+            Iterator<T> it = neededKeyCollection.iterator();
+            int i = 0;
+            while (it.hasNext()) {
+                dataToGet[0][i] = it.next();
+                i++;
+            }
+            return dataToGet;
+        } else {
+            return dataToGet;
         }
-
-        return dataToGet;
     }
 
-    public void fillNewDataPool(String testParameterName , ITestContext testContext,  Class<T> dataClass){
-        HashMap<String,String> parameters = new HashMap<>( testContext.getCurrentXmlTest().getAllParameters());
-        this.processDataFile( parameters.get(testParameterName), dataClass );
+    public void addNewDataPool(String testParameterName, ITestContext testContext, Class<T> dataClass, Object key) {
+        HashMap<String, String> parameters = new HashMap<>(testContext.getCurrentXmlTest().getAllParameters());
+        this.processDataFile(parameters.get(testParameterName), dataClass, key);
     }
 }

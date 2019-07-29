@@ -1,3 +1,4 @@
+import models.DataIs;
 import models.User;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +17,7 @@ public class RegistrationTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
     }
 
     @Override
@@ -38,7 +39,7 @@ public class RegistrationTest extends BaseTest {
     @Test(dataProvider = "dataProvider")
     public void registerNewAccount(User user) {
 
-        signInPage.sendNewEmail(user.getEmail());
+        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
 
         registrationPage.createNewAccountWithAllFields(user);
@@ -51,7 +52,7 @@ public class RegistrationTest extends BaseTest {
     @Test(dataProvider = "dataProvider")
     public void registerNewAccountOnlyRequired(User user) {
 
-        signInPage.sendNewEmail(user.getEmail());
+        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
 
         registrationPage.createNewAccountWithOnlyRequiredFields(user);
@@ -64,7 +65,7 @@ public class RegistrationTest extends BaseTest {
     @Test(dataProvider = "dataProvider")
     public void registerNewAccountNegative(User user) {
 
-        signInPage.sendNewEmail(user.getEmail());
+        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
 
         registrationPage.registerAccount();
@@ -81,7 +82,7 @@ public class RegistrationTest extends BaseTest {
 
     @DataProvider
     private Object[][] dataProvider(){
-        return dataPool.getData();
+        return dataPool.getData(DataIs.USER_BEFORE_EDITING);
     }
 }
 

@@ -13,8 +13,9 @@
         <classes>
             <class name="SignInPageTest">
                 <methods>
-                    <include name="enterAccount" />
-                    <include name="enterAccountNegative" />
+                    <!--<include name="enterAccount" />
+                    <include name="enterAccountNegative" />-->
+                    <include name="enterAccountTest" />
                 </methods>
             </class>
         </classes>

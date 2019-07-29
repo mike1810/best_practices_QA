@@ -1,3 +1,4 @@
+import models.DataIs;
 import models.User;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
@@ -5,7 +6,6 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class EditPersonalInfoTest extends BaseTest {
 
@@ -27,73 +27,74 @@ public class EditPersonalInfoTest extends BaseTest {
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
         myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        dataPool = new DataPool("dataFile", testContext, User.class);
-        dataPool.fillNewDataPool("dataToReplaceFile", testContext, User.class);
+        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
+        dataPool.addNewDataPool("dataToReplaceFile", testContext, User.class, DataIs.USER_AFTER_EDITING);
     }
 
     @Test
     public void passwordTest() {
-        Object[][] obj = dataPool.getData();
-        newPassword = ((User)obj[0][0]).getPassword();
-        oldPassword = ((User)obj[0][1]).getPassword();
+        /*Object[][] obj = dataPool.getData();
+        newPassword = ((User)obj[0][0]).getPersonalInfo().getPassword();
+        oldPassword = ((User)obj[0][1]).getPersonalInfo().getPassword();
         System.out.println(newPassword);
-        System.out.println(oldPassword);
+        System.out.println(oldPassword);*/
     }
 
     @Test(dataProvider = "dataProvider")
-    public void editPersonalInfo(User user1, User user2) {
-        signInPage.sendNewEmail(user1.getEmail());
+    public void editPersonalInfo(User userBefore, User userAfter) {
+        signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
-        registrationPage.createNewAccountWithAllFields(user1);
+        registrationPage.createNewAccountWithAllFields(userBefore);
         registrationPage.registerAccount();
 
         myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(user1);
+        verifyPersonalInformation(userBefore);
 
         myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
-        myPersonalInformationPage.updatePersonalInformation(user2,user1.getPassword(),user2.getPassword());
+        myPersonalInformationPage.updatePersonalInformation(userBefore, userAfter);
         myPersonalInformationPage.saveUpdates();
 
         myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
-        verifyPersonalInformation(user2);
-
+        verifyPersonalInformation(userAfter);
     }
 
     private void verifyPersonalInformation(User user){
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(
                 myPersonalInformationPage.getMaleAttribute(),
-                user.isGenderMale());
+                user.getPersonalInfo().isGenderMale());
         softAssert.assertEquals(
                 myPersonalInformationPage.getFirstnameAttribute(),
-                user.getFirstName());
+                user.getPersonalInfo().getCustomerFirstName());
         softAssert.assertEquals(
                 myPersonalInformationPage.getLastnameAttribute(),
-                user.getLastName());
+                user.getPersonalInfo().getCustomerLastName());
         softAssert.assertEquals(
                 myPersonalInformationPage.getDaysAttribute(),
                 //myPersonalInformationPage.getDropBoxValueAttribute(myPersonalInformationPage.getDays()),
                 //myPersonalInformationPage.getDays().getAttribute("value"),
-                user.getDate());
+                user.getPersonalInfo().getDay());
         softAssert.assertEquals(
                 myPersonalInformationPage.getMonthsAttribute(),
-                user.getMonth());
+                user.getPersonalInfo().getMonth());
         softAssert.assertEquals(
                 myPersonalInformationPage.getYearsAttribute(),
-                user.getYear());
+                user.getPersonalInfo().getYear());
         softAssert.assertEquals(
                 myPersonalInformationPage.getNewsletterAttribute(),
-                user.isNewsLetter());
+                user.getPersonalInfo().isNewsLetter());
         softAssert.assertEquals(
                 myPersonalInformationPage.getSpecialOffersAttribute(),
-                user.isSpecialOffers());
+                user.getPersonalInfo().isSpecialOffers());
         softAssert.assertAll();
     }
 
     @DataProvider
     private Object[][] dataProvider(){
-        return dataPool.getData();
+        User userBefore = (User) dataPool.getData(DataIs.USER_BEFORE_EDITING)[0][0];
+        User userAfter = (User) dataPool.getData(DataIs.USER_AFTER_EDITING)[0][0];
+        return new Object[][]{{userBefore,userAfter}};
     }
 }

@@ -35,7 +35,7 @@ public class MyPersonalInformationPage extends RegistrationPage{
     private WebElement saveButton;
 
     private void chooseGender(User user) {
-        click(user.isGenderMale() ? getMale() : getFemale());
+        click(user.getPersonalInfo().isGenderMale() ? getMale() : getFemale());
     }
 
     void goHomePage(){
@@ -54,19 +54,19 @@ public class MyPersonalInformationPage extends RegistrationPage{
         clickAfterWaiting(saveButton);
     }
 
-    void updatePersonalInformation(User user, String oldPassword, String newPassword){
-        chooseGender(user);
-        send(getFirstname(), user.getFirstName());
-        send(getLastname(), user.getLastName());
+    void updatePersonalInformation(User userBefore, User userAfter){
+        chooseGender(userAfter);
+        send(getFirstname(), userAfter.getPersonalInfo().getCustomerFirstName());
+        send(getLastname(), userAfter.getPersonalInfo().getCustomerLastName());
         //Email
-        select(getDays(), user.getDate());
-        select(getMonths(), user.getMonth());
-        select(getYears(), user.getYear());
-        send(getOldPassword(), oldPassword);
-        chooseNewsLetter(user);
-        chooseSpecialOffers(user);
-        send(getPassword(), newPassword);
-        send(getConfirmationPassword(), newPassword);
+        select(getDays(), userAfter.getPersonalInfo().getDay());
+        select(getMonths(), userAfter.getPersonalInfo().getMonth());
+        select(getYears(), userAfter.getPersonalInfo().getYear());
+        send(getOldPassword(), userBefore.getPersonalInfo().getPassword());
+        chooseNewsLetter(userAfter);
+        chooseSpecialOffers(userAfter);
+        send(getPassword(), userAfter.getPersonalInfo().getPassword());
+        send(getConfirmationPassword(), userAfter.getPersonalInfo().getPassword());
     }
 
 }

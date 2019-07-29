@@ -1,3 +1,4 @@
+import models.DataIs;
 import models.User;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
@@ -5,7 +6,6 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class VerifyPersonalInfoTest extends BaseTest {
 
@@ -16,7 +16,7 @@ public class VerifyPersonalInfoTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new DataPool("dataFile", testContext, User.class);
+        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
     }
 
     @BeforeClass
@@ -32,7 +32,7 @@ public class VerifyPersonalInfoTest extends BaseTest {
 
     @Test(dataProvider = "dataProvider")
     public void VerifyPersonalInfo(User user) {
-        signInPage.sendNewEmail(user.getEmail());
+        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
         registrationPage.createNewAccountWithAllFields(user);
         registrationPage.registerAccount();
@@ -45,33 +45,33 @@ public class VerifyPersonalInfoTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(
                 myPersonalInformationPage.getMaleAttribute(),
-                user.isGenderMale());
+                user.getPersonalInfo().isGenderMale());
         softAssert.assertEquals(
                 myPersonalInformationPage.getFirstnameAttribute(),
-                user.getFirstName());
+                user.getPersonalInfo().getCustomerFirstName());
         softAssert.assertEquals(
                 myPersonalInformationPage.getLastnameAttribute(),
-                user.getLastName());
+                user.getPersonalInfo().getCustomerLastName());
         softAssert.assertEquals(
                 myPersonalInformationPage.getDaysAttribute(),
-                user.getDate());
+                user.getPersonalInfo().getDay());
         softAssert.assertEquals(
                 myPersonalInformationPage.getMonthsAttribute(),
-                user.getMonth());
+                user.getPersonalInfo().getMonth());
         softAssert.assertEquals(
                 myPersonalInformationPage.getYearsAttribute(),
-                user.getYear());
+                user.getPersonalInfo().getYear());
         softAssert.assertEquals(
                 myPersonalInformationPage.getNewsletterAttribute(),
-                user.isNewsLetter());
+                user.getPersonalInfo().isNewsLetter());
         softAssert.assertEquals(
                 myPersonalInformationPage.getSpecialOffersAttribute(),
-                user.isSpecialOffers());
+                user.getPersonalInfo().isSpecialOffers());
         softAssert.assertAll();
     }
 
     @DataProvider
     private Object[][] dataProvider(){
-        return dataPool.getData();
+        return dataPool.getData(DataIs.USER_BEFORE_EDITING);
     }
 }

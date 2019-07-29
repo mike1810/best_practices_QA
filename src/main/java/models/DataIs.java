@@ -3,12 +3,12 @@ package models;
 import lombok.Getter;
 
 @Getter
-public enum AccountIs{
-    REGISTERED,
-    NOT_REGISTERED
+public enum DataIs {
+    USER_BEFORE_EDITING,
+    USER_AFTER_EDITING
     /*REGISTERED("Registered"),NOT_REGISTERED("Not registered");
     private String key;
-    AccountIs(String key){
+    DataIs(String key){
         this.key = key;
     }*/
 }

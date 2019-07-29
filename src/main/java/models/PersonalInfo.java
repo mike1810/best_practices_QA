@@ -2,21 +2,19 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Getter
-public class PersonalIlfo {
+public class PersonalInfo {
 
-    {}
     private boolean genderMale;
-    private String firstName;
-    private String lastName;
+    private String customerFirstName;
+    private String customerLastName;
     @JsonIgnore
     private String email;
-    private String date;
+    private String day;
     private String month;
     private String year;
     private String password;
