@@ -1,5 +1,4 @@
 import lombok.Getter;
-import models.Address;
 import models.PersonalInfo;
 import models.User;
 import org.openqa.selenium.WebDriver;
@@ -64,8 +63,8 @@ public class MyPersonalInformationPage extends RegistrationPage{
         select(getDays(), userAfter.getPersonalInfo().getDay());
         select(getMonths(), userAfter.getPersonalInfo().getMonth());
         select(getYears(), userAfter.getPersonalInfo().getYear());
-        chooseNewsLetter(userAfter);
-        chooseSpecialOffers(userAfter);
+        chooseCheckBox(getNewsletter(), userAfter);
+        chooseCheckBox(getSpecialOffers(), userAfter);
         send(getOldPassword(), userBefore.getPersonalInfo().getPassword());
         send(getPassword(), userAfter.getPersonalInfo().getPassword());
         send(getConfirmationPassword(), userAfter.getPersonalInfo().getPassword());
@@ -73,7 +72,6 @@ public class MyPersonalInformationPage extends RegistrationPage{
 
     public PersonalInfo getUserPersonalInfo(){
         PersonalInfo pageUserPersonalInfo = new PersonalInfo();
-
         pageUserPersonalInfo.setCustomerFirstName(getValueAttribute(getFirstname()));
         pageUserPersonalInfo.setCustomerLastName(getValueAttribute(getLastname()));
         pageUserPersonalInfo.setEmail(getValueAttribute(getEmail()));
@@ -83,7 +81,6 @@ public class MyPersonalInformationPage extends RegistrationPage{
         pageUserPersonalInfo.setGenderMale(getMale().isSelected());
         pageUserPersonalInfo.setNewsLetter(getNewsletter().isSelected());
         pageUserPersonalInfo.setSpecialOffers(getSpecialOffers().isSelected());
-
         return pageUserPersonalInfo;
     }
 

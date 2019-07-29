@@ -10,7 +10,7 @@
     "newsLetter":false,
     "specialOffers":false
   },
-  "address" : {
+  "mainAddress" : {
     "firstName":"Mikela",
     "lastName":"Kaliberdina",
     "company":"operasoft",
@@ -24,5 +24,37 @@
     "homePhone":"54321",
     "mobilePhone":"54321",
     "alias":"Second address"
-  }
+  },
+  "anyAddresses": [
+    {
+      "firstName":"Mikela",
+      "lastName":"Kaliberdina",
+      "company":"operasoft",
+      "address1":"Lenina 301",
+      "address2":"Centralnaya 11",
+      "city":"Moscow",
+      "state":"2",
+      "postcode":"54321",
+      "country":"21",
+      "additionalInformation":"I have time to write about me",
+      "homePhone":"54321",
+      "mobilePhone":"54321",
+      "alias":"Second address"
+    },
+    {
+      "firstName":"Mikela",
+      "lastName":"Kaliberdina",
+      "company":"operasoft",
+      "address1":"Lenina 301",
+      "address2":"Centralnaya 11",
+      "city":"Moscow",
+      "state":"2",
+      "postcode":"54321",
+      "country":"21",
+      "additionalInformation":"I have time to write about me",
+      "homePhone":"54321",
+      "mobilePhone":"54321",
+      "alias":"Second address"
+    }
+  ]
 }

@@ -1,4 +1,5 @@
 import lombok.Getter;
+import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -94,6 +95,12 @@ public abstract class Page {
         waitForWebElementVisibility(webElement);
         webElement.clear();
         webElement.sendKeys(textToSend);
+    }
+
+    void chooseCheckBox(WebElement webElement, User user) {
+        while(user.getPersonalInfo().isNewsLetter() != webElement.isSelected()){
+            click(webElement);
+        }
     }
 
     void waitPageIsLoaded(){

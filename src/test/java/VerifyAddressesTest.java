@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
@@ -48,7 +47,7 @@ public class VerifyAddressesTest extends BaseTest {
     private void verifyAddress(User user){
         Assert.assertEquals(
                 myAddressesUpdatePage.
-                        getUserAddress().compareTo(user.getAddress()),
+                        getUserAddress().compareTo(user.getMainAddress()),
                 0);
     }
 

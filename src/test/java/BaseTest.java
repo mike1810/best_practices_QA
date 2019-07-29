@@ -35,26 +35,10 @@ public abstract class BaseTest {
         prop = new Properties();
         InputStream input = new FileInputStream(ReadResourceFile.read("configProperties.txt"));
         prop.load(input);
-        /*prop = new Properties();
-        InputStream input = null;
-        try {
-            input = new FileInputStream(ReadResourceFile.read("configProperties.txt"));
-            prop.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
     }
 
     @AfterSuite
     public void afterSuite() {
-        driver.quit();
+        //driver.quit();
     }
 }

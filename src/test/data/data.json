@@ -1,28 +1,60 @@
 {
-  "personalInfo" : {
-    "genderMale":true,
-    "customerFirstName":"Mike",
-    "customerLastName":"Kaliberdin",
-    "password":"12345",
-    "day":"1",
-    "month":"1",
-    "year":"1994",
-    "newsLetter":true,
-    "specialOffers":true
+  "personalInfo": {
+    "genderMale": true,
+    "customerFirstName": "Mike",
+    "customerLastName": "Kaliberdin",
+    "password": "12345",
+    "day": "1",
+    "month": "1",
+    "year": "1994",
+    "newsLetter": true,
+    "specialOffers": true
   },
-  "address" : {
-    "firstName":"Mike",
-    "lastName":"Kaliberdin",
-    "company":"sperasoft",
-    "address1":"Lenina 30",
-    "address2":"Centralnaya 1",
-    "city":"Volgograd",
-    "state":"1",
-    "postcode":"12345",
-    "country":"21",
-    "additionalInformation":"I have no time to write about me",
-    "homePhone":"12345",
-    "mobilePhone":"12345",
-    "alias":"First address"
-  }
+  "mainAddress": {
+    "firstName": "Mike",
+    "lastName": "Kaliberdin",
+    "company": "sperasoft",
+    "address1": "Lenina 30",
+    "address2": "Centralnaya 1",
+    "city": "Volgograd",
+    "state": "1",
+    "postcode": "12345",
+    "country": "21",
+    "additionalInformation": "I have no time to write about me",
+    "homePhone": "12345",
+    "mobilePhone": "12345",
+    "alias": "First address"
+  },
+  "anyAddresses": [
+    {
+      "firstName": "Mike",
+      "lastName": "Kaliberdin",
+      "company": "sperasoft",
+      "address1": "Lenina 30",
+      "address2": "Centralnaya 1",
+      "city": "Volgograd",
+      "state": "1",
+      "postcode": "12345",
+      "country": "21",
+      "additionalInformation": "I have no time to write about me",
+      "homePhone": "12345",
+      "mobilePhone": "12345",
+      "alias": "First"
+    },
+    {
+      "firstName": "Mike",
+      "lastName": "Kaliberdin",
+      "company": "sperasoft",
+      "address1": "Lenina 30",
+      "address2": "Centralnaya 1",
+      "city": "Volgograd",
+      "state": "1",
+      "postcode": "12345",
+      "country": "21",
+      "additionalInformation": "I have no time to write about me",
+      "homePhone": "12345",
+      "mobilePhone": "12345",
+      "alias": "Second"
+    }
+  ]
 }

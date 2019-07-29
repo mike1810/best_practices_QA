@@ -1,4 +1,5 @@
 import lombok.Getter;
+import models.Address;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -93,18 +94,6 @@ public class RegistrationPage extends Page {
         clickAfterWaiting(user.getPersonalInfo().isGenderMale() ? male : female);
     }
 
-    void chooseNewsLetter(User user) {
-        while(user.getPersonalInfo().isNewsLetter() != newsletter.isSelected()){
-            click(newsletter);
-        }
-    }
-
-    void chooseSpecialOffers(User user) {
-        while(user.getPersonalInfo().isSpecialOffers() != specialOffers.isSelected()){
-            click(specialOffers);
-        }
-    }
-
     void createNewAccountWithOnlyRequiredFields(User user) {
         send(getСustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
         send(getСustomerLastName(), user.getPersonalInfo().getCustomerLastName());
@@ -113,18 +102,23 @@ public class RegistrationPage extends Page {
         select(getMonths(), user.getPersonalInfo().getMonth());
         select(getYears(), user.getPersonalInfo().getYear());
 
-        send(getFirstname(), user.getAddress().getFirstName());
-        send(getLastname(), user.getAddress().getLastName());
-        send(getAddress1(), user.getAddress().getAddress1());
-        send(getCity(), user.getAddress().getCity());
-        select(getState(),user.getAddress().getState());
-        send(getPostcode(), user.getAddress().getPostcode());
-        select(getCountry(),user.getAddress().getCountry());
-        send(getMobilePhone(), user.getAddress().getMobilePhone());
-        send(getAlias(), user.getAddress().getAlias());
+        send(getFirstname(), user.getMainAddress().getFirstName());
+        send(getLastname(), user.getMainAddress().getLastName());
+        send(getAddress1(), user.getMainAddress().getAddress1());
+        send(getCity(), user.getMainAddress().getCity());
+        select(getState(),user.getMainAddress().getState());
+        send(getPostcode(), user.getMainAddress().getPostcode());
+        select(getCountry(),user.getMainAddress().getCountry());
+        send(getMobilePhone(), user.getMainAddress().getMobilePhone());
+        send(getAlias(), user.getMainAddress().getAlias());
 }
 
     void createNewAccountWithAllFields(User user) {
+        fillAccountPersonalInfo(user);
+        fillAccountsMainAddress(user);
+    }
+
+    void fillAccountPersonalInfo(User user){
         chooseGender(user);
         send(getСustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
         send(getСustomerLastName(), user.getPersonalInfo().getCustomerLastName());
@@ -132,26 +126,51 @@ public class RegistrationPage extends Page {
         select(getDays(), user.getPersonalInfo().getDay());
         select(getMonths(), user.getPersonalInfo().getMonth());
         select(getYears(), user.getPersonalInfo().getYear());
-        chooseNewsLetter(user);
-        chooseSpecialOffers(user);
-
-        send(getFirstname(), user.getAddress().getFirstName());
-        send(getLastname(), user.getAddress().getLastName());
-        send(getCompany(), user.getAddress().getCompany());
-        send(getAddress1(), user.getAddress().getAddress1());
-        send(getAddress2(), user.getAddress().getAddress2());
-        send(getCity(), user.getAddress().getCity());
-        select(getState(),user.getAddress().getState());
-        send(getPostcode(), user.getAddress().getPostcode());
-        select(getCountry(),user.getAddress().getCountry());
-        send(getAdditionalInformation(), user.getAddress().getAdditionalInformation());
-        send(getHomePhone(), user.getAddress().getHomePhone());
-        send(getMobilePhone(), user.getAddress().getMobilePhone());
-        send(getAlias(), user.getAddress().getAlias());
+        chooseCheckBox(getNewsletter(), user);
+        chooseCheckBox(getSpecialOffers(), user);
     }
+
+    void fillAccountsMainAddress(User user){
+        addNewAddress(user);
+    }
+
+    void addNewAddress(User user){
+        send(getFirstname(), user.getMainAddress().getFirstName());
+        send(getLastname(), user.getMainAddress().getLastName());
+        send(getCompany(), user.getMainAddress().getCompany());
+        send(getAddress1(), user.getMainAddress().getAddress1());
+        send(getAddress2(), user.getMainAddress().getAddress2());
+        send(getCity(), user.getMainAddress().getCity());
+        select(getState(),user.getMainAddress().getState());
+        send(getPostcode(), user.getMainAddress().getPostcode());
+        select(getCountry(),user.getMainAddress().getCountry());
+        send(getAdditionalInformation(), user.getMainAddress().getAdditionalInformation());
+        send(getHomePhone(), user.getMainAddress().getHomePhone());
+        send(getMobilePhone(), user.getMainAddress().getMobilePhone());
+        send(getAlias(), user.getMainAddress().getAlias());}
+
+    void addNewAddress(Address address){
+        send(getFirstname(), address.getFirstName());
+        send(getLastname(), address.getLastName());
+        send(getCompany(), address.getCompany());
+        send(getAddress1(), address.getAddress1());
+        send(getAddress2(), address.getAddress2());
+        send(getCity(), address.getCity());
+        select(getState(), address.getState());
+        send(getPostcode(), address.getPostcode());
+        send(getHomePhone(), address.getHomePhone());
+        send(getMobilePhone(), address.getMobilePhone());
+        send(getAdditionalInformation(), address.getAdditionalInformation());
+        send(getAlias(), address.getAlias());}
 
     void registerAccount() {
         waitForWebElementVisibility(register);
         clickAfterWaiting(register);
     }
+
+
+    private enum registrationErrors{
+
+    }
+
 }

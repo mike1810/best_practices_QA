@@ -25,18 +25,18 @@ public class MyAddressesUpdatePage extends RegistrationPage {
     }
 
     void updateAddress(User user) {
-        send(getFirstname(), user.getAddress().getFirstName());
-        send(getLastname(), user.getAddress().getLastName());
-        send(getCompany(), user.getAddress().getCompany());
-        send(getAddress1(), user.getAddress().getAddress1());
-        send(getAddress2(), user.getAddress().getAddress2());
-        send(getCity(), user.getAddress().getCity());
-        select(getState(), user.getAddress().getState());
-        send(getPostcode(), user.getAddress().getPostcode());
-        send(getHomePhone(), user.getAddress().getHomePhone());
-        send(getMobilePhone(), user.getAddress().getMobilePhone());
-        send(getAdditionalInformation(), user.getAddress().getAdditionalInformation());
-        send(getAlias(), user.getAddress().getAlias());
+        send(getFirstname(), user.getMainAddress().getFirstName());
+        send(getLastname(), user.getMainAddress().getLastName());
+        send(getCompany(), user.getMainAddress().getCompany());
+        send(getAddress1(), user.getMainAddress().getAddress1());
+        send(getAddress2(), user.getMainAddress().getAddress2());
+        send(getCity(), user.getMainAddress().getCity());
+        select(getState(), user.getMainAddress().getState());
+        send(getPostcode(), user.getMainAddress().getPostcode());
+        send(getHomePhone(), user.getMainAddress().getHomePhone());
+        send(getMobilePhone(), user.getMainAddress().getMobilePhone());
+        send(getAdditionalInformation(), user.getMainAddress().getAdditionalInformation());
+        send(getAlias(), user.getMainAddress().getAlias());
     }
 
     public Address getUserAddress(){
