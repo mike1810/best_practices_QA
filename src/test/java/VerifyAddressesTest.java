@@ -17,18 +17,17 @@ public class VerifyAddressesTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
-        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
+        //dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
     }
+
+    @Test
+    public void verifyAddressTest2(User user) {
+        System.out.println(2);
+    }
+
 
     @BeforeClass
     public void beforeClass() throws IOException {
-        super.beforeClass();
-        driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
-        signInPage = PageFactory.initElements(driver, SignInPage.class);
-        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
-        myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
     }
 
     @Test(dataProvider = "dataProvider")
