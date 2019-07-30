@@ -172,4 +172,82 @@ public class RegistrationPage extends Page {
         waitForWebElementVisibility(register);
         clickAfterWaiting(register);
     }
+
+
+    final static String MESSAGE_ERROR_FIRSTNAME = "firstname is too long. Maximum length: 32";
+    final static String MESSAGE_ERROR_LASTNAME = "lastname is too long. Maximum length: 32";
+    final static String MESSAGE_ERROR_EMAIL = "email is invalid.";
+    final static String MESSAGE_ERROR_PASSWORD = "passwd is invalid.";
+    final static String MESSAGE_ERROR_PASSWORD2 = "passwd is required.";
+
+    final static String MESSAGE_ERROR_ADDRESS1 = "address1 is too long. Maximum length: 128";
+    final static String MESSAGE_ERROR_ZIP = "The Zip/Postal code you've entered is invalid. It must follow this format: 00000";
+    final static String MESSAGE_ERROR_STATE = "This country requires you to choose a State.";
+    final static String MESSAGE_ERROR_COUNTRY = "Country is invalid";
+    final static String MESSAGE_ERROR_CITY = "city is too long. Maximum length: 64";
+    final static String MESSAGE_ERROR_MOBILE = "phone_mobile is invalid.";
+
+    private ArrayList<String> baseErrors = new ArrayList<>();
+
+    private ArrayList<WebElement> pageElements = new ArrayList<>();
+
+    @FindBy(css = "div.alert li")
+    List<WebElement> userErrors;
+
+    public void fillPageElementsList(){
+        /*pageElements.add(male);
+        pageElements.add(female);
+        pageElements.add(customerFirstName);
+        pageElements.add(customerLastName);
+        pageElements.add(email);
+        pageElements.add(password);
+        pageElements.add(day);
+        pageElements.add(month);
+        pageElements.add(year);
+        pageElements.add(newsletter);
+        pageElements.add(specialOffers);
+        pageElements.add(firstNameInAdressForm);
+        pageElements.add(lastNameInAdressForm);
+        pageElements.add(company);
+        pageElements.add(adressLine1);
+        pageElements.add(adressLine2);
+        pageElements.add(city);
+        pageElements.add(state);
+        pageElements.add(zip);
+        pageElements.add(country);
+        pageElements.add(additionalInformation);
+        pageElements.add(homePhone);
+        pageElements.add(mobilePhone);
+        pageElements.add(anAdressAlias);
+        pageElements.add(register);*/
+    }
+
+    public void fillErrorArrayList(){
+        baseErrors.add(MESSAGE_ERROR_FIRSTNAME);
+        baseErrors.add(MESSAGE_ERROR_LASTNAME);
+
+        baseErrors.add(MESSAGE_ERROR_EMAIL);
+        baseErrors.add(MESSAGE_ERROR_PASSWORD);
+        baseErrors.add(MESSAGE_ERROR_PASSWORD2);
+
+        baseErrors.add(MESSAGE_ERROR_ADDRESS1);
+        baseErrors.add(MESSAGE_ERROR_CITY);
+        baseErrors.add(MESSAGE_ERROR_STATE);
+        baseErrors.add(MESSAGE_ERROR_ZIP);
+        baseErrors.add(MESSAGE_ERROR_COUNTRY);
+        baseErrors.add(MESSAGE_ERROR_MOBILE);
+    }
+    public boolean findError() {
+
+        fillErrorArrayList();
+
+        for (WebElement webElement : userErrors) {
+            if (!baseErrors.contains(webElement.getText())) {
+                //LOGGER.error("Error message: \"" + webElement.getText() + "\" isn't exist");
+                return false;
+            }
+        }
+        //LOGGER.info("All error messages are exist");
+        return true;
+    }
 }

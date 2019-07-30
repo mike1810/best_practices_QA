@@ -1,5 +1,5 @@
 import models.User;
-import org.apache.logging.log4j.Logger;
+//import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;

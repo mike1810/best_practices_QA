@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 @NoArgsConstructor
-public class DataPool<T> {
+class DataPool<T> {
 
     HashMap<Object, Collection<T>> dataHashMap;
 
@@ -20,12 +20,13 @@ public class DataPool<T> {
     }
 
 
-    public void processDataFile(String filePath, Class<T> dataClass, Object key) {
+    private void processDataFile(String filePath, Class<T> dataClass, Object key) {
 
         Collection<T> keyCollection;
         ObjectMapper objectMapper = new ObjectMapper();
         T data;
-        keyCollection = (dataHashMap.containsKey(key))?
+        keyCollection =
+                (dataHashMap.containsKey(key))?
                 (dataHashMap.get(key)):
                 (new ArrayList<>());
 
@@ -40,7 +41,7 @@ public class DataPool<T> {
 
     }
 
-    public Object[][] getData(Object neededKey) {
+    Object[][] getData(Object neededKey) {
 
         Object[][] dataToGet = new Object[0][0];
         if (dataHashMap.containsKey(neededKey)) {

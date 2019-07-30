@@ -20,12 +20,6 @@ public class VerifyAddressesTest extends BaseTest {
         //dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
     }
 
-    @Test
-    public void verifyAddressTest2(User user) {
-        System.out.println(2);
-    }
-
-
     @BeforeClass
     public void beforeClass() throws IOException {
     }

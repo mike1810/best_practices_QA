@@ -9,7 +9,7 @@ import readResource.ReadResourceFile;
 
 import java.io.IOException;
 
-public class RegistrationTest extends BaseTest {
+public class NegativeTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
@@ -37,37 +37,14 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void registerNewAccount(User user) {
+    public void Collection(User user) {
 
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
 
         registrationPage.createNewAccountWithAllFields(user);
-        //registrationPage.registerAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
-        //registrationPage.signOut();
-    }
-
-    @Test(dataProvider = "dataProvider")
-    public void registerNewAccountNegative(User user) {
-
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage.registerAccount();
-        Assert.assertTrue(registrationPage.accountWasNotRegistered());
-    }
-
-    @Test(dataProvider = "dataProvider")
-    public void Collection(User user) {//user 2
-
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage.createNewAccountWithAllFields(user);
-
-        //Assert.assertTrue(RegistrationPage.findError());
     }
 
     @Test

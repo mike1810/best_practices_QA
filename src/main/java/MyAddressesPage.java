@@ -68,7 +68,6 @@ public class MyAddressesPage extends Page {
 
     int  verifyAddresses(User user) {
 
-
         String userAddresses = "";
         for(Address address : user.getAddresses()){
             userAddresses+=address+"\n";
