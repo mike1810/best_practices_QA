@@ -25,7 +25,7 @@
     "mobilePhone":"54321",
     "alias":"Second address"
   },
-  "anyAddresses": [
+  "addresses": [
     {
       "firstName":"Mikela",
       "lastName":"Kaliberdina",

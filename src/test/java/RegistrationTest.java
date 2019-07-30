@@ -3,6 +3,7 @@ import models.DataIs;
 import models.User;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -15,10 +16,10 @@ public class RegistrationTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
-    private MyAccountPage myAccountPage;
+    /*private MyAccountPage myAccountPage;
     private MyAddressesPage myAddressesPage;
-    private MyAddressesUpdatePage myAddressesUpdatePage;
-    private MyAddressesAddPage myAddressesAddPage;
+    private MyAddressesAddPage myAddressesAddPage;*/
+    private Logger LOGGER;
 
     @BeforeSuite
     protected void beforeSuite(ITestContext testContext) {
@@ -38,10 +39,9 @@ public class RegistrationTest extends BaseTest {
     public void beforeMethod() {
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
+        /*myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
-        myAddressesAddPage = PageFactory.initElements(driver, MyAddressesAddPage.class);
+        myAddressesAddPage = PageFactory.initElements(driver, MyAddressesAddPage.class);*/
         driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
     }
 
@@ -52,23 +52,10 @@ public class RegistrationTest extends BaseTest {
         signInPage.clickButtonToCreateAccount();
 
         registrationPage.createNewAccountWithAllFields(user);
-        registrationPage.registerAccount();
+        //registrationPage.registerAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
-        registrationPage.signOut();
-    }
-
-    @Test(dataProvider = "dataProvider")
-    public void registerNewAccountOnlyRequired(User user) {
-
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage.createNewAccountWithOnlyRequiredFields(user);
-        registrationPage.registerAccount();
-
-        Assert.assertTrue(registrationPage.accountWasRegistered());
-        registrationPage.signOut();
+        //registrationPage.signOut();
     }
 
     @Test(dataProvider = "dataProvider")
@@ -92,41 +79,6 @@ public class RegistrationTest extends BaseTest {
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
 
-
-        System.out.println("--------------------------------------");
-        for (Address address : user.getAnyAddresses()) {
-            System.out.println(address);
-        }
-        user.getAnyAddresses().add(user.getMainAddress());
-        System.out.println("--------------------------------------");
-        for (Address address : user.getAnyAddresses()) {
-            System.out.println(address);
-        }
-        System.out.println("--------------------------------------");
-
-
-        if(user.getAnyAddresses().size() > 0) {
-            for (Address address : user.getAnyAddresses()) {
-                myAccountPage.openMyAddresses();
-                myAddressesPage.addANewAddress();
-                myAddressesAddPage.addNewAddress(address);
-                myAddressesUpdatePage.saveUpdates();
-            }
-        }
-        /*
-        if(user.getAnyAddresses().size() > 0) {
-
-            for (Address address : user.getAnyAddresses()) {
-                for(WebElement webElement: webArr){
-                    if(!webElement.equals(address.getAlias()))
-
-                        myAccountPage.openMyAddresses();
-                    myAddressesPage.addANewAddress();
-                    myAddressesAddPage.addNewAddress(address);
-                    myAddressesUpdatePage.saveUpdates();
-                }
-            }
-        }*/
     }
 
     @Test

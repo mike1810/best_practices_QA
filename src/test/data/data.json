@@ -25,7 +25,7 @@
     "mobilePhone": "12345",
     "alias": "First address"
   },
-  "anyAddresses": [
+  "addresses": [
     {
       "firstName": "Mike",
       "lastName": "Kaliberdin",
@@ -55,6 +55,21 @@
       "homePhone": "12345",
       "mobilePhone": "12345",
       "alias": "Second"
+    },
+    {
+      "firstName": "Mike",
+      "lastName": "Kaliberdin",
+      "company": "sperasoft",
+      "address1": "Lenina 30",
+      "address2": "Centralnaya 1",
+      "city": "Volgograd",
+      "state": "1",
+      "postcode": "12345",
+      "country": "21",
+      "additionalInformation": "I have no time to write about me",
+      "homePhone": "12345",
+      "mobilePhone": "12345",
+      "alias": "third"
     }
   ]
 }

@@ -36,8 +36,6 @@ public class VerifyPersonalInfoTest extends BaseTest {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
         registrationPage.createNewAccountWithAllFields(user);
-        registrationPage.registerAccount();
-
         myAccountPage.openMyPersonalInformation();
         verifyPersonalInformation(user);
     }

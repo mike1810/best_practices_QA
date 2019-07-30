@@ -1,11 +1,24 @@
+import lombok.Data;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-//import hmmmm.Addresses;
+import java.util.ArrayList;
+import java.util.List;
 
+@Data
 public class MyAddressesPage extends Page {
     public MyAddressesPage(WebDriver driver) {
         super(driver);
+    }
+
+    @FindBy(css = "h3")
+    private List<WebElement> addressAliases;
+
+    public void findElements(List<WebElement> webElementsList) {
+        for (WebElement webElement : webElementsList) {
+            //System.out.println(webElement.getText());
+        }
     }
 
     @FindBy(xpath = "//span[contains(text(),'Add a new address')]")

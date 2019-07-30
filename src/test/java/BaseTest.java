@@ -18,9 +18,7 @@ public abstract class BaseTest {
 
     WebDriver driver;
     Properties prop;
-    static Logger LOGGER;
     DataPool dataPool;
-    DataPool dataPoolNew;
 
     @BeforeClass
     public void beforeClass() throws IOException {

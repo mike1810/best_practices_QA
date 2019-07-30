@@ -48,7 +48,34 @@ public class PersonalInfo {
     }
 
     public int compareTo(PersonalInfo comparedWith){
-        return this.toString().compareTo(comparedWith.toString());
+        if(this.genderMale != comparedWith.genderMale){
+            return -1;
+        }
+        if(this.customerFirstName.compareTo(comparedWith.customerFirstName) != 0){
+            return -1;
+        }
+        if(this.customerLastName.compareTo(comparedWith.customerLastName) != 0){
+            return -1;
+        }
+        if(this.email.compareTo(comparedWith.email) != 0){
+            return -1;
+        }
+        if(this.day.compareTo(comparedWith.day) != 0){
+            return -1;
+        }
+        if(this.month.compareTo(comparedWith.month) != 0){
+            return -1;
+        }
+        if(this.year.compareTo(comparedWith.year) != 0){
+            return -1;
+        }
+        if(this.newsLetter != comparedWith.newsLetter){
+            return -1;
+        }
+        if(this.specialOffers != comparedWith.specialOffers){
+            return -1;
+        }
+        return 0;
     }
 }
 
