@@ -1,13 +1,10 @@
 import lombok.Getter;
 import models.Address;
 import models.User;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,22 +174,6 @@ public class RegistrationPage extends Page {
             }
         }
         return false;
-    }
-
-    void addNewAddress(User user) {
-        send(getFirstname(), user.getMainAddress().getFirstName());
-        send(getLastname(), user.getMainAddress().getLastName());
-        send(getCompany(), user.getMainAddress().getCompany());
-        send(getAddress1(), user.getMainAddress().getAddress1());
-        send(getAddress2(), user.getMainAddress().getAddress2());
-        send(getCity(), user.getMainAddress().getCity());
-        select(getState(), user.getMainAddress().getState());
-        send(getPostcode(), user.getMainAddress().getPostcode());
-        select(getCountry(), user.getMainAddress().getCountry());
-        send(getAdditionalInformation(), user.getMainAddress().getAdditionalInformation());
-        send(getHomePhone(), user.getMainAddress().getHomePhone());
-        send(getMobilePhone(), user.getMainAddress().getMobilePhone());
-        send(getAlias(), user.getMainAddress().getAlias());
     }
 
     void addNewAddress(Address address) {

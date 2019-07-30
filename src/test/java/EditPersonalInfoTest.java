@@ -34,11 +34,6 @@ public class EditPersonalInfoTest extends BaseTest {
 
     @Test
     public void passwordTest() {
-        /*Object[][] obj = dataPool.getData();
-        newPassword = ((User)obj[0][0]).getPersonalInfo().getPassword();
-        oldPassword = ((User)obj[0][1]).getPersonalInfo().getPassword();
-        System.out.println(newPassword);
-        System.out.println(oldPassword);*/
     }
 
     @Test(dataProvider = "dataProvider")
@@ -46,7 +41,6 @@ public class EditPersonalInfoTest extends BaseTest {
         signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
         signInPage.clickButtonToCreateAccount();
         registrationPage.createNewAccountWithAllFields(userBefore);
-        registrationPage.registerAccount();
 
         myAccountPage.openMyPersonalInformation();
         verifyPersonalInformation(userBefore);
