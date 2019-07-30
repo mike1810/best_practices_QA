@@ -60,9 +60,9 @@ public class MyPersonalInformationPage extends RegistrationPage{
         send(getFirstname(), userAfter.getPersonalInfo().getCustomerFirstName());
         send(getLastname(), userAfter.getPersonalInfo().getCustomerLastName());
         send(getEmail(), userAfter.getPersonalInfo().getEmail());
-        select(getDays(), userAfter.getPersonalInfo().getDay());
-        select(getMonths(), userAfter.getPersonalInfo().getMonth());
-        select(getYears(), userAfter.getPersonalInfo().getYear());
+        selectByValue(getDays(), userAfter.getPersonalInfo().getDay());
+        selectByValue(getMonths(), userAfter.getPersonalInfo().getMonth());
+        selectByValue(getYears(), userAfter.getPersonalInfo().getYear());
         chooseCheckBox(getNewsletter(), userAfter);
         chooseCheckBox(getSpecialOffers(), userAfter);
         send(getOldPassword(), userBefore.getPersonalInfo().getPassword());

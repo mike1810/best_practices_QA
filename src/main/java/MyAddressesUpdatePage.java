@@ -31,7 +31,7 @@ public class MyAddressesUpdatePage extends RegistrationPage {
         send(getAddress1(), user.getMainAddress().getAddress1());
         send(getAddress2(), user.getMainAddress().getAddress2());
         send(getCity(), user.getMainAddress().getCity());
-        select(getState(), user.getMainAddress().getState());
+        selectByVisibleText(getState(), user.getMainAddress().getState());
         send(getPostcode(), user.getMainAddress().getPostcode());
         send(getHomePhone(), user.getMainAddress().getHomePhone());
         send(getMobilePhone(), user.getMainAddress().getMobilePhone());
@@ -47,8 +47,8 @@ public class MyAddressesUpdatePage extends RegistrationPage {
         pageUserAddress.setAddress1(getValueAttribute(getAddress1()));
         pageUserAddress.setAddress2(getValueAttribute(getAddress2()));
         pageUserAddress.setCity(getValueAttribute(getCity()));
-        pageUserAddress.setCountry(getValueAttribute(getCountry()));
-        pageUserAddress.setState(getValueAttribute(getState()));
+        pageUserAddress.setCountry(getTextAttribute(getCountry()));
+        pageUserAddress.setState(getTextAttribute(getState()));
         pageUserAddress.setPostcode(getValueAttribute(getPostcode()));
         pageUserAddress.setHomePhone(getValueAttribute(getHomePhone()));
         pageUserAddress.setMobilePhone(getValueAttribute(getMobilePhone()));

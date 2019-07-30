@@ -1,7 +1,6 @@
 package models;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class Address {
@@ -21,19 +20,16 @@ public class Address {
 
     @Override
     public String toString(){
-        return  "firstName: " + firstName +
-                "; lastName: " + lastName +
-                "; company: " + company +
-                "; address1: " + address1 +
-                "; address2: " + address2 +
-                "; city: " + city +
-                "; state: " + state +
-                "; postcode: " + postcode +
-                "; country: " + country +
-                "; additionalInformation: " + additionalInformation +
-                "; homePhone: " + homePhone +
-                "; mobilePhone: " + mobilePhone +
-                "; alias: " + alias;
+        return  alias.toUpperCase() + "\n"
+                + firstName + " " + lastName + "\n"
+                + company + "\n"
+                + address1 + " " + address2 + "\n"
+                + city + ", " + state + " " + postcode + "\n"
+                + country + "\n"
+                + homePhone + "\n"
+                + mobilePhone + "\n"
+                + "Update" + "\n"
+                + "Delete";
     }
 
     public int compareTo(Address comparedWith){

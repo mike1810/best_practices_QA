@@ -1,13 +1,17 @@
+import models.Address;
 import models.DataIs;
 import models.User;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class VerifyAddressesTest extends BaseTest {
+public class VerifyAddressesTestInUpdate extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
@@ -39,18 +43,19 @@ public class VerifyAddressesTest extends BaseTest {
         Assert.assertTrue(registrationPage.accountWasRegistered());
 
         myAccountPage.openMyAddresses();
+        myAddressesPage.verifyAddresses(user);
+        Assert.assertEquals(myAddressesPage.verifyAddresses(user),0);
 
 
-
-        myAddressesPage.openAddressUpdatePage();
-        //verifyAddress(user);
+        //myAddressesPage.openAddressUpdatePage();
+       // verifyAddress(user);
     }
 
     private void verifyAddress(User user){
-        /*Assert.assertEquals(
+        Assert.assertEquals(
                 myAddressesUpdatePage.
                         getUserAddress().compareTo(user.getMainAddress()),
-                0);*/
+                0);
     }
 
     @DataProvider

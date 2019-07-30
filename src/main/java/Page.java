@@ -74,9 +74,16 @@ public abstract class Page {
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
-    protected void select(WebElement webElement, String valueToSelect) {
+    protected void selectByValue(WebElement webElement, String valueToSelect) {
         Select dropdown = new Select(webElement);
+        click(webElement);
         dropdown.selectByValue(String.valueOf(valueToSelect));
+    }
+
+    protected void selectByVisibleText(WebElement webElement, String valueToSelect) {
+        Select dropdown = new Select(webElement);
+        click(webElement);
+        dropdown.selectByVisibleText(String.valueOf(valueToSelect));
     }
 
     protected void clear(WebElement webElement) {
@@ -85,6 +92,10 @@ public abstract class Page {
 
     public String getValueAttribute(WebElement dropBox) {
         return dropBox.getAttribute("value");
+    }
+
+    public String getTextAttribute(WebElement dropBox) {
+        return dropBox.getText();
     }
 
     protected boolean getIsSelected(WebElement webElement) {

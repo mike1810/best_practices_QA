@@ -98,33 +98,6 @@ public class RegistrationPage extends Page {
         clickAfterWaiting(user.getPersonalInfo().isGenderMale() ? male : female);
     }
 
-    void createNewAccountWithOnlyRequiredFields(User user) {
-        fillRequiredPersonalInfo(user);
-        fillRequiredAddress(user);
-    }
-
-    void fillRequiredAddress(User user) {
-        send(getFirstname(), user.getMainAddress().getFirstName());
-        send(getLastname(), user.getMainAddress().getLastName());
-        send(getAddress1(), user.getMainAddress().getAddress1());
-        send(getCity(), user.getMainAddress().getCity());
-        select(getState(), user.getMainAddress().getState());
-        send(getPostcode(), user.getMainAddress().getPostcode());
-        select(getCountry(), user.getMainAddress().getCountry());
-        send(getMobilePhone(), user.getMainAddress().getMobilePhone());
-        send(getAlias(), user.getMainAddress().getAlias());
-    }
-
-    void fillRequiredPersonalInfo(User user) {
-        send(getСustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
-        send(getСustomerLastName(), user.getPersonalInfo().getCustomerLastName());
-        send(getPassword(), user.getPersonalInfo().getPassword());
-        select(getDays(), user.getPersonalInfo().getDay());
-        select(getMonths(), user.getPersonalInfo().getMonth());
-        select(getYears(), user.getPersonalInfo().getYear());
-    }
-
-
     void createNewAccountWithAllFields(User user) {
         fillAllPersonalInfo(user);
         fillAllAddresses(user);
@@ -135,9 +108,9 @@ public class RegistrationPage extends Page {
         send(getСustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
         send(getСustomerLastName(), user.getPersonalInfo().getCustomerLastName());
         send(getPassword(), user.getPersonalInfo().getPassword());
-        select(getDays(), user.getPersonalInfo().getDay());
-        select(getMonths(), user.getPersonalInfo().getMonth());
-        select(getYears(), user.getPersonalInfo().getYear());
+        selectByValue(getDays(), user.getPersonalInfo().getDay());
+        selectByValue(getMonths(), user.getPersonalInfo().getMonth());
+        selectByValue(getYears(), user.getPersonalInfo().getYear());
         chooseCheckBox(getNewsletter(), user);
         chooseCheckBox(getSpecialOffers(), user);
     }
@@ -149,11 +122,14 @@ public class RegistrationPage extends Page {
             this.registerAccount();
 
             if (addresses.size() > 1) {
-                MyAccountPage myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
+                MyAccountPage myAccountPage =
+                        PageFactory.initElements(driver, MyAccountPage.class);
                 myAccountPage.openMyAddresses();
-                MyAddressesPage myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
+                MyAddressesPage myAddressesPage =
+                        PageFactory.initElements(driver, MyAddressesPage.class);
                 List<WebElement> aliases = myAddressesPage.getAddressAliases();
-                MyAddressesAddPage myAddressesAddPage = PageFactory.initElements(driver, MyAddressesAddPage.class);
+                MyAddressesAddPage myAddressesAddPage =
+                        PageFactory.initElements(driver, MyAddressesAddPage.class);
 
                 for(Address address: addresses){
                     if(!aliasIsOnThePage(address.getAlias(), aliases)){
@@ -183,7 +159,8 @@ public class RegistrationPage extends Page {
         send(getAddress1(), address.getAddress1());
         send(getAddress2(), address.getAddress2());
         send(getCity(), address.getCity());
-        select(getState(), address.getState());
+        selectByVisibleText(getState(), address.getState());
+        selectByVisibleText(country, address.getCountry());
         send(getPostcode(), address.getPostcode());
         send(getHomePhone(), address.getHomePhone());
         send(getMobilePhone(), address.getMobilePhone());
@@ -195,10 +172,4 @@ public class RegistrationPage extends Page {
         waitForWebElementVisibility(register);
         clickAfterWaiting(register);
     }
-
-
-    private enum registrationErrors {
-
-    }
-
 }
