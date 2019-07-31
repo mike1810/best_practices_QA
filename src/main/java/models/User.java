@@ -1,14 +1,13 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 import java.util.ArrayList;
-import java.util.Collection;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

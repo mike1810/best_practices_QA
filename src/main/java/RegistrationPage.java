@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,31 +197,34 @@ public class RegistrationPage extends Page {
     List<WebElement> userErrors;
 
     public void fillPageElementsList(){
-        /*pageElements.add(male);
+        WebDriverWait wait = new WebDriverWait(driver, 1000);
+        pageElements.add(wait.until(ExpectedConditions.visibilityOf(male)));
         pageElements.add(female);
-        pageElements.add(customerFirstName);
-        pageElements.add(customerLastName);
+        pageElements.add(сustomerFirstName);
+        pageElements.add(сustomerLastName);
         pageElements.add(email);
         pageElements.add(password);
-        pageElements.add(day);
-        pageElements.add(month);
-        pageElements.add(year);
+        pageElements.add(days);
+        pageElements.add(months);
+        pageElements.add(years);
         pageElements.add(newsletter);
         pageElements.add(specialOffers);
-        pageElements.add(firstNameInAdressForm);
-        pageElements.add(lastNameInAdressForm);
+        pageElements.add(lastname);
+        pageElements.add(firstname);
         pageElements.add(company);
-        pageElements.add(adressLine1);
-        pageElements.add(adressLine2);
+        pageElements.add(address1);
+        pageElements.add(address2);
         pageElements.add(city);
         pageElements.add(state);
-        pageElements.add(zip);
+        pageElements.add(postcode);
         pageElements.add(country);
         pageElements.add(additionalInformation);
         pageElements.add(homePhone);
         pageElements.add(mobilePhone);
-        pageElements.add(anAdressAlias);
-        pageElements.add(register);*/
+        pageElements.add(alias);
+        pageElements.add(register);
+
+
     }
 
     public void fillErrorArrayList(){
@@ -237,17 +242,32 @@ public class RegistrationPage extends Page {
         baseErrors.add(MESSAGE_ERROR_COUNTRY);
         baseErrors.add(MESSAGE_ERROR_MOBILE);
     }
+
     public boolean findError() {
 
         fillErrorArrayList();
 
         for (WebElement webElement : userErrors) {
             if (!baseErrors.contains(webElement.getText())) {
-                //LOGGER.error("Error message: \"" + webElement.getText() + "\" isn't exist");
+                LOGGER.error("Error message: \"" + webElement.getText() + "\" isn't exist");
                 return false;
             }
         }
-        //LOGGER.info("All error messages are exist");
+        LOGGER.info("All error messages are exist");
+        return true;
+    }
+
+    public boolean correctPageElementsAreShown(){
+        fillPageElementsList();
+
+        for (WebElement webElement : pageElements) {
+            if (!getIsDisplayed(webElement) && !getIsEnabled(webElement)) {
+                System.out.println("Page element \"" + webElement + "\" isn't shown");
+                //LOGGER.error("Page element \"" + webElement + "\" isn't shown");
+                return false;
+            }
+        }
+        System.out.println("All page elements is shown");
         return true;
     }
 }

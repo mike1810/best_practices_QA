@@ -12,7 +12,7 @@
         <classes>
             <class name="VerifyPersonalInfoTest">
                 <methods>
-                    <include name="verifyPersonalInfo" />
+                    <include name="forScreenShot" />
                 </methods>
             </class>
         </classes>

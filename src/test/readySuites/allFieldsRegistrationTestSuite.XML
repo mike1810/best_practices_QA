@@ -3,8 +3,8 @@
 <suite name="allFieldsRegistration suite">
 
     <listeners>
-        <listener class-name="listeners.CustomListener"/>
-        <listener class-name="listeners.CustomListenerForSuite"/>
+        <listener class-name="CustomListener"/>
+        <listener class-name="CustomListenerForSuite"/>
     </listeners>
 
     <test name="Some Test" verbose="1">

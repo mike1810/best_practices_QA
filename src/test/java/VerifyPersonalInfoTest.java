@@ -39,6 +39,15 @@ public class VerifyPersonalInfoTest extends BaseTest {
         verifyPersonalInformation(user);
     }
 
+    @Test(dataProvider = "dataProvider")
+    public void forScreenShot(User user) {
+        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
+        signInPage.openRegistrationPage();
+        //registrationPage.createNewAccount(user);
+        myAccountPage.openMyPersonalInformation();
+        verifyPersonalInformation(user);
+    }
+
     private void verifyPersonalInformation(User user){
         Assert.assertEquals(
                 myPersonalInformationPage.

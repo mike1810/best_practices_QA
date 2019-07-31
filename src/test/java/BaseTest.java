@@ -1,3 +1,4 @@
+import lombok.Getter;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
@@ -5,13 +6,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import readResource.ReadResourceFile;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+@Getter
 public abstract class BaseTest {
+
     static final Logger LOGGER = Logger.getLogger(BaseTest.class);
 
     WebDriver driver;
@@ -24,6 +27,7 @@ public abstract class BaseTest {
                 ReadResourceFile.read("driverPath.txt"));
         driver = new ChromeDriver();
         initProperties();
+        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         PropertyConfigurator.configure(System.getProperty("user.dir") + prop.getProperty("log"));
     }
@@ -36,6 +40,6 @@ public abstract class BaseTest {
 
     @AfterSuite
     public void afterSuite() {
-        //driver.quit();
+        driver.quit();
     }
 }

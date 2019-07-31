@@ -1,5 +1,6 @@
 import lombok.Getter;
 import models.User;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class Page {
 
     WebDriver driver;
+
+    static final Logger LOGGER = Logger.getLogger(Page.class);
 
     public Page(WebDriver driver){
         this.driver = driver;
@@ -100,6 +103,14 @@ public abstract class Page {
 
     protected boolean getIsSelected(WebElement webElement) {
         return webElement.isSelected();
+    }
+
+    protected boolean getIsDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
+
+    protected boolean getIsEnabled(WebElement webElement) {
+        return webElement.isEnabled();
     }
 
     protected void send(WebElement webElement, String textToSend) {

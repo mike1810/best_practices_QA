@@ -4,11 +4,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import readResource.ReadResourceFile;
 
 import java.io.IOException;
 
-public class NegativeTest extends BaseTest {
+public class NegativePageElementsTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
@@ -16,7 +15,8 @@ public class NegativeTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite(ITestContext testContext) {
-        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
+        dataPool = new DataPool("normalUserForNegative", testContext, User.class, DataIs.NORMAL_USER_FOR_NEGATIVE);
+        dataPool.addNewDataPool("notNormalUserForNegative", testContext, User.class, DataIs.NOT_NORMAL_USER_FOR_NEGATIVE);
     }
 
     @Override
@@ -35,14 +35,14 @@ public class NegativeTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void collection(User user) {
+    public void negativePageElements(User testUser, User negativeUser) {
 
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
+
+        testUser.getPersonalInfo().setCustomerFirstName(negativeUser.getPersonalInfo().getCustomerFirstName());
+        signInPage.sendNewEmail(testUser.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
 
-        registrationPage.createNewAccount(user);
-        Assert.assertTrue(registrationPage.findError());
-        Assert.assertTrue(registrationPage.accountWasRegistered());
+        Assert.assertTrue(registrationPage.correctPageElementsAreShown());
     }
 
     @Test
@@ -52,9 +52,12 @@ public class NegativeTest extends BaseTest {
         //LOGGER.info("Info Message Logged !!!");
     }
 
+
     @DataProvider
-    private Object[][] dataProvider() {
-        return dataPool.getData(DataIs.USER_BEFORE_EDITING);
+    private Object[][] dataProvider(){
+        User testUser = (User) dataPool.getData(DataIs.NORMAL_USER_FOR_NEGATIVE)[0][0];
+        User negativeUser = (User) dataPool.getData(DataIs.NOT_NORMAL_USER_FOR_NEGATIVE)[0][0];
+        return new Object[][]{{testUser,negativeUser}};
     }
 }
 
