@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="InvalidErrorsTest suite">
+
+    <!--<listeners>
+        <listener class-name="CustomListener"/>
+        <listener class-name="CustomListenerForSuite"/>
+    </listeners>-->
+
+    <test name="Some Test" verbose="1">
+        <parameter name="normalUserForNegative" value="src/test/data/normalUserForNegative.json"/>
+        <parameter name="invalidUser" value="src/test/data/invalidUser.json"/>
+        <classes>
+            <class name="InvalidErrorsTest">
+                <methods>
+                    <include name="checkInvalidErrors" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

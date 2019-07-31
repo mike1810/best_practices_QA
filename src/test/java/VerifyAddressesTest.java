@@ -39,6 +39,7 @@ public class VerifyAddressesTest extends BaseTest {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
         registrationPage.createNewAccount(user);
+        registrationPage.openMyAccount();
         Assert.assertTrue(registrationPage.accountWasRegistered());
 
         myAccountPage.openMyAddresses();

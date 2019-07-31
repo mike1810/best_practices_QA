@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="allFieldsRegistration suite">
+
+    <!--<listeners>
+        <listener class-name="CustomListener"/>
+        <listener class-name="CustomListenerForSuite"/>
+    </listeners>-->
+
+    <test name="Some Test" verbose="1">
+        <parameter name="normalUserForNegative" value="src/test/data/normalUserForNegative.json"/>
+        <parameter name="tooLongUser" value="src/test/data/tooLongUser.json"/>
+        <classes>
+            <class name="TooLongErrorsTest">
+                <methods>
+                    <include name="checkTooLongErrors" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

@@ -23,14 +23,13 @@ public class RegistrationTest extends BaseTest {
     @BeforeClass
     public void beforeClass() throws IOException {
         super.beforeClass();
-        driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
     }
 
     @BeforeMethod
     public void beforeMethod() {
+        driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-        driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
     }
 
     @Test(dataProvider = "dataProvider")
@@ -40,6 +39,7 @@ public class RegistrationTest extends BaseTest {
         signInPage.openRegistrationPage();
 
         registrationPage.createNewAccount(user);
+        registrationPage.openMyAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
     }

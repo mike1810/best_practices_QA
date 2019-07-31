@@ -13,7 +13,6 @@ public class EditAddressesTest extends BaseTest {
     private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
     private MyAddressesPage myAddressesPage;
-    private MyAddressesUpdatePage myAddressesUpdatePage;
 
     @BeforeClass
     public void beforeClass( ITestContext testContext ) throws IOException {
@@ -23,7 +22,6 @@ public class EditAddressesTest extends BaseTest {
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
         myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
         dataPool.addNewDataPool("dataToReplaceFile", testContext, User.class, DataIs.USER_AFTER_EDITING);
     }
@@ -34,6 +32,7 @@ public class EditAddressesTest extends BaseTest {
         signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
         registrationPage.createNewAccount(userBefore);
+        registrationPage.openMyAccount();
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
 

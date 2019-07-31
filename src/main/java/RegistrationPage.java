@@ -133,8 +133,8 @@ public class RegistrationPage extends Page {
                 MyAddressesAddPage myAddressesAddPage =
                         PageFactory.initElements(driver, MyAddressesAddPage.class);
 
-                for(Address address: addresses){
-                    if(!aliasIsOnThePage(address.getAlias(), aliases)){
+                for (Address address : addresses) {
+                    if (!aliasIsOnThePage(address.getAlias(), aliases)) {
                         myAddressesPage.addANewAddress();
                         myAddressesAddPage.addNewAddress(address);
                         myAddressesAddPage.saveUpdates();
@@ -142,12 +142,11 @@ public class RegistrationPage extends Page {
                 }
             }
         }
-        this.openMyAccount();
     }
 
-    private boolean aliasIsOnThePage(String alias, List<WebElement> webElements){
-        for(WebElement web : webElements){
-            if(alias.toUpperCase().compareTo(web.getText()) == 0){
+    private boolean aliasIsOnThePage(String alias, List<WebElement> webElements) {
+        for (WebElement web : webElements) {
+            if (alias.toUpperCase().compareTo(web.getText()) == 0) {
                 return true;
             }
         }
@@ -175,19 +174,35 @@ public class RegistrationPage extends Page {
         clickAfterWaiting(register);
     }
 
+    @Getter
+    enum Errors {
+        FIRSTNAME_OR_CUSTOMER_FIRSTNAME_TOO_LONG("firstname is too long. Maximum length: 32", "firstname"),
+        FIRSTNAME_OR_CUSTOMER_FIRSTNAME_IS_INVALID("firstname is invalid.", "firstname"),
+        FIRSTNAME_IS_REQUIRED("firstname is required.", "firstname");
 
-    final static String MESSAGE_ERROR_FIRSTNAME = "firstname is too long. Maximum length: 32";
-    final static String MESSAGE_ERROR_LASTNAME = "lastname is too long. Maximum length: 32";
-    final static String MESSAGE_ERROR_EMAIL = "email is invalid.";
-    final static String MESSAGE_ERROR_PASSWORD = "passwd is invalid.";
-    final static String MESSAGE_ERROR_PASSWORD2 = "passwd is required.";
+        String errorText;
+        String field;
 
-    final static String MESSAGE_ERROR_ADDRESS1 = "address1 is too long. Maximum length: 128";
-    final static String MESSAGE_ERROR_ZIP = "The Zip/Postal code you've entered is invalid. It must follow this format: 00000";
-    final static String MESSAGE_ERROR_STATE = "This country requires you to choose a State.";
-    final static String MESSAGE_ERROR_COUNTRY = "Country is invalid";
-    final static String MESSAGE_ERROR_CITY = "city is too long. Maximum length: 64";
-    final static String MESSAGE_ERROR_MOBILE = "phone_mobile is invalid.";
+        Errors(String errorText, String field) {
+            this.errorText = errorText;
+            this.field = field;
+        }
+    }
+/*
+    final static String FIRSTNAME_TOO_LONG = "firstname is too long. Maximum length: 32";
+    final static String FIRSTNAME_IS_INVALID = "firstname is invalid.";
+    final static String FIRSTNAME_IS_REQUIRED = "firstname is required.";
+    final static String LASTNAME = "lastname is too long. Maximum length: 32";
+    final static String EMAIL = "email is invalid.";
+    final static String PASSWORD = "passwd is invalid.";
+    final static String PASSWORD2 = "passwd is required.";
+
+    final static String ADDRESS1 = "address1 is too long. Maximum length: 128";
+    final static String ZIP = "The Zip/Postal code you've entered is invalid. It must follow this format: 00000";
+    final static String STATE = "This country requires you to choose a State.";
+    final static String COUNTRY = "Country is invalid";
+    final static String CITY = "city is too long. Maximum length: 64";
+    final static String MOBILE = "phone_mobile is invalid.";*/
 
     private ArrayList<String> baseErrors = new ArrayList<>();
 
@@ -196,7 +211,7 @@ public class RegistrationPage extends Page {
     @FindBy(css = "div.alert li")
     List<WebElement> userErrors;
 
-    public void fillPageElementsList(){
+    public void fillPageElementsList() {
         WebDriverWait wait = new WebDriverWait(driver, 1000);
         pageElements.add(wait.until(ExpectedConditions.visibilityOf(male)));
         pageElements.add(female);
@@ -223,43 +238,43 @@ public class RegistrationPage extends Page {
         pageElements.add(mobilePhone);
         pageElements.add(alias);
         pageElements.add(register);
-
-
     }
 
-    public void fillErrorArrayList(){
-        baseErrors.add(MESSAGE_ERROR_FIRSTNAME);
-        baseErrors.add(MESSAGE_ERROR_LASTNAME);
-
-        baseErrors.add(MESSAGE_ERROR_EMAIL);
-        baseErrors.add(MESSAGE_ERROR_PASSWORD);
-        baseErrors.add(MESSAGE_ERROR_PASSWORD2);
-
-        baseErrors.add(MESSAGE_ERROR_ADDRESS1);
-        baseErrors.add(MESSAGE_ERROR_CITY);
-        baseErrors.add(MESSAGE_ERROR_STATE);
-        baseErrors.add(MESSAGE_ERROR_ZIP);
-        baseErrors.add(MESSAGE_ERROR_COUNTRY);
-        baseErrors.add(MESSAGE_ERROR_MOBILE);
+    public void fillErrorArrayList() {
+        for (Errors a : Errors.values()) {
+            baseErrors.add(a.getErrorText());
+        }
     }
 
-    public boolean findError() {
+    String findTooLong(){
+        return findError();
+    }
 
+    String findRequired(){
+        return findError();
+    }
+
+    String findInvalid(){
+        return findError();
+    }
+
+    String findError() {
         fillErrorArrayList();
-
+        String userErr = "";
         for (WebElement webElement : userErrors) {
-            if (!baseErrors.contains(webElement.getText())) {
-                LOGGER.error("Error message: \"" + webElement.getText() + "\" isn't exist");
-                return false;
+            if (baseErrors.contains(webElement.getText())) {
+                for (Errors a : Errors.values()) {
+                    if(a.getErrorText().compareTo(webElement.getText()) == 0){
+                        userErr+=a.getField()+"\n";
+                    }
+                }
             }
         }
-        LOGGER.info("All error messages are exist");
-        return true;
+        return userErr;
     }
 
-    public boolean correctPageElementsAreShown(){
+    public boolean correctPageElementsAreShown() {
         fillPageElementsList();
-
         for (WebElement webElement : pageElements) {
             if (!getIsDisplayed(webElement) && !getIsEnabled(webElement)) {
                 System.out.println("Page element \"" + webElement + "\" isn't shown");

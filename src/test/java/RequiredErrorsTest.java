@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 import java.io.IOException;
 
-public class NegativeErrorsTest extends BaseTest {
+public class RequiredErrorsTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
@@ -15,8 +15,9 @@ public class NegativeErrorsTest extends BaseTest {
 
     @BeforeSuite
     protected void beforeSuite(ITestContext testContext) {
+
         dataPool = new DataPool("normalUserForNegative", testContext, User.class, DataIs.NORMAL_USER_FOR_NEGATIVE);
-        dataPool.addNewDataPool("notNormalUserForNegative", testContext, User.class, DataIs.NOT_NORMAL_USER_FOR_NEGATIVE);
+        dataPool.addNewDataPool("requiredUser", testContext, User.class, DataIs.NOT_NORMAL_USER_FOR_NEGATIVE);
     }
 
     @Override
@@ -35,14 +36,20 @@ public class NegativeErrorsTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void negative(User user) {
+    public void checkRequiredErrors(User testUser, User negativeUser) {
+        testUser.getPersonalInfo().setCustomerFirstName(negativeUser.getPersonalInfo().getCustomerFirstName());
 
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
+        signInPage.sendNewEmail(testUser.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
 
-        registrationPage.createNewAccount(user);
-        Assert.assertTrue(registrationPage.findError());
-        Assert.assertTrue(registrationPage.accountWasRegistered());
+        registrationPage.createNewAccount(testUser);
+
+        LOGGER.info("we wait error in: " + testUser.fieldsWillBeNegative(negativeUser));
+        LOGGER.info("real error in: " + registrationPage.findRequired());
+        Assert.assertEquals(
+                testUser.fieldsWillBeNegative(negativeUser).
+                compareTo(registrationPage.findRequired()),
+                0);
     }
 
     @Test
@@ -54,7 +61,9 @@ public class NegativeErrorsTest extends BaseTest {
 
     @DataProvider
     private Object[][] dataProvider() {
-        return dataPool.getData(DataIs.USER_BEFORE_EDITING);
+        User testUser = (User) dataPool.getData(DataIs.NORMAL_USER_FOR_NEGATIVE)[0][0];
+        User negativeUser = (User) dataPool.getData(DataIs.NOT_NORMAL_USER_FOR_NEGATIVE)[0][0];
+        return new Object[][]{{testUser, negativeUser}};
     }
 }
 

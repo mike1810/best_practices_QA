@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 
 public class EditPersonalInfoTest extends BaseTest {
@@ -12,23 +11,22 @@ public class EditPersonalInfoTest extends BaseTest {
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
-    private MyAddressesPage myAddressesPage;
-    private MyAddressesUpdatePage myAddressesUpdatePage;
     private MyPersonalInformationPage myPersonalInformationPage;
-    private String newPassword, oldPassword;
 
     @BeforeClass
     public void beforeClass( ITestContext testContext ) throws IOException {
         super.beforeClass();
+        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
+        dataPool.addNewDataPool("dataToReplaceFile", testContext, User.class, DataIs.USER_AFTER_EDITING);
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
         driver.get(prop.getProperty("homePageURL")+prop.getProperty("signInPageURL"));
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
-        myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
         myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
-        dataPool = new DataPool("dataFile", testContext, User.class, DataIs.USER_BEFORE_EDITING);
-        dataPool.addNewDataPool("dataToReplaceFile", testContext, User.class, DataIs.USER_AFTER_EDITING);
     }
 
     @Test
@@ -40,7 +38,9 @@ public class EditPersonalInfoTest extends BaseTest {
         signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
         registrationPage.createNewAccount(userBefore);
+        registrationPage.openMyAccount();
 
+        myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
         verifyPersonalInformation(userBefore);
 
