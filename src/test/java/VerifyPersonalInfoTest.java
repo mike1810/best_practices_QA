@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
@@ -34,8 +33,8 @@ public class VerifyPersonalInfoTest extends BaseTest {
     @Test(dataProvider = "dataProvider")
     public void VerifyPersonalInfo(User user) {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-        registrationPage.createNewAccountWithAllFields(user);
+        signInPage.openRegistrationPage();
+        registrationPage.createNewAccount(user);
         myAccountPage.openMyPersonalInformation();
         verifyPersonalInformation(user);
     }

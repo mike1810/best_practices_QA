@@ -37,7 +37,8 @@ public class MyAccountPage extends Page {
     }
 
     void openMyAddresses() {
-        clickAfterWaiting(myAddresses);
+        click(myAddresses);
+        //clickAfterWaiting(myAddresses);
     }
 
     void openMyPersonalInformation() {

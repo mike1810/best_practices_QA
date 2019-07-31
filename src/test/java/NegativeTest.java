@@ -1,6 +1,5 @@
 import models.DataIs;
 import models.User;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -25,7 +24,6 @@ public class NegativeTest extends BaseTest {
     public void beforeClass() throws IOException {
         super.beforeClass();
         //LOGGER = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure(ReadResourceFile.read("log4jProperties.txt"));
         driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
     }
 
@@ -40,10 +38,10 @@ public class NegativeTest extends BaseTest {
     public void Collection(User user) {
 
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
+        signInPage.openRegistrationPage();
 
-        registrationPage.createNewAccountWithAllFields(user);
-
+        registrationPage.createNewAccount(user);
+        Assert.assertTrue(registrationPage.findError());
         Assert.assertTrue(registrationPage.accountWasRegistered());
     }
 

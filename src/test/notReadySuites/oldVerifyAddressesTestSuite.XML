@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="negativeRegistration suite">
+<suite name="VerifyAddresses suite">
 
     <listeners>
         <listener class-name="listeners.CustomListener"/>
@@ -10,9 +10,9 @@
     <test name="Some Test" verbose="2">
         <parameter name="dataFile" value="src/test/data/data.json"/>
         <classes>
-            <class name="RegistrationTest">
+            <class name="OldVerifyAddressesTest">
                 <methods>
-                    <include name="Collection" />
+                    <include name="verifyAddressTest" />
                 </methods>
             </class>
         </classes>

@@ -31,8 +31,8 @@ public class EditAddressesTest extends BaseTest {
     @Test(dataProvider = "dataProvider")
     public void editAccountAddress(User userBefore, User userAfter) {
         signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-        registrationPage.createNewAccountWithAllFields(userBefore);
+        signInPage.openRegistrationPage();
+        registrationPage.createNewAccount(userBefore);
         registrationPage.registerAccount();
         Assert.assertTrue(registrationPage.accountWasRegistered());
 

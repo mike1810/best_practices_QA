@@ -1,6 +1,6 @@
 import models.DataIs;
 import models.User;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -13,7 +13,7 @@ public class RegistrationTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
-    //private Logger LOGGER;
+    private Logger LOGGER;
 
     @BeforeSuite
     protected void beforeSuite(ITestContext testContext) {
@@ -25,7 +25,7 @@ public class RegistrationTest extends BaseTest {
     public void beforeClass() throws IOException {
         super.beforeClass();
         //LOGGER = LogManager.getLogger(RegistrationTest.class);
-        PropertyConfigurator.configure(ReadResourceFile.read("log4jProperties.txt"));
+        //PropertyConfigurator.configure(ReadResourceFile.read("log4jProperties.txt"));
         driver.get(prop.getProperty("homePageURL") + prop.getProperty("registrationPageURL"));
     }
 
@@ -40,10 +40,9 @@ public class RegistrationTest extends BaseTest {
     public void registerNewAccount(User user) {
 
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
+        signInPage.openRegistrationPage();
 
-        registrationPage.createNewAccountWithAllFields(user);
-        //registrationPage.registerAccount();
+        registrationPage.createNewAccount(user);
 
         Assert.assertTrue(registrationPage.accountWasRegistered());
         //registrationPage.signOut();
@@ -53,21 +52,9 @@ public class RegistrationTest extends BaseTest {
     public void registerNewAccountNegative(User user) {
 
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage.registerAccount();
+        signInPage.openRegistrationPage();
+        signInPage.signIn();
         Assert.assertTrue(registrationPage.accountWasNotRegistered());
-    }
-
-    @Test(dataProvider = "dataProvider")
-    public void Collection(User user) {//user 2
-
-        signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
-        signInPage.clickButtonToCreateAccount();
-
-        registrationPage.createNewAccountWithAllFields(user);
-
-        //Assert.assertTrue(RegistrationPage.findError());
     }
 
     @Test

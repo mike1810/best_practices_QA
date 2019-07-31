@@ -98,7 +98,7 @@ public class RegistrationPage extends Page {
         clickAfterWaiting(user.getPersonalInfo().isGenderMale() ? male : female);
     }
 
-    void createNewAccountWithAllFields(User user) {
+    void createNewAccount(User user) {
         fillAllPersonalInfo(user);
         fillAllAddresses(user);
     }
@@ -153,19 +153,19 @@ public class RegistrationPage extends Page {
     }
 
     void addNewAddress(Address address) {
-        send(getFirstname(), address.getFirstName());
-        send(getLastname(), address.getLastName());
-        send(getCompany(), address.getCompany());
-        send(getAddress1(), address.getAddress1());
-        send(getAddress2(), address.getAddress2());
-        send(getCity(), address.getCity());
-        selectByVisibleText(getState(), address.getState());
+        send(firstname, address.getFirstName());
+        send(lastname, address.getLastName());
+        send(company, address.getCompany());
+        send(address1, address.getAddress1());
+        send(address2, address.getAddress2());
+        send(city, address.getCity());
+        selectByVisibleText(state, address.getState());
         selectByVisibleText(country, address.getCountry());
-        send(getPostcode(), address.getPostcode());
-        send(getHomePhone(), address.getHomePhone());
-        send(getMobilePhone(), address.getMobilePhone());
-        send(getAdditionalInformation(), address.getAdditionalInformation());
-        send(getAlias(), address.getAlias());
+        send(postcode, address.getPostcode());
+        send(homePhone, address.getHomePhone());
+        send(mobilePhone, address.getMobilePhone());
+        send(additionalInformation, address.getAdditionalInformation());
+        send(alias, address.getAlias());
     }
 
     void registerAccount() {

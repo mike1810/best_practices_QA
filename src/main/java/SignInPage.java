@@ -28,7 +28,7 @@ public class SignInPage extends Page {
         send(newEmail, email);
     }
 
-    void clickButtonToCreateAccount(){
+    void openRegistrationPage(){
         clickAfterWaiting(buttonToCreateAccount);
     }
 

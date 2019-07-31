@@ -1,13 +1,10 @@
 import lombok.Data;
-import lombok.Getter;
 import models.Address;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +17,7 @@ public class MyAddressesPage extends Page {
     private List<WebElement> addressAliases;
 
     @FindBy(css = "div.col-sm-6")
-    private List<WebElement> divs;
+    private List<WebElement> pageAddresses;
 
     @FindBy(css = "div.col-sm-6 li a[title = \"Update\"]")
     private List<WebElement> updateButtons;
@@ -74,7 +71,7 @@ public class MyAddressesPage extends Page {
         }
 
         String pageAddresses = "";
-        for(WebElement w : divs)
+        for(WebElement w : this.pageAddresses)
         {
             pageAddresses+=w.getText()+"\n";
             System.out.println(w.getText());
