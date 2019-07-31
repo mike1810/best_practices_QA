@@ -46,12 +46,12 @@ public class VerifyAddressesTest extends BaseTest {
         Assert.assertEquals(myAddressesPage.verifyAddresses(user),0);
     }
 
-    private void verifyAddress(User user){
+    /*private void verifyAddress(User user){
         Assert.assertEquals(
                 myAddressesUpdatePage.
                         getUserAddress().compareTo(user.getMainAddress()),
                 0);
-    }
+    }*/
 
     @DataProvider
     private Object[][] dataProvider(){

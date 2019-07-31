@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="negativeRegistration suite">
+<suite name="editAddresses suite">
 
     <listeners>
         <listener class-name="listeners.CustomListener"/>
         <listener class-name="listeners.CustomListenerForSuite"/>
     </listeners>
 
-    <test name="Some Test" verbose="2">
+    <test name="Some Test" verbose="1">
         <parameter name="dataFile" value="src/test/data/data.json"/>
+        <parameter name="dataToReplaceFile" value="src/test/data/dataToReplace.json"/>
         <classes>
-            <class name="RegistrationTest">
+            <class name="EditAddressesTest">
                 <methods>
-                    <!--<include name="Collection" />-->
+                    <include name="editAccountAddress" />
                 </methods>
             </class>
         </classes>

@@ -47,7 +47,6 @@ public class EditPersonalInfoTest extends BaseTest {
         myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();
         myPersonalInformationPage.updatePersonalInformation(userBefore, userAfter);
-        myPersonalInformationPage.saveUpdates();
 
         myPersonalInformationPage.openMyAccount();
         myAccountPage.openMyPersonalInformation();

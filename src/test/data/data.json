@@ -10,21 +10,6 @@
     "newsLetter": true,
     "specialOffers": true
   },
-  "mainAddress": {
-    "firstName": "Mike",
-    "lastName": "Kaliberdin",
-    "company": "sperasoft",
-    "address1": "Lenina 30",
-    "address2": "Centralnaya 1",
-    "city": "Volgograd",
-    "state": "Alaska",
-    "postcode": "12345",
-    "country": "United States",
-    "additionalInformation": "I have no time to write about me",
-    "homePhone": "12345",
-    "mobilePhone": "12345",
-    "alias": "First addasdasdress"
-  },
   "addresses": [
     {
       "firstName": "Mike",
@@ -69,7 +54,7 @@
       "additionalInformation": "I have no time to write about me",
       "homePhone": "12345",
       "mobilePhone": "123456789",
-      "alias": "third"
+      "alias": "Third"
     }
   ]
 }

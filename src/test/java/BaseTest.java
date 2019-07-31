@@ -1,20 +1,18 @@
-import models.User;
-//import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import readResource.ReadResourceFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Properties;
 
 public abstract class BaseTest {
+    static final Logger LOGGER = Logger.getLogger(BaseTest.class);
 
     WebDriver driver;
     Properties prop;
@@ -27,6 +25,7 @@ public abstract class BaseTest {
         driver = new ChromeDriver();
         initProperties();
         driver.manage().window().maximize();
+        PropertyConfigurator.configure(System.getProperty("user.dir") + prop.getProperty("log"));
     }
 
     private void initProperties() throws IOException{

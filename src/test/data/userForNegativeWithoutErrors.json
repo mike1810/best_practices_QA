@@ -1,0 +1,30 @@
+{
+  "personalInfo": {
+    "genderMale": false,
+    "customerFirstName": "Mikela",
+    "customerLastName": "Kaliberdina",
+    "password": "54321",
+    "day": "2",
+    "month": "2",
+    "year": "1995",
+    "newsLetter": false,
+    "specialOffers": false
+  },
+  "addresses": [
+    {
+      "firstName": "Mikela",
+      "lastName": "Kaliberdina",
+      "company": "operasoft",
+      "address1": "Lenina 301",
+      "address2": "Centralnaya 11",
+      "city": "Moscow",
+      "state": "Alabama",
+      "postcode": "54321",
+      "country": "United States",
+      "additionalInformation": "I have time to write about me",
+      "homePhone": "54321",
+      "mobilePhone": "543212345",
+      "alias": "First new"
+    }
+  ]
+}

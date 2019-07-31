@@ -30,25 +30,17 @@ public class EditAddressesTest extends BaseTest {
 
     @Test(dataProvider = "dataProvider")
     public void editAccountAddress(User userBefore, User userAfter) {
+
         signInPage.sendNewEmail(userBefore.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
         registrationPage.createNewAccount(userBefore);
-        registrationPage.registerAccount();
+
         Assert.assertTrue(registrationPage.accountWasRegistered());
 
         myAccountPage.openMyAddresses();
-        myAddressesPage.openAddressUpdatePage();
-        myAddressesUpdatePage.updateAddress(userAfter);
-        myAddressesUpdatePage.saveUpdates();
-        myAddressesPage.openAddressUpdatePage();
-        verifyAddress(userAfter);
-    }
+        myAddressesPage.updateAddress(userAfter);
 
-    private void verifyAddress(User user){
-        Assert.assertEquals(
-                myAddressesUpdatePage.
-                        getUserAddress().compareTo(user.getMainAddress()),
-                0);
+        Assert.assertEquals(myAddressesPage.verifyAddresses(userAfter),0);
     }
 
     @DataProvider

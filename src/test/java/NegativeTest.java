@@ -35,7 +35,7 @@ public class NegativeTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void Collection(User user) {
+    public void collection(User user) {
 
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();

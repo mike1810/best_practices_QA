@@ -68,6 +68,7 @@ public class MyPersonalInformationPage extends RegistrationPage{
         send(getOldPassword(), userBefore.getPersonalInfo().getPassword());
         send(getPassword(), userAfter.getPersonalInfo().getPassword());
         send(getConfirmationPassword(), userAfter.getPersonalInfo().getPassword());
+        saveUpdates();
     }
 
     public PersonalInfo getUserPersonalInfo(){

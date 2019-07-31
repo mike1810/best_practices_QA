@@ -31,7 +31,7 @@ public class VerifyPersonalInfoTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void VerifyPersonalInfo(User user) {
+    public void verifyPersonalInfo(User user) {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
         registrationPage.createNewAccount(user);

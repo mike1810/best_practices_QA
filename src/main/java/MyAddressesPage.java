@@ -4,11 +4,12 @@ import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 @Data
-public class MyAddressesPage extends Page {
+public class MyAddressesPage extends RegistrationPage {
     public MyAddressesPage(WebDriver driver) {
         super(driver);
     }
@@ -63,41 +64,35 @@ public class MyAddressesPage extends Page {
         clickAfterWaiting(Home);
     }
 
-    int  verifyAddresses(User user) {
+    int verifyAddresses(User user) {
 
         String userAddresses = "";
-        for(Address address : user.getAddresses()){
-            userAddresses+=address+"\n";
+        for (Address address : user.getAddresses()) {
+            userAddresses += address + "\n";
         }
 
         String pageAddresses = "";
-        for(WebElement w : this.pageAddresses)
-        {
-            pageAddresses+=w.getText()+"\n";
+        for (WebElement w : this.pageAddresses) {
+            pageAddresses += w.getText() + "\n";
             System.out.println(w.getText());
         }
 
         return userAddresses.compareTo(pageAddresses);
     }
 
+    @FindBy(xpath = "//ul[@class='last_item item box']//span[contains(text(),'Update')]")
+    private WebElement updateLastAddress;
 
+    void updateAddress(User user) {
+        MyAddressesUpdatePage maup = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        int userAddressesQuantity = user.getAddresses().size();
+        if (userAddressesQuantity == updateButtons.size()) {
+            for(int i = 0; i < updateButtons.size(); i++){
+                updateButtons.get(i).click();
+                addNewAddress(user.getAddresses().get(i));
+                maup.saveUpdates();
+            }
+        }
+    }
 }
