@@ -59,17 +59,6 @@
             <version>1.2.17</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.12.0</version>
-        </dependency>-->
-
         <!--
         Lombok
         -->
@@ -79,7 +68,6 @@
             <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
-
 
         <!--
         commons-io
@@ -115,8 +103,13 @@
                         <suiteXmlFile>src/test/readySuites/allFieldsRegistrationTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/editAddressesTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/editPersonalInfoTestSuite.XML</suiteXmlFile>
-                        <suiteXmlFile>src/test/readySuites/VerifyAddressesTestSuite.XML</suiteXmlFile>
-                        <suiteXmlFile>src/test/readySuites/VerifyPersonalInfoTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/verifyAddressesTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/verifyPersonalInfoTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/invalidErrorsTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/requiredErrorsTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/tooLongErrorsTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/negativePageElementsTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/screenShotTestSuite.XML</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <property>

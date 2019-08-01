@@ -17,7 +17,6 @@ public class CustomListener implements ITestListener{
 
     @Attachment(value = "Page screenshot", type = "image/png")
     protected byte[] saveAllureScreenshot(ITestResult var1) {
-
         Object currentClass = var1.getInstance();
         WebDriver webDriver = ((BaseTest) currentClass).getDriver();
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
@@ -27,17 +26,12 @@ public class CustomListener implements ITestListener{
     public void onTestStart(ITestResult var1){
         //takeScreenShot(var1);
         LOGGER.info("Method "+ a +")'" + var1.getName() + "' started");
-        System.out.println("Method "+ a +")'" + var1.getName() + "' started");
         var1.getTestClass();
     }
 
     public void onTestSuccess(ITestResult var1){
 
-        Object currentClass = var1.getInstance();
-        ((BaseTest) currentClass).getDriver().quit();
-        //takeScreenShot(var1);
         LOGGER.info("Method "+ a +")'" + var1.getName() + "' successful");
-        System.out.println("Method "+ a +")'" + var1.getName() + "' successful");
         a++;
     }
 
@@ -47,15 +41,15 @@ public class CustomListener implements ITestListener{
     }
 
     public void onTestFailure(ITestResult var1){
+
         try {
             takeScreenShot(var1);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Method "+ a +")'" + var1.getName() + "' failed");
         a++;
 
+        LOGGER.info("Method "+ a +")'" + var1.getName() + "' failed");
         Object currentClass = var1.getInstance();
         ((BaseTest) currentClass).getDriver().quit();
     }
@@ -86,14 +80,9 @@ public class CustomListener implements ITestListener{
     private void takeScreenShot(ITestResult var1) throws IOException {
         Object currentClass = var1.getInstance();
         WebDriver webDriver = ((BaseTest) currentClass).getDriver();
-/*
-        if (webDriver != null)
-        {
-            File f = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-        }*/
         File screenshot = ((TakesScreenshot) webDriver)
                 .getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File("src/target/allure-results/screenshots/" + var1.getTestClass()+ ".jpg"));
+        FileUtils.copyFile(screenshot, new File("target/allure-results/screenshots/" + var1.getTestClass()+ ".jpg"));
     }
 
 }
