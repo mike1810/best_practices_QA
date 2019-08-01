@@ -36,15 +36,15 @@ public class NegativePageElementsTest extends BaseTest {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void checkPageElementsToBeVisibleAndDisplayed(User user) {
+    public void checkPageElementsToBeVisibleAndDisplayed(User user) throws IllegalAccessException {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
-        Assert.assertTrue(registrationPage.correctPageElementsAreShown());
+        Assert.assertTrue(registrationPage.pageElementsAreVisibleAndDisplayed());
     }
 
     @DataProvider
     private Object[][] dataProvider() {
-        return dataPool.getData(DataIs.USER_BEFORE_EDITING);
+        return dataPool.getData(DataIs.NORMAL_USER_FOR_NEGATIVE);
     }
 }
 

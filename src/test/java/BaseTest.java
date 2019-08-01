@@ -27,7 +27,6 @@ public abstract class BaseTest {
                 ReadResourceFile.read("driverPath.txt"));
         driver = new ChromeDriver();
         initProperties();
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         PropertyConfigurator.configure(System.getProperty("user.dir") + prop.getProperty("log"));
     }

@@ -10,9 +10,9 @@
     <test name="VerifyPersonalInfoTest" verbose="1">
         <parameter name="dataFile" value="src/test/data/data.json"/>
         <classes>
-            <class name="VerifyPersonalInfoTest">
+            <class name="ScreenShotTest">
                 <methods>
-                    <include name="forScreenShot" />
+                    <include name="takeScreenShot" />
                 </methods>
             </class>
         </classes>

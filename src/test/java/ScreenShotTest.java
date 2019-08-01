@@ -10,13 +10,12 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class VerifyAddressesTest extends BaseTest {
+public class ScreenShotTest extends BaseTest {
 
     private SignInPage signInPage;
     private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
-    private MyAddressesPage myAddressesPage;
-    private MyAddressesUpdatePage myAddressesUpdatePage;
+    private MyPersonalInformationPage myPersonalInformationPage;
 
     @BeforeSuite
     protected void beforeSuite( ITestContext testContext ) {
@@ -30,20 +29,24 @@ public class VerifyAddressesTest extends BaseTest {
         signInPage = PageFactory.initElements(driver, SignInPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
-        myAddressesPage = PageFactory.initElements(driver, MyAddressesPage.class);
-        myAddressesUpdatePage = PageFactory.initElements(driver, MyAddressesUpdatePage.class);
+        myAccountPage = PageFactory.initElements(driver, MyAccountPage.class);
+        myPersonalInformationPage = PageFactory.initElements(driver, MyPersonalInformationPage.class);
     }
 
     @Test(dataProvider = "dataProvider")
-    public void verifyAddressTest(User user) {
+    public void takeScreenShot(User user) {
         signInPage.sendNewEmail(user.getPersonalInfo().getEmail());
         signInPage.openRegistrationPage();
-        registrationPage.createNewAccount(user);
-        registrationPage.openMyAccount();
-        Assert.assertTrue(registrationPage.accountWasRegistered());
+        //registrationPage.createNewAccount(user);
+        myAccountPage.openMyPersonalInformation();
+        verifyPersonalInformation(user);
+    }
 
-        myAccountPage.openMyAddresses();
-        Assert.assertEquals(myAddressesPage.verifyAddresses(user),0);
+    private void verifyPersonalInformation(User user){
+        Assert.assertEquals(
+                myPersonalInformationPage.
+                        getUserPersonalInfo().compareTo(user.getPersonalInfo()),
+                0);
     }
 
     @DataProvider

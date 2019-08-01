@@ -7,13 +7,12 @@
         <listener class-name="CustomListenerForSuite"/>
     </listeners>-->
 
-    <test name="Some Test" verbose="1">
+    <test name="NegativePageElementsTest" verbose="1">
         <parameter name="normalUserForNegative" value="src/test/data/normalUserForNegative.json"/>
-        <parameter name="notNormalUserForNegative" value="src/test/data/notNormalUserForNegative.json"/>
         <classes>
             <class name="NegativePageElementsTest">
                 <methods>
-                    <include name="negativePageElements" />
+                    <include name="checkPageElementsToBeVisibleAndDisplayed" />
                 </methods>
             </class>
         </classes>

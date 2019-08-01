@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -95,6 +95,13 @@ public class RegistrationPage extends Page {
 
     @FindBy(xpath = "//*[@id='columns']/div[1]")
     private WebElement invalidData;
+
+    private ArrayList<String> baseErrors = new ArrayList<>();
+
+    private ArrayList<WebElement> pageElements = new ArrayList<>();
+
+    @FindBy(css = "div.alert li")
+    List<WebElement> userErrors;
 
     private void chooseGender(User user) {
         clickAfterWaiting(user.getPersonalInfo().isGenderMale() ? male : female);
@@ -188,56 +195,18 @@ public class RegistrationPage extends Page {
             this.field = field;
         }
     }
-/*
-    final static String FIRSTNAME_TOO_LONG = "firstname is too long. Maximum length: 32";
-    final static String FIRSTNAME_IS_INVALID = "firstname is invalid.";
-    final static String FIRSTNAME_IS_REQUIRED = "firstname is required.";
-    final static String LASTNAME = "lastname is too long. Maximum length: 32";
-    final static String EMAIL = "email is invalid.";
-    final static String PASSWORD = "passwd is invalid.";
-    final static String PASSWORD2 = "passwd is required.";
 
-    final static String ADDRESS1 = "address1 is too long. Maximum length: 128";
-    final static String ZIP = "The Zip/Postal code you've entered is invalid. It must follow this format: 00000";
-    final static String STATE = "This country requires you to choose a State.";
-    final static String COUNTRY = "Country is invalid";
-    final static String CITY = "city is too long. Maximum length: 64";
-    final static String MOBILE = "phone_mobile is invalid.";*/
+    public void fillPageElementsList() throws IllegalAccessException {
 
-    private ArrayList<String> baseErrors = new ArrayList<>();
+        waitForWebElementVisibility(male);
+        List<Field> allElements = new ArrayList<>(Arrays.asList(RegistrationPage.class.getDeclaredFields()));
+        for (Field allElement : allElements) {
+            if (allElement.getType().toString().equals("interface org.openqa.selenium.WebElement")) {
 
-    private ArrayList<WebElement> pageElements = new ArrayList<>();
-
-    @FindBy(css = "div.alert li")
-    List<WebElement> userErrors;
-
-    public void fillPageElementsList() {
-        WebDriverWait wait = new WebDriverWait(driver, 1000);
-        pageElements.add(wait.until(ExpectedConditions.visibilityOf(male)));
-        pageElements.add(female);
-        pageElements.add(сustomerFirstName);
-        pageElements.add(сustomerLastName);
-        pageElements.add(email);
-        pageElements.add(password);
-        pageElements.add(days);
-        pageElements.add(months);
-        pageElements.add(years);
-        pageElements.add(newsletter);
-        pageElements.add(specialOffers);
-        pageElements.add(lastname);
-        pageElements.add(firstname);
-        pageElements.add(company);
-        pageElements.add(address1);
-        pageElements.add(address2);
-        pageElements.add(city);
-        pageElements.add(state);
-        pageElements.add(postcode);
-        pageElements.add(country);
-        pageElements.add(additionalInformation);
-        pageElements.add(homePhone);
-        pageElements.add(mobilePhone);
-        pageElements.add(alias);
-        pageElements.add(register);
+                RegistrationPage obj = PageFactory.initElements(super.driver, RegistrationPage.class);
+                pageElements.add(((WebElement) allElement.get(obj)));
+            }
+        }
     }
 
     public void fillErrorArrayList() {
@@ -273,16 +242,16 @@ public class RegistrationPage extends Page {
         return userErr;
     }
 
-    public boolean correctPageElementsAreShown() {
+    boolean pageElementsAreVisibleAndDisplayed() throws IllegalAccessException {
         fillPageElementsList();
         for (WebElement webElement : pageElements) {
             if (!getIsDisplayed(webElement) && !getIsEnabled(webElement)) {
-                System.out.println("Page element \"" + webElement + "\" isn't shown");
-                //LOGGER.error("Page element \"" + webElement + "\" isn't shown");
+                //System.out.println("Page element \"" + webElement + "\" isn't shown");
+                LOGGER.error("Page element \"" + webElement + "\" isn't shown");
                 return false;
             }
         }
-        System.out.println("All page elements is shown");
+        LOGGER.error("All page elements are shown");
         return true;
     }
 }

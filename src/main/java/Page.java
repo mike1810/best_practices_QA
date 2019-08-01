@@ -54,11 +54,11 @@ public abstract class Page {
         click(signOutButton);
     }
 
-    protected void click(WebElement webElement){
+    void click(WebElement webElement){
         webElement.click();
     }
 
-    protected void clickAfterWaiting(WebElement webElement){
+    void clickAfterWaiting(WebElement webElement){
         waitForWebElementToBeClickable(webElement);
         click(webElement);
     }
@@ -77,13 +77,13 @@ public abstract class Page {
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
-    protected void selectByValue(WebElement webElement, String valueToSelect) {
+    void selectByValue(WebElement webElement, String valueToSelect) {
         Select dropdown = new Select(webElement);
         click(webElement);
         dropdown.selectByValue(String.valueOf(valueToSelect));
     }
 
-    protected void selectByVisibleText(WebElement webElement, String valueToSelect) {
+    void selectByVisibleText(WebElement webElement, String valueToSelect) {
         Select dropdown = new Select(webElement);
         click(webElement);
         dropdown.selectByVisibleText(String.valueOf(valueToSelect));
@@ -93,7 +93,7 @@ public abstract class Page {
         webElement.clear();
     }
 
-    public String getValueAttribute(WebElement dropBox) {
+    String getValueAttribute(WebElement dropBox) {
         return dropBox.getAttribute("value");
     }
 
@@ -105,15 +105,15 @@ public abstract class Page {
         return webElement.isSelected();
     }
 
-    protected boolean getIsDisplayed(WebElement webElement) {
+    boolean getIsDisplayed(WebElement webElement) {
         return webElement.isDisplayed();
     }
 
-    protected boolean getIsEnabled(WebElement webElement) {
+    boolean getIsEnabled(WebElement webElement) {
         return webElement.isEnabled();
     }
 
-    protected void send(WebElement webElement, String textToSend) {
+    void send(WebElement webElement, String textToSend) {
         waitForWebElementVisibility(webElement);
         webElement.clear();
         webElement.sendKeys(textToSend);

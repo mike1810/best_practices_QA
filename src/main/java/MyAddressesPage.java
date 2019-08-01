@@ -74,7 +74,7 @@ public class MyAddressesPage extends RegistrationPage {
         String pageAddresses = "";
         for (WebElement w : this.pageAddresses) {
             pageAddresses += w.getText() + "\n";
-            System.out.println(w.getText());
+            //System.out.println(w.getText());
         }
 
         return userAddresses.compareTo(pageAddresses);
