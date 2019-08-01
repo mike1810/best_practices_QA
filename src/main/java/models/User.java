@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private Address mainAddress;
+    //private Address mainAddress;
     private PersonalInfo personalInfo;
 
     private ArrayList<Address> addresses;
