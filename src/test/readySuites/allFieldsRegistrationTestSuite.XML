@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="allFieldsRegistration suite">
+<suite name="RegistrationTest suite">
 
     <listeners>
         <listener class-name="CustomListener"/>
         <listener class-name="CustomListenerForSuite"/>
     </listeners>
 
-    <test name="Some Test" verbose="1">
+    <test name="RegistrationTest" verbose="1">
         <parameter name="dataFile" value="src/test/data/data.json"/>
         <classes>
             <class name="RegistrationTest">

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="allFieldsRegistration suite">
+<suite name="NegativePageElementsTest suite">
 
-    <!--<listeners>
+    <listeners>
         <listener class-name="CustomListener"/>
         <listener class-name="CustomListenerForSuite"/>
-    </listeners>-->
+    </listeners>
 
     <test name="NegativePageElementsTest" verbose="1">
         <parameter name="normalUserForNegative" value="src/test/data/normalUserForNegative.json"/>
