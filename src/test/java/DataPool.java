@@ -28,7 +28,7 @@ class DataPool<T> {
         keyCollection =
                 (dataHashMap.containsKey(key))?
                 (dataHashMap.get(key)):
-                (new ArrayList<>());
+                        (Collection<T>) (new ArrayList<>());
 
         try {
             data = objectMapper.readValue(new File(filePath), dataClass);
