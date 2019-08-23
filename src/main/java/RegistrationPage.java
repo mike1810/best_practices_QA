@@ -25,10 +25,10 @@ public class RegistrationPage extends Page {
     private WebElement female;
 
     @FindBy(xpath = "//*[@id='customer_firstname']")
-    private WebElement сustomerFirstName;
+    private WebElement customerFirstName;
 
     @FindBy(xpath = "//*[@id='customer_lastname']")
-    private WebElement сustomerLastName;
+    private WebElement customerLastName;
 
     @FindBy(xpath = "//input[@id='email']")
     private WebElement email;
@@ -114,8 +114,8 @@ public class RegistrationPage extends Page {
 
     void fillAllPersonalInfo(User user) {
         chooseGender(user);
-        send(getСustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
-        send(getСustomerLastName(), user.getPersonalInfo().getCustomerLastName());
+        send(getCustomerFirstName(), user.getPersonalInfo().getCustomerFirstName());
+        send(getCustomerLastName(), user.getPersonalInfo().getCustomerLastName());
         send(getPassword(), user.getPersonalInfo().getPassword());
         selectByValue(getDays(), user.getPersonalInfo().getDay());
         selectByValue(getMonths(), user.getPersonalInfo().getMonth());
