@@ -169,6 +169,8 @@
                 <version>2.12</version>
                 <configuration>
                     <suiteXmlFiles>
+                        <forkCount>0</forkCount>
+                        <testFailureIgnore>true</testFailureIgnore>
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
