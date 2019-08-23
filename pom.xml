@@ -104,14 +104,17 @@
 
     <build>
         <plugins>
-            <!--<plugin>
+
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
-            </plugin>-->
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -122,7 +125,8 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/readySuites/allFieldsRegistrationTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <!--<suiteXmlFile>src/test/readySuites/allFieldsRegistrationTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/editAddressesTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/editPersonalInfoTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/verifyAddressesTestSuite.XML</suiteXmlFile>
@@ -131,14 +135,14 @@
                         <suiteXmlFile>src/test/readySuites/requiredErrorsTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/tooLongErrorsTestSuite.XML</suiteXmlFile>
                         <suiteXmlFile>src/test/readySuites/negativePageElementsTestSuite.XML</suiteXmlFile>
-                        <suiteXmlFile>src/test/readySuites/screenShotTestSuite.XML</suiteXmlFile>
+                        <suiteXmlFile>src/test/readySuites/screenShotTestSuite.XML</suiteXmlFile>-->
                     </suiteXmlFiles>
-                    <properties>
+                    <!--<properties>
                         <property>
                             <name>suitethreadpoolsize</name>
                             <value>2</value>
                         </property>
-                    </properties>
+                    </properties>-->
                 </configuration>
 
 
