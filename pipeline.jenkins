@@ -1,0 +1,13 @@
+pipeline {
+    agent {
+    label 'best_practice'
+    }
+    stages{
+        stage("GIT"){
+        steps {
+            echo "clone repo"
+            git 'https://github.com/Jinnoka3/qa_automation'
+            }
+        }
+    }
+}
